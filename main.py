@@ -1,23 +1,22 @@
-import advertools
-import json
-import pandas as pd
-from IPython.display import display
+import os
+import feature_extraction.recipe1m
+import feature_extraction.my_emission
 
+os.environ['DB_USER'] = 'root'
+os.environ['DB_PASSWORD'] = 'root'
+os.environ['DB_HOST'] = 'localhost'
+os.environ['DB_PORT'] = '8889'
+os.environ['DB_DATABASE'] = 'semantics_our_schema'
 
 # This is a sample Python script.
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
-def scraping_url_list(url_list, filename):
-    advertools.crawl(url_list, 'tmp/scraping.jl')
-    proximus_crawl = pd.read_json('tmp/scraping.jl', lines=True)
-    proximus_crawl.filter(regex='jsonld').to_csv(filename)
-
-
 def main():
-    with open('scraping/giallozafferano.com-sitemap.json') as f:
-        data = json.load(f)
-        scraping_url_list(data, 'scraping/giallozafferano.com-JSONLD.csv')
+    #feature_extraction.recipe1m.import_1m_recipes()
+    feature_extraction.recipe1m.import_1m_recipes_ingredients()
+    #feature_extraction.my_emission.import_my_emission()
+    pass
 
 
 # Press the green button in the gutter to run the script.
