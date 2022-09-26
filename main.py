@@ -1,6 +1,7 @@
 import os
 import feature_extraction.recipe1m
 import feature_extraction.my_emission
+import feature_extraction.my_emission_edamam
 
 os.environ['DB_USER'] = 'root'
 os.environ['DB_PASSWORD'] = 'root'
@@ -14,8 +15,9 @@ os.environ['DB_DATABASE'] = 'semantics_our_schema'
 
 def main():
     #feature_extraction.recipe1m.import_1m_recipes()
-    feature_extraction.recipe1m.import_1m_recipes_ingredients()
+    #feature_extraction.recipe1m.import_1m_recipes_ingredients()
     #feature_extraction.my_emission.import_my_emission()
+    feature_extraction.my_emission_edamam.my_emission_edamam()
     pass
 
 
