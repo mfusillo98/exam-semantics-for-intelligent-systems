@@ -24,10 +24,10 @@ CREATE TABLE me_foods
 
 CREATE TABLE edamam_hints
 (
-    me_food_id VARCHAR(255)               NOT NULL,
+    edamam_food_id VARCHAR(255)               NOT NULL,
     type_id    VARCHAR(255)               NOT NULL,
     type       ENUM ('1m', 'foodb', 'me') NOT NULL,
-    PRIMARY KEY (me_food_id, type_id, type)
+    PRIMARY KEY (edamam_food_id, type_id, type)
 );
 
 create table 1m_recipe
