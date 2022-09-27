@@ -25,8 +25,8 @@ CREATE TABLE me_foods
 CREATE TABLE edamam_hints
 (
     edamam_food_id VARCHAR(255)               NOT NULL,
-    type_id    VARCHAR(255)               NOT NULL,
-    type       ENUM ('1m', 'foodb', 'me') NOT NULL,
+    type_id        VARCHAR(255)               NOT NULL,
+    type           ENUM ('1m', 'foodb', 'me') NOT NULL,
     PRIMARY KEY (edamam_food_id, type_id, type)
 );
 
@@ -50,14 +50,27 @@ create table 1m_recipe
 
 create table 1m_recipes_ingredients
 (
-    1m_recipe_id varchar(255) NOT NULL,
+    1m_recipe_id   varchar(255) NOT NULL,
     ingredient_idx int(3),
-    text varchar(255),
-    valid int(1),
-    edamam_food_id                 VARCHAR(255),
+    text           varchar(255),
+    valid          int(1),
+    edamam_food_id VARCHAR(255),
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id),
     -- foreign key (1m_recipe_id) references 1m_recipe(1m_recipe_id),
     primary key (1m_recipe_id, ingredient_idx)
 );
 
-alter table 1m_recipes_ingredients add index (1m_recipe_id);
+alter table 1m_recipes_ingredients
+    add index (1m_recipe_id);
+
+
+CREATE TABLE `foodb_foods`
+(
+    `foodb_food_id` int(11)                              NOT NULL primary key,
+    `name`          varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+    `wikipedia_id`  varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+    `food_group`    varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+    `food_subgroup` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+    edamam_food_id  VARCHAR(255),
+    FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
+);
