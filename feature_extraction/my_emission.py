@@ -1,5 +1,10 @@
 import json
+import os
+
 import pymysql
+import database.connection
+import database.query
+import scraping.edamam
 
 def import_my_emission():
     f = open("dataset/myemissions.green-ingredients-with-emission.json")
@@ -43,3 +48,66 @@ def import_my_emission():
 
         connection.commit()
         connection.close()
+
+
+# Matteo Fusillo
+def save_ingredient_edamam_food_id(me_food_id, edamam_food_id, cursor):
+    database.query.update(
+        cursor,
+        'me_foods',
+        {
+            "edamam_food_id": edamam_food_id
+        },
+        {
+            "me_food_id": me_food_id,
+        }
+    )
+
+
+# Matteo Fusillo
+def save_edamam_food_hint(edamam_food_id, me_food_id, cursor):
+    database.query.insert(cursor, 'edamam_hints', {
+        'edamam_food_id': edamam_food_id,
+        'type_id': me_food_id,
+        'type': "me"
+    }, True)
+
+
+# Matteo Fusillo
+def fetch_me_food_edamam_foods():
+    connection = database.connection.get_connection(os.environ.get('DB_DATABASE'))
+    connection2 = database.connection.new_connection(os.environ.get('DB_DATABASE'))
+    update_cursor = connection2.cursor()
+    cursor = connection.cursor(pymysql.cursors.SSDictCursor)
+    # Fetching all ingredients with an unbuffered cursor (we cannot keep all rows in memory)
+    cursor.execute('SELECT * FROM me_foods WHERE edamam_food_id IS NULL')
+    counter = 1
+    for row in cursor:
+        if row['food_name'] == '':
+            continue
+        print(f"> {counter}) Getting edamam foods for {row['food_name']}")
+        edamam_response = scraping.edamam.fetch_edamam_food(row['food_name'])
+        # Checking if the response is valid
+        if edamam_response is not False and 'parsed' in edamam_response and \
+                len(edamam_response['parsed']) > 0 and 'food' in edamam_response['parsed'][0]:
+            parsed = edamam_response['parsed'][0]
+            # Save the edamam food
+            scraping.edamam.save_edamam_food(parsed, update_cursor)
+
+            # Linking edamam food to the my emission's foods
+            save_ingredient_edamam_food_id(row['me_food_id'], parsed['food']['foodId'], update_cursor)
+
+        # Saving possible hints in the edamam response
+        if 'hints' in edamam_response:
+            hints = edamam_response['hints']
+
+            for h in hints:
+                if 'food' in h:
+                    scraping.edamam.save_edamam_food(h, update_cursor)
+                    save_edamam_food_hint(h['food']['foodId'], row['me_food_id'], update_cursor)
+        connection2.commit()
+        counter = counter + 1
+
+    connection.close()
+    connection2.close()
+    return

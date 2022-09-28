@@ -52,7 +52,7 @@ def fetch_foodb_edamam_foods():
             # Save the edamam food
             scraping.edamam.save_edamam_food(parsed, update_cursor)
 
-            # Linking edamam food to the 1m recipe's ingredient
+            # Linking edamam food to the foodb's ingredient
             save_ingredient_edamam_food_id(row['foodb_food_id'], parsed['food']['foodId'], update_cursor)
 
         # Saving possible hints in the edamam response

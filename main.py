@@ -20,8 +20,8 @@ def main():
     # feature_extraction.recipe1m.import_1m_recipes_ingredients()
     # feature_extraction.recipe1m.fetch_1m_recipes_edamam_foods()
     # feature_extraction.my_emission.import_my_emission()
-    # feature_extraction.my_emission_edamam.my_emission_edamam()
-    feature_extraction.foodb.fetch_foodb_edamam_foods()
+    feature_extraction.my_emission.fetch_me_food_edamam_foods()
+    # feature_extraction.foodb.fetch_foodb_edamam_foods()
     pass
 
 

@@ -56,6 +56,7 @@ def import_1m_recipes_ingredients():
     connection.commit()
 
 
+# Matteo Fusillo
 def save_ingredient_edamam_food_id(text, edamam_food_id, cursor):
     database.query.update(
         cursor,
