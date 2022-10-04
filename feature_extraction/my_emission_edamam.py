@@ -52,8 +52,8 @@ def my_emission_edamam():
                 saveEdamamFood(parsed, cursor)
 
                 # Lo collego al cibo cercato
-                insert = "UPDATE me_foods SET edamam_food_id = '" + parsed['food'][
-                    'foodId'] + "' WHERE me_food_id = '" + me_food['me_food_id'] + "'"
+                insert = "UPDATE me_foods SET edamam_food_id = '" + parsed['food']['foodId'] + \
+                         "' WHERE me_food_id = '" + me_food['me_food_id'] + "'"
                 cursor.execute(insert)
 
             # Salvo i possibili hints

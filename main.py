@@ -1,4 +1,6 @@
 import os
+
+import data_mining.category_foodb_cluster
 import feature_extraction.recipe1m
 import feature_extraction.foodb
 import feature_extraction.my_emission
@@ -20,8 +22,9 @@ def main():
     # feature_extraction.recipe1m.import_1m_recipes_ingredients()
     # feature_extraction.recipe1m.fetch_1m_recipes_edamam_foods()
     # feature_extraction.my_emission.import_my_emission()
-    feature_extraction.my_emission.fetch_me_food_edamam_foods()
+    #feature_extraction.my_emission.fetch_me_food_edamam_foods()
     # feature_extraction.foodb.fetch_foodb_edamam_foods()
+    data_mining.category_foodb_cluster.create_category_cluster()
     pass
 
 
