@@ -12,6 +12,7 @@ def _get_connection(host, port, database, user, password):
                                  password=password,
                                  charset='utf8',
                                  cursorclass=pymysql.cursors.DictCursor)
+    connection.cursor().execute("SET SESSION sql_mode = 'ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'")
     return connection
 
 
