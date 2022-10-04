@@ -87,21 +87,22 @@ def estimate_co2(cursor, my_emissions_food, type, type_id, similarity_thresholds
         maxV = max(foods_emissions)
         if len(foods_emissions) > 2:
             distribution_classes_size = (maxV - minV) / (round(len(foods_emissions) / 2.5, 0))
-            cmin = minV  # La prima classe ha estremo sinistro = minV
-            print(f"Distribution class size {distribution_classes_size}, cmin={cmin}, cmax={maxV}")
-            while cmin + distribution_classes_size <= maxV:
-                cmax = cmin + distribution_classes_size
-                classes.append({
-                    'min': cmin,
-                    'max': cmax,
-                    'label': f"{cmin} - {cmax}",
-                    'values': [e for e in foods_emissions if cmax <= e < cmax]
-                })
-                cmin = cmax
-            print(f"Classes {len(classes)}")
-            for c in classes:
-                if most_frequent_class is None or len(most_frequent_class['values']) < len(c['values']):
-                    most_frequent_class = c
+            if distribution_classes_size > 0:
+                cmin = minV  # La prima classe ha estremo sinistro = minV
+                print(f"Distribution class size {distribution_classes_size}, cmin={cmin}, cmax={maxV}")
+                while cmin + distribution_classes_size <= maxV:
+                    cmax = cmin + distribution_classes_size
+                    classes.append({
+                        'min': cmin,
+                        'max': cmax,
+                        'label': f"{cmin} - {cmax}",
+                        'values': [e for e in foods_emissions if cmax <= e < cmax]
+                    })
+                    cmin = cmax
+                print(f"Classes {len(classes)}")
+                for c in classes:
+                    if most_frequent_class is None or len(most_frequent_class['values']) < len(c['values']):
+                        most_frequent_class = c
         results[i] = {
             'similar_foods': similar_foods[i],
             'min': minV,
