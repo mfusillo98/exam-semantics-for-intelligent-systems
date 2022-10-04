@@ -16,7 +16,7 @@ def estimate_co2_by_hints_similarity():
     print("Retrieving My emissions food's features vector")
     my_emissions_foods = data_mining.co2_my_emissions_hints_similarity.get_my_emissions_feature_vector(cursor)
     unbuffered_cursor.execute(
-        'SELECT * FROM `1m_recipes_ingredients` WHERE valid = 1 AND edamam_food_id IS NOT NULL GROUP BY text')
+        'SELECT * FROM `1m_recipes_ingredients` WHERE valid = 1 AND edamam_food_id IS NOT NULL AND co2_raw_data_hints_similarity IS NULL GROUP BY text')
     counter = 1
     for row in unbuffered_cursor:
         print(f"{counter}) Estimating {row['text']}")

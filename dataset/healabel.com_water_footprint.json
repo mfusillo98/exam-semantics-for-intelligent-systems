@@ -1,0 +1,1094 @@
+[
+    {
+        "lasso_id": "2955",
+        "url": "https://www.healabel.com/a-ingredients/acornsquash",
+        "name": "Acorn Squash",
+        "liters_per_kg": "336"
+    },
+    {
+        "lasso_id": "2956",
+        "url": "https://www.healabel.com/a-ingredients/almonds",
+        "name": "Almonds",
+        "liters_per_kg": "16.095"
+    },
+    {
+        "lasso_id": "2957",
+        "url": "https://www.healabel.com/a-ingredients/almonds",
+        "name": "Almonds",
+        "liters_per_kg": "8.040"
+    },
+    {
+        "lasso_id": "2958",
+        "url": "https://www.healabel.com/a-ingredients/anise",
+        "name": "Anise",
+        "liters_per_kg": "8.280"
+    },
+    {
+        "lasso_id": "2959",
+        "url": "https://www.healabel.com/a-ingredients/apples",
+        "name": "Apples",
+        "liters_per_kg": "822"
+    },
+    {
+        "lasso_id": "2960",
+        "url": "https://www.healabel.com/a-ingredients/apricots",
+        "name": "Apricots",
+        "liters_per_kg": "1.287"
+    },
+    {
+        "lasso_id": "2961",
+        "url": "https://www.healabel.com/a-ingredients/artichokes",
+        "name": "Artichokes",
+        "liters_per_kg": "818"
+    },
+    {
+        "lasso_id": "2962",
+        "url": "https://www.healabel.com/a-ingredients/asparagus",
+        "name": "Asparagus",
+        "liters_per_kg": "2.150"
+    },
+    {
+        "lasso_id": "2963",
+        "url": "https://www.healabel.com/a-ingredients/avocados",
+        "name": "Avocados",
+        "liters_per_kg": "1.981"
+    },
+    {
+        "lasso_id": "2964",
+        "url": "https://www.healabel.com/b-ingredients/baby-back-ribs",
+        "name": "Baby Back Ribs",
+        "liters_per_kg": "5.990"
+    },
+    {
+        "lasso_id": "2965",
+        "url": "https://www.healabel.com/b-ingredients/bacon",
+        "name": "Bacon",
+        "liters_per_kg": ""
+    },
+    {
+        "lasso_id": "2966",
+        "url": "https://www.healabel.com/b-ingredients/bananas",
+        "name": "Bananas",
+        "liters_per_kg": "790"
+    },
+    {
+        "lasso_id": "2967",
+        "url": "https://www.healabel.com/b-ingredients/barley",
+        "name": "Barley",
+        "liters_per_kg": "1.423"
+    },
+    {
+        "lasso_id": "2968",
+        "url": "https://www.healabel.com/b-ingredients/basil",
+        "name": "Basil",
+        "liters_per_kg": "322"
+    },
+    {
+        "lasso_id": "2969",
+        "url": "https://www.healabel.com/b-ingredients/beef",
+        "name": "Beef",
+        "liters_per_kg": "15.414"
+    },
+    {
+        "lasso_id": "2970",
+        "url": "https://www.healabel.com/b-ingredients/beer",
+        "name": "Beer",
+        "liters_per_kg": "298"
+    },
+    {
+        "lasso_id": "2971",
+        "url": "https://www.healabel.com/b-ingredients/bell-peppers",
+        "name": "Bell Peppers",
+        "liters_per_kg": "379"
+    },
+    {
+        "lasso_id": "2972",
+        "url": "https://www.healabel.com/b-ingredients/black-beans",
+        "name": "Black Beans",
+        "liters_per_kg": "5.053"
+    },
+    {
+        "lasso_id": "2973",
+        "url": "https://www.healabel.com/b-ingredients/black-tea",
+        "name": "Black Tea",
+        "liters_per_kg": "8.856"
+    },
+    {
+        "lasso_id": "2974",
+        "url": "https://www.healabel.com/b-ingredients/black-eyed-peas",
+        "name": "Black-Eyed Peas",
+        "liters_per_kg": "6.906"
+    },
+    {
+        "lasso_id": "2975",
+        "url": "https://www.healabel.com/b-ingredients/blackberries",
+        "name": "Blackberries",
+        "liters_per_kg": "962"
+    },
+    {
+        "lasso_id": "2976",
+        "url": "https://www.healabel.com/b-ingredients/blueberries",
+        "name": "Blueberries",
+        "liters_per_kg": "845"
+    },
+    {
+        "lasso_id": "2977",
+        "url": "https://www.healabel.com/b-ingredients/bok-choy",
+        "name": "Bok Choy",
+        "liters_per_kg": "280"
+    },
+    {
+        "lasso_id": "2978",
+        "url": "https://www.healabel.com/b-ingredients/broad-beans",
+        "name": "Broad Beans",
+        "liters_per_kg": "2.018"
+    },
+    {
+        "lasso_id": "2979",
+        "url": "https://www.healabel.com/b-ingredients/broccoli",
+        "name": "Broccoli",
+        "liters_per_kg": "285"
+    },
+    {
+        "lasso_id": "2980",
+        "url": "https://www.healabel.com/b-ingredients/brussels-sprouts",
+        "name": "Brussels Sprouts",
+        "liters_per_kg": "285"
+    },
+    {
+        "lasso_id": "2981",
+        "url": "https://www.healabel.com/b-ingredients/buckwheat",
+        "name": "Buckwheat",
+        "liters_per_kg": "3.142"
+    },
+    {
+        "lasso_id": "2982",
+        "url": "https://www.healabel.com/b-ingredients/butter",
+        "name": "Butter",
+        "liters_per_kg": "5.553"
+    },
+    {
+        "lasso_id": "2983",
+        "url": "https://www.healabel.com/b-ingredients/buttermilk",
+        "name": "Buttermilk",
+        "liters_per_kg": "1.599"
+    },
+    {
+        "lasso_id": "2984",
+        "url": "https://www.healabel.com/b-ingredients/butternut-squash",
+        "name": "Butternut Squash",
+        "liters_per_kg": "336"
+    },
+    {
+        "lasso_id": "2985",
+        "url": "https://www.healabel.com/c-ingredients/cabbage",
+        "name": "Cabbage",
+        "liters_per_kg": "280"
+    },
+    {
+        "lasso_id": "2986",
+        "url": "https://www.healabel.com/c-ingredients/cantaloupe",
+        "name": "Cantaloupe",
+        "liters_per_kg": "962"
+    },
+    {
+        "lasso_id": "2987",
+        "url": "https://www.healabel.com/c-ingredients/cardamom",
+        "name": "Cardamom",
+        "liters_per_kg": "34.319"
+    },
+    {
+        "lasso_id": "2988",
+        "url": "https://www.healabel.com/c-ingredients/carob",
+        "name": "Carob",
+        "liters_per_kg": "5.594"
+    },
+    {
+        "lasso_id": "2989",
+        "url": "https://www.healabel.com/c-ingredients/carrots",
+        "name": "Carrots",
+        "liters_per_kg": "195"
+    },
+    {
+        "lasso_id": "2990",
+        "url": "https://www.healabel.com/c-ingredients/cashews",
+        "name": "Cashews",
+        "liters_per_kg": "14.218"
+    },
+    {
+        "lasso_id": "2991",
+        "url": "https://www.healabel.com/c-ingredients/castor-oil",
+        "name": "Castor Oil",
+        "liters_per_kg": "24.740"
+    },
+    {
+        "lasso_id": "2992",
+        "url": "https://www.healabel.com/c-ingredients/cauliflower",
+        "name": "Cauliflower",
+        "liters_per_kg": "285"
+    },
+    {
+        "lasso_id": "2993",
+        "url": "https://www.healabel.com/c-ingredients/cheese",
+        "name": "Cheese",
+        "liters_per_kg": "5.060"
+    },
+    {
+        "lasso_id": "2994",
+        "url": "https://www.healabel.com/c-ingredients/cherries",
+        "name": "Cherries",
+        "liters_per_kg": "1.411"
+    },
+    {
+        "lasso_id": "2995",
+        "url": "https://www.healabel.com/c-ingredients/chestnuts",
+        "name": "Chestnuts",
+        "liters_per_kg": "2.750"
+    },
+    {
+        "lasso_id": "2996",
+        "url": "https://www.healabel.com/c-ingredients/chicken",
+        "name": "Chicken",
+        "liters_per_kg": "4.325"
+    },
+    {
+        "lasso_id": "2997",
+        "url": "https://www.healabel.com/c-ingredients/chickpeas",
+        "name": "Chickpeas",
+        "liters_per_kg": "4.177"
+    },
+    {
+        "lasso_id": "2998",
+        "url": "https://www.healabel.com/c-ingredients/chocolate",
+        "name": "Chocolate",
+        "liters_per_kg": "17.196"
+    },
+    {
+        "lasso_id": "2999",
+        "url": "https://www.healabel.com/c-ingredients/cinnamon",
+        "name": "Cinnamon",
+        "liters_per_kg": "15.526"
+    },
+    {
+        "lasso_id": "3000",
+        "url": "https://www.healabel.com/c-ingredients/clementines",
+        "name": "Clementines",
+        "liters_per_kg": "748"
+    },
+    {
+        "lasso_id": "3001",
+        "url": "https://www.healabel.com/c-ingredients/cloves",
+        "name": "Cloves",
+        "liters_per_kg": "61.205"
+    },
+    {
+        "lasso_id": "3002",
+        "url": "https://www.healabel.com/c-ingredients/coffee",
+        "name": "Coffee",
+        "liters_per_kg": "18.925"
+    },
+    {
+        "lasso_id": "3003",
+        "url": "https://www.healabel.com/c-ingredients/coconuts",
+        "name": "Coconuts",
+        "liters_per_kg": "2.687"
+    },
+    {
+        "lasso_id": "3004",
+        "url": "https://www.healabel.com/c-ingredients/coconut-oil",
+        "name": "Coconut Oil",
+        "liters_per_kg": "4.490"
+    },
+    {
+        "lasso_id": "3005",
+        "url": "https://www.healabel.com/c-ingredients/coco-powder",
+        "name": "Coco Powder",
+        "liters_per_kg": "15.636"
+    },
+    {
+        "lasso_id": "3006",
+        "url": "https://www.healabel.com/c-ingredients/coriander?rq=coriand",
+        "name": "Coriander",
+        "liters_per_kg": "8.280"
+    },
+    {
+        "lasso_id": "3007",
+        "url": "https://www.healabel.com/c-ingredients/corn",
+        "name": "Corn",
+        "liters_per_kg": "1.222"
+    },
+    {
+        "lasso_id": "3008",
+        "url": "https://www.healabel.com/c-ingredients/corn",
+        "name": "Corn",
+        "liters_per_kg": "1.314"
+    },
+    {
+        "lasso_id": "3009",
+        "url": "https://www.healabel.com/c-ingredients/corn-oil",
+        "name": "Corn",
+        "liters_per_kg": "2.575"
+    },
+    {
+        "lasso_id": "3010",
+        "url": "https://www.healabel.com/c-ingredients/corn-oil",
+        "name": "Oil",
+        "liters_per_kg": "2.575"
+    },
+    {
+        "lasso_id": "3011",
+        "url": "https://www.healabel.com/c-ingredients/cranberries",
+        "name": "Cranberries",
+        "liters_per_kg": "276"
+    },
+    {
+        "lasso_id": "3012",
+        "url": "https://www.healabel.com/c-ingredients/cucumbers",
+        "name": "Cucumbers",
+        "liters_per_kg": "353"
+    },
+    {
+        "lasso_id": "3013",
+        "url": "https://www.healabel.com/d-ingredients/dates",
+        "name": "Dates",
+        "liters_per_kg": ""
+    },
+    {
+        "lasso_id": "3014",
+        "url": "https://www.healabel.com/d-ingredients/duck",
+        "name": "Duck",
+        "liters_per_kg": ""
+    },
+    {
+        "lasso_id": "3015",
+        "url": "https://www.healabel.com/e-ingredients/eggplant",
+        "name": "Eggplant",
+        "liters_per_kg": "362"
+    },
+    {
+        "lasso_id": "3016",
+        "url": "https://www.healabel.com/e-ingredients/eggs",
+        "name": "Eggs",
+        "liters_per_kg": "3.265"
+    },
+    {
+        "lasso_id": "3017",
+        "url": "https://www.healabel.com/f-ingredients/fava-beans",
+        "name": "Fava Beans",
+        "liters_per_kg": "5.053"
+    },
+    {
+        "lasso_id": "3018",
+        "url": "https://www.healabel.com/f-ingredients/fennel",
+        "name": "Fennel",
+        "liters_per_kg": "8.280"
+    },
+    {
+        "lasso_id": "3019",
+        "url": "https://www.healabel.com/f-ingredients/figs",
+        "name": "Figs",
+        "liters_per_kg": "3.350"
+    },
+    {
+        "lasso_id": "3020",
+        "url": "https://www.healabel.com/g-ingredients/garlic",
+        "name": "Garlic",
+        "liters_per_kg": "589"
+    },
+    {
+        "lasso_id": "3021",
+        "url": "https://www.healabel.com/p-ingredients/pickles",
+        "name": "Gherkins",
+        "liters_per_kg": "353"
+    },
+    {
+        "lasso_id": "3022",
+        "url": "https://www.healabel.com/g-ingredients/ginger",
+        "name": "Ginger",
+        "liters_per_kg": "1.657"
+    },
+    {
+        "lasso_id": "3023",
+        "url": "https://www.healabel.com/g-ingredients/goat-meat",
+        "name": "Goat Meat",
+        "liters_per_kg": "8.763"
+    },
+    {
+        "lasso_id": "3024",
+        "url": "https://www.healabel.com/g-ingredients/goose",
+        "name": "Goose",
+        "liters_per_kg": "4.325"
+    },
+    {
+        "lasso_id": "3025",
+        "url": "https://www.healabel.com/g-ingredients/gooseberries",
+        "name": "Gooseberries",
+        "liters_per_kg": "526"
+    },
+    {
+        "lasso_id": "3026",
+        "url": "https://www.healabel.com/g-ingredients/grapefruit",
+        "name": "Grapefruit",
+        "liters_per_kg": "506"
+    },
+    {
+        "lasso_id": "3027",
+        "url": "https://www.healabel.com/g-ingredients/grapes",
+        "name": "Grapes",
+        "liters_per_kg": "608"
+    },
+    {
+        "lasso_id": "3028",
+        "url": "https://www.healabel.com/g-ingredients/green-beans",
+        "name": "Beans",
+        "liters_per_kg": "561"
+    },
+    {
+        "lasso_id": "3029",
+        "url": "https://www.healabel.com/g-ingredients/green-beans",
+        "name": "Green",
+        "liters_per_kg": "561"
+    },
+    {
+        "lasso_id": "3030",
+        "url": "https://www.healabel.com/g-ingredients/green-onions",
+        "name": "Onions",
+        "liters_per_kg": "272"
+    },
+    {
+        "lasso_id": "3031",
+        "url": "https://www.healabel.com/g-ingredients/green-onions",
+        "name": "Green",
+        "liters_per_kg": "272"
+    },
+    {
+        "lasso_id": "3032",
+        "url": "https://www.healabel.com/g-ingredients/green-tea",
+        "name": "Tea",
+        "liters_per_kg": "8.856"
+    },
+    {
+        "lasso_id": "3033",
+        "url": "https://www.healabel.com/g-ingredients/green-tea",
+        "name": "Green",
+        "liters_per_kg": "8.856"
+    },
+    {
+        "lasso_id": "3034",
+        "url": "https://www.healabel.com/g-ingredients/guava",
+        "name": "Guava",
+        "liters_per_kg": "1.800"
+    },
+    {
+        "lasso_id": "3035",
+        "url": "https://www.healabel.com/h-ingredients/ham",
+        "name": "Ham",
+        "liters_per_kg": "5.677"
+    },
+    {
+        "lasso_id": "3036",
+        "url": "https://www.healabel.com/h-ingredients/hazelnuts",
+        "name": "Hazelnuts",
+        "liters_per_kg": "10.515"
+    },
+    {
+        "lasso_id": "3037",
+        "url": "https://www.healabel.com/h-ingredients/hazelnuts",
+        "name": "Hazelnuts",
+        "liters_per_kg": "5.258"
+    },
+    {
+        "lasso_id": "3038",
+        "url": "https://www.healabel.com/h-ingredients/hemp-seeds",
+        "name": "Hempseed",
+        "liters_per_kg": "3.685"
+    },
+    {
+        "lasso_id": "3039",
+        "url": "https://www.healabel.com/h-ingredients/horse-meat",
+        "name": "Horse Meat",
+        "liters_per_kg": "51.779"
+    },
+    {
+        "lasso_id": "3040",
+        "url": "https://www.healabel.com/j-ingredients/jalape%C3%B1o-peppers",
+        "name": "Jalapeño Peppers",
+        "liters_per_kg": "379"
+    },
+    {
+        "lasso_id": "3041",
+        "url": "https://www.healabel.com/k-ingredients/kale",
+        "name": "Kale",
+        "liters_per_kg": "322"
+    },
+    {
+        "lasso_id": "3042",
+        "url": "https://www.healabel.com/k-ingredients/kefir",
+        "name": "Kefir",
+        "liters_per_kg": "1.599  of water"
+    },
+    {
+        "lasso_id": "3043",
+        "url": "https://www.healabel.com/k-ingredients/kidney-beans",
+        "name": "Kidney Beans",
+        "liters_per_kg": "5.053"
+    },
+    {
+        "lasso_id": "3044",
+        "url": "https://www.healabel.com/k-ingredients/kiwi",
+        "name": "Kiwi",
+        "liters_per_kg": "514"
+    },
+    {
+        "lasso_id": "3045",
+        "url": "https://www.healabel.com/k-ingredients/ketchup",
+        "name": "Ketchup",
+        "liters_per_kg": "534"
+    },
+    {
+        "lasso_id": "3046",
+        "url": "https://www.healabel.com/l-ingredients/lamb",
+        "name": "Lamb",
+        "liters_per_kg": "5.301"
+    },
+    {
+        "lasso_id": "3047",
+        "url": "https://www.healabel.com/l-ingredients/lemons",
+        "name": "Lemons",
+        "liters_per_kg": "642"
+    },
+    {
+        "lasso_id": "3048",
+        "url": "https://www.healabel.com/l-ingredients/lentils",
+        "name": "Lentils",
+        "liters_per_kg": "5.874"
+    },
+    {
+        "lasso_id": "3049",
+        "url": "https://www.healabel.com/l-ingredients/lettuce",
+        "name": "Lettuce",
+        "liters_per_kg": "237"
+    },
+    {
+        "lasso_id": "3050",
+        "url": "https://www.healabel.com/l-ingredients/limes",
+        "name": "Limes",
+        "liters_per_kg": "642"
+    },
+    {
+        "lasso_id": "3051",
+        "url": "https://www.healabel.com/m-ingredients/malt",
+        "name": "Malt",
+        "liters_per_kg": "2.437"
+    },
+    {
+        "lasso_id": "3052",
+        "url": "https://www.healabel.com/m-ingredients/malt",
+        "name": "Malt",
+        "liters_per_kg": "1.950"
+    },
+    {
+        "lasso_id": "3053",
+        "url": "https://www.healabel.com/m-ingredients/mandarins",
+        "name": "Mandarins",
+        "liters_per_kg": "748"
+    },
+    {
+        "lasso_id": "3054",
+        "url": "https://www.healabel.com/m-ingredients/mangos",
+        "name": "Mangos",
+        "liters_per_kg": "1.800"
+    },
+    {
+        "lasso_id": "3055",
+        "url": "https://www.healabel.com/m-ingredients/milk",
+        "name": "Milk",
+        "liters_per_kg": "1.020"
+    },
+    {
+        "lasso_id": "3056",
+        "url": "https://www.healabel.com/m-ingredients/milk-powder",
+        "name": "Milk Powder",
+        "liters_per_kg": "4.345"
+    },
+    {
+        "lasso_id": "3057",
+        "url": "https://www.healabel.com/m-ingredients/millet",
+        "name": "Millet",
+        "liters_per_kg": "4.478"
+    },
+    {
+        "lasso_id": "3058",
+        "url": "https://www.healabel.com/m-ingredients/mint",
+        "name": "Mint",
+        "liters_per_kg": "288"
+    },
+    {
+        "lasso_id": "3059",
+        "url": "https://www.healabel.com/m-ingredients/mushrooms",
+        "name": "Mushrooms",
+        "liters_per_kg": "322"
+    },
+    {
+        "lasso_id": "3060",
+        "url": "https://www.healabel.com/m-ingredients/mustard-seeds",
+        "name": "Mustard Seeds",
+        "liters_per_kg": "2.809"
+    },
+    {
+        "lasso_id": "3061",
+        "url": "https://www.healabel.com/n-ingredients/nectarines",
+        "name": "Nectarines",
+        "liters_per_kg": "910"
+    },
+    {
+        "lasso_id": "3062",
+        "url": "https://www.healabel.com/n-ingredients/nutmeg",
+        "name": "Nutmeg",
+        "liters_per_kg": "34.319"
+    },
+    {
+        "lasso_id": "3063",
+        "url": "https://www.healabel.com/o-ingredients/oats",
+        "name": "Oats",
+        "liters_per_kg": "1.788"
+    },
+    {
+        "lasso_id": "3064",
+        "url": "https://www.healabel.com/o-ingredients/oats",
+        "name": "Oats",
+        "liters_per_kg": "2.536"
+    },
+    {
+        "lasso_id": "3065",
+        "url": "https://www.healabel.com/o-ingredients/oats",
+        "name": "Oats",
+        "liters_per_kg": "2.416"
+    },
+    {
+        "lasso_id": "3066",
+        "url": "https://www.healabel.com/o-ingredients/okra",
+        "name": "Okra",
+        "liters_per_kg": "576"
+    },
+    {
+        "lasso_id": "3067",
+        "url": "https://www.healabel.com/o-ingredients/olive-oil",
+        "name": "Olive Oil",
+        "liters_per_kg": "14.431"
+    },
+    {
+        "lasso_id": "3068",
+        "url": "https://www.healabel.com/o-ingredients/olive-oil",
+        "name": "Olive Oil",
+        "liters_per_kg": "14.726"
+    },
+    {
+        "lasso_id": "3069",
+        "url": "https://www.healabel.com/o-ingredients/olives",
+        "name": "Olives",
+        "liters_per_kg": "3.015"
+    },
+    {
+        "lasso_id": "3070",
+        "url": "https://www.healabel.com/o-ingredients/onions",
+        "name": "Onions",
+        "liters_per_kg": "272"
+    },
+    {
+        "lasso_id": "3071",
+        "url": "https://www.healabel.com/o-ingredients/oranges",
+        "name": "Oranges",
+        "liters_per_kg": "560"
+    },
+    {
+        "lasso_id": "3072",
+        "url": "https://www.healabel.com/o-ingredients/orange-juice",
+        "name": "Orange Juice",
+        "liters_per_kg": "1.018"
+    },
+    {
+        "lasso_id": "3073",
+        "url": "https://www.healabel.com/p-ingredients/palm-oil",
+        "name": "Palm Oil",
+        "liters_per_kg": "4.971"
+    },
+    {
+        "lasso_id": "3074",
+        "url": "https://www.healabel.com/p-ingredients/papaya",
+        "name": "Papaya",
+        "liters_per_kg": "460"
+    },
+    {
+        "lasso_id": "3075",
+        "url": "https://www.healabel.com/p-ingredients/pasta",
+        "name": "Pasta",
+        "liters_per_kg": "1.849"
+    },
+    {
+        "lasso_id": "3076",
+        "url": "https://www.healabel.com/p-ingredients/peaches",
+        "name": "Peaches",
+        "liters_per_kg": "910"
+    },
+    {
+        "lasso_id": "3077",
+        "url": "https://www.healabel.com/p-ingredients/pears",
+        "name": "Pears",
+        "liters_per_kg": "922"
+    },
+    {
+        "lasso_id": "3078",
+        "url": "https://www.healabel.com/p-ingredients/peas",
+        "name": "Peas",
+        "liters_per_kg": "595"
+    },
+    {
+        "lasso_id": "3079",
+        "url": "https://www.healabel.com/m-ingredients/mint",
+        "name": "Peppermint",
+        "liters_per_kg": "288"
+    },
+    {
+        "lasso_id": "3080",
+        "url": "https://www.healabel.com/p-ingredients/pineapples",
+        "name": "Pineapple",
+        "liters_per_kg": "255"
+    },
+    {
+        "lasso_id": "3081",
+        "url": "https://www.healabel.com/p-ingredients/pinto-beans",
+        "name": "Pinto Beans",
+        "liters_per_kg": "5.053"
+    },
+    {
+        "lasso_id": "3082",
+        "url": "https://www.healabel.com/p-ingredients/pistachios",
+        "name": "Pistachios",
+        "liters_per_kg": "11.363"
+    },
+    {
+        "lasso_id": "3083",
+        "url": "https://www.healabel.com/p-ingredients/plantains",
+        "name": "Plantains",
+        "liters_per_kg": "1.602"
+    },
+    {
+        "lasso_id": "3084",
+        "url": "https://www.healabel.com/p-ingredients/plums",
+        "name": "Plums",
+        "liters_per_kg": "2.180"
+    },
+    {
+        "lasso_id": "3085",
+        "url": "https://www.healabel.com/p-ingredients/poppy-seeds",
+        "name": "Poppy Seeds",
+        "liters_per_kg": "2.188"
+    },
+    {
+        "lasso_id": "3086",
+        "url": "https://www.healabel.com/p-ingredients/pork",
+        "name": "Pork",
+        "liters_per_kg": "5.990"
+    },
+    {
+        "lasso_id": "3087",
+        "url": "https://www.healabel.com/p-ingredients/potatoes",
+        "name": "Potatoes",
+        "liters_per_kg": "287"
+    },
+    {
+        "lasso_id": "3088",
+        "url": "https://www.healabel.com/p-ingredients/potato-starch",
+        "name": "Potato Starch",
+        "liters_per_kg": "1.512"
+    },
+    {
+        "lasso_id": "3089",
+        "url": "https://www.healabel.com/p-ingredients/pumpkins",
+        "name": "Pumpkins",
+        "liters_per_kg": "336"
+    },
+    {
+        "lasso_id": "3090",
+        "url": "https://www.healabel.com/r-ingredients/rapeseed-oil",
+        "name": "Rapeseed Oil",
+        "liters_per_kg": "4.301"
+    },
+    {
+        "lasso_id": "3091",
+        "url": "https://www.healabel.com/r-ingredients/raspberries",
+        "name": "Raspberries",
+        "liters_per_kg": "413"
+    },
+    {
+        "lasso_id": "3092",
+        "url": "https://www.healabel.com/r-ingredients/red-cabbage",
+        "name": "Red Cabbage",
+        "liters_per_kg": "280"
+    },
+    {
+        "lasso_id": "3093",
+        "url": "https://www.healabel.com/r-ingredients/red-currants",
+        "name": "Red Currants",
+        "liters_per_kg": "499"
+    },
+    {
+        "lasso_id": "3094",
+        "url": "https://www.healabel.com/r-ingredients/rice-flour",
+        "name": "Rice Flour",
+        "liters_per_kg": "2.628"
+    },
+    {
+        "lasso_id": "3095",
+        "url": "https://www.healabel.com/r-ingredients/romanesco-broccoli",
+        "name": "Romanesco Broccoli",
+        "liters_per_kg": "285"
+    },
+    {
+        "lasso_id": "3096",
+        "url": "https://www.healabel.com/r-ingredients/rye",
+        "name": "Rye",
+        "liters_per_kg": "1.544"
+    },
+    {
+        "lasso_id": "3097",
+        "url": "https://www.healabel.com/r-ingredients/rye-flour",
+        "name": "Rye Flour",
+        "liters_per_kg": "1.930"
+    },
+    {
+        "lasso_id": "3098",
+        "url": "https://www.healabel.com/s-ingredients/sauerkraut",
+        "name": "Sauerkraut",
+        "liters_per_kg": "280"
+    },
+    {
+        "lasso_id": "3099",
+        "url": "https://www.healabel.com/s-ingredients/savoy-cabbage",
+        "name": "Savoy Cabbage",
+        "liters_per_kg": "280"
+    },
+    {
+        "lasso_id": "3100",
+        "url": "https://www.healabel.com/s-ingredients/sesame-oil",
+        "name": "Sesame Oil",
+        "liters_per_kg": "21.793"
+    },
+    {
+        "lasso_id": "3101",
+        "url": "https://www.healabel.com/s-ingredients/sesame-seeds",
+        "name": "Sesame Seeds",
+        "liters_per_kg": "9.371"
+    },
+    {
+        "lasso_id": "3102",
+        "url": "https://www.healabel.com/s-ingredients/shallots",
+        "name": "Shallots",
+        "liters_per_kg": "272"
+    },
+    {
+        "lasso_id": "3103",
+        "url": "https://www.healabel.com/s-ingredients/sheep-meat",
+        "name": "Sheep Meat",
+        "liters_per_kg": "8.763"
+    },
+    {
+        "lasso_id": "3104",
+        "url": "https://www.healabel.com/s-ingredients/sorghum",
+        "name": "Sorghum",
+        "liters_per_kg": "3.048"
+    },
+    {
+        "lasso_id": "3105",
+        "url": "https://www.healabel.com/s-ingredients/soy",
+        "name": "Soybeans",
+        "liters_per_kg": "2.145"
+    },
+    {
+        "lasso_id": "3106",
+        "url": "https://www.healabel.com/s-ingredients/soy-sauce",
+        "name": "Soy Sauce",
+        "liters_per_kg": "613"
+    },
+    {
+        "lasso_id": "3107",
+        "url": "https://www.healabel.com/s-ingredients/soy-milk",
+        "name": "Soy Milk",
+        "liters_per_kg": "3.763"
+    },
+    {
+        "lasso_id": "3108",
+        "url": "https://www.healabel.com/s-ingredients/spinach",
+        "name": "Spinach",
+        "liters_per_kg": "292"
+    },
+    {
+        "lasso_id": "3109",
+        "url": "https://www.healabel.com/s-ingredients/squash",
+        "name": "Squash",
+        "liters_per_kg": "336"
+    },
+    {
+        "lasso_id": "3110",
+        "url": "https://www.healabel.com/s-ingredients/strawberries",
+        "name": "Strawberries",
+        "liters_per_kg": "347"
+    },
+    {
+        "lasso_id": "3111",
+        "url": "https://www.healabel.com/s-ingredients/string-beans",
+        "name": "String Beans",
+        "liters_per_kg": "547"
+    },
+    {
+        "lasso_id": "3112",
+        "url": "https://www.healabel.com/s-ingredients/sugar",
+        "name": "Sugar",
+        "liters_per_kg": "210"
+    },
+    {
+        "lasso_id": "3113",
+        "url": "https://www.healabel.com/s-ingredients/sugar",
+        "name": "Sugar",
+        "liters_per_kg": "1.666"
+    },
+    {
+        "lasso_id": "3114",
+        "url": "https://www.healabel.com/s-ingredients/sunflower-seeds",
+        "name": "Sunflower Seeds",
+        "liters_per_kg": "3.366"
+    },
+    {
+        "lasso_id": "3115",
+        "url": "https://www.healabel.com/s-ingredients/sunflower-oil",
+        "name": "Sunflower Oil",
+        "liters_per_kg": "6.792"
+    },
+    {
+        "lasso_id": "3116",
+        "url": "https://www.healabel.com/s-ingredients/sweet-potatoes",
+        "name": "Sweet Potatoes",
+        "liters_per_kg": "383"
+    },
+    {
+        "lasso_id": "3117",
+        "url": "https://www.healabel.com/t-ingredients/tangerines",
+        "name": "Tangerines",
+        "liters_per_kg": "748"
+    },
+    {
+        "lasso_id": "3118",
+        "url": "https://www.healabel.com/t-ingredients/taro-root",
+        "name": "Taro Root",
+        "liters_per_kg": "606"
+    },
+    {
+        "lasso_id": "3119",
+        "url": "https://www.healabel.com/t-ingredients/tempeh",
+        "name": "Tempeh",
+        "liters_per_kg": "2.145"
+    },
+    {
+        "lasso_id": "3120",
+        "url": "https://www.healabel.com/t-ingredients/tofu",
+        "name": "Tofu",
+        "liters_per_kg": "2.145"
+    },
+    {
+        "lasso_id": "3121",
+        "url": "https://www.healabel.com/t-ingredients/tomatoes",
+        "name": "Tomatoes",
+        "liters_per_kg": "214"
+    },
+    {
+        "lasso_id": "3122",
+        "url": "https://www.healabel.com/t-ingredients/turkey",
+        "name": "Turkey",
+        "liters_per_kg": "4.325"
+    },
+    {
+        "lasso_id": "3123",
+        "url": "https://www.healabel.com/t-ingredients/turnips",
+        "name": "Turnips",
+        "liters_per_kg": "195"
+    },
+    {
+        "lasso_id": "3124",
+        "url": "https://www.healabel.com/v-ingredients/vanilla-beans",
+        "name": "Vanilla Beans",
+        "liters_per_kg": "126.505"
+    },
+    {
+        "lasso_id": "3125",
+        "url": "https://www.healabel.com/w-ingredients/walnuts",
+        "name": "Walnuts",
+        "liters_per_kg": "5.293"
+    },
+    {
+        "lasso_id": "3126",
+        "url": "https://www.healabel.com/w-ingredients/walnuts",
+        "name": "Walnuts",
+        "liters_per_kg": "4.918"
+    },
+    {
+        "lasso_id": "3127",
+        "url": "https://www.healabel.com/w-ingredients/watermelon",
+        "name": "Watermelon",
+        "liters_per_kg": "235"
+    },
+    {
+        "lasso_id": "3128",
+        "url": "https://www.healabel.com/w-ingredients/wheat",
+        "name": "Wheat",
+        "liters_per_kg": "1.827"
+    },
+    {
+        "lasso_id": "3129",
+        "url": "https://www.healabel.com/w-ingredients/wheat-flour",
+        "name": "Wheat",
+        "liters_per_kg": "1.849"
+    },
+    {
+        "lasso_id": "3130",
+        "url": "https://www.healabel.com/w-ingredients/wheat-flour",
+        "name": "Flour",
+        "liters_per_kg": "1.849"
+    },
+    {
+        "lasso_id": "3131",
+        "url": "https://www.healabel.com/w-ingredients/whey",
+        "name": "Whey",
+        "liters_per_kg": "647"
+    },
+    {
+        "lasso_id": "3132",
+        "url": "https://www.healabel.com/w-ingredients/white-currants",
+        "name": "White Currants",
+        "liters_per_kg": "499"
+    },
+    {
+        "lasso_id": "3133",
+        "url": "https://www.healabel.com/y-ingredients/yams",
+        "name": "Yams",
+        "liters_per_kg": "343"
+    },
+    {
+        "lasso_id": "3134",
+        "url": "https://www.healabel.com/y-ingredients/yellow-squash",
+        "name": "Yellow Squash",
+        "liters_per_kg": "336"
+    },
+    {
+        "lasso_id": "3135",
+        "url": "https://www.healabel.com/y-ingredients/yogurt",
+        "name": "Yogurt",
+        "liters_per_kg": "1.186"
+    },
+    {
+        "lasso_id": "3136",
+        "url": "https://www.healabel.com/z-ingredients/zucchini",
+        "name": "Zucchini",
+        "liters_per_kg": "336"
+    }
+]
