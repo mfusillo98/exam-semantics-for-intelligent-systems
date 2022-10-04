@@ -72,7 +72,7 @@ def save_ingredient_edamam_food_id(text, edamam_food_id, cursor):
 
 # Matteo Fusillo
 def save_edamam_food_hint(edamam_food_id, text, cursor):
-    query = f"INSERT IGNORE INTO edamam_hints (edamam_food_id, type_id, type) SELECT %s, 1m_recipe_id, '1m' FROM `1m_recipes_ingredients` WHERE text LIKE %s"
+    query = f"INSERT IGNORE INTO edamam_hints (edamam_food_id, type_id, type) VALUES (%s, %s, '1m')"
     result = cursor.execute(query, (edamam_food_id, text))
     return result
 

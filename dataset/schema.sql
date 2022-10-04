@@ -22,6 +22,9 @@ CREATE TABLE me_foods
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
 );
 
+alter table me_foods
+    add index (edamam_food_id);
+
 CREATE TABLE edamam_hints
 (
     edamam_food_id VARCHAR(255)               NOT NULL,
@@ -29,6 +32,15 @@ CREATE TABLE edamam_hints
     type           ENUM ('1m', 'foodb', 'me') NOT NULL,
     PRIMARY KEY (edamam_food_id, type_id, type)
 );
+
+alter table edamam_hints
+    add index (edamam_food_id);
+alter table edamam_hints
+    add index (type_id);
+alter table edamam_hints
+    add index (type);
+alter table edamam_hints
+    add index (type, type_id);
 
 create table 1m_recipe
 (
@@ -62,6 +74,8 @@ create table 1m_recipes_ingredients
 
 alter table 1m_recipes_ingredients
     add index (1m_recipe_id);
+alter table 1m_recipes_ingredients
+    add index (edamam_food_id);
 
 
 CREATE TABLE `foodb_foods`
@@ -74,3 +88,21 @@ CREATE TABLE `foodb_foods`
     edamam_food_id  VARCHAR(255),
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
 );
+
+-- Setta la CO2 stimata in base ad una relazione diretta con i cibi my_emission
+alter table 1m_recipes_ingredients
+    add co2_direct_my_emission varchar(128);
+update 1m_recipes_ingredients i JOIN me_foods me ON i.edamam_food_id = me.edamam_food_id
+set co2_direct_my_emission = me.emissions
+where 1;
+
+alter table 1m_recipes_ingredients
+    add co2_min_by_hints_similarity varchar(128);
+alter table 1m_recipes_ingredients
+    add co2_max_by_hints_similarity varchar(128);
+alter table 1m_recipes_ingredients
+    add co2_mean_by_hints_similarity varchar(128);
+alter table 1m_recipes_ingredients
+    add co2_mean_max_freq_class_by_hints_similarity varchar(128);
+alter table 1m_recipes_ingredients
+    add co2_raw_data_hints_similarity text;
