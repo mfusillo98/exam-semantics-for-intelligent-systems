@@ -63,11 +63,12 @@ def estimate_co2(cursor, my_emissions_food, type, type_id, similarity_thresholds
                     {'me_food_id': f['me_food_id'], 'emissions': f['emissions'], 'similarity': similarity})
 
     for i in range(0, len(similarity_thresholds)):
-        print(f"> Similarities threshold: {similarity_thresholds[i]} | # Similar foods: {len(similar_foods[i])} | Max. similarity: {max_similarity}")
+        print(
+            f"> Similarities threshold: {similarity_thresholds[i]} | # Similar foods: {len(similar_foods[i])} | Max. similarity: {max_similarity}")
 
     results = [{} for _ in similarity_thresholds]  # Vettore parallelo di similarity_thresholds
     for i in range(0, len(similarity_thresholds)):
-        foods_emissions = [float(f['emissions']) for f in similar_foods[i]]
+        foods_emissions = [float(f['emissions'] if f['emissions'] != '' else '0') for f in similar_foods[i]]
         if len(foods_emissions) == 0:
             results[i] = {
                 'similar_foods': similar_foods[i],
@@ -86,26 +87,29 @@ def estimate_co2(cursor, my_emissions_food, type, type_id, similarity_thresholds
         maxV = max(foods_emissions)
         if len(foods_emissions) > 2:
             distribution_classes_size = (maxV - minV) / (round(len(foods_emissions) / 2.5, 0))
-            cmin = minV  # La prima classe ha estremo sinistro = minV
-            while cmin + distribution_classes_size <= maxV:
-                cmax = cmin + distribution_classes_size
-                classes.append({
-                    'min': cmin,
-                    'max': cmax,
-                    'label': f"{cmin} - {cmax}",
-                    'values': [e for e in foods_emissions if cmax <= e <= cmax]
-                })
-            for c in classes:
-                if most_frequent_class is None or len(most_frequent_class['values']) < len(c['values']):
-                    most_frequent_class = c
+            if distribution_classes_size > 0:
+                cmin = minV  # La prima classe ha estremo sinistro = minV
+                print(f"Distribution class size {distribution_classes_size}, cmin={cmin}, cmax={maxV}")
+                while cmin + distribution_classes_size <= maxV:
+                    cmax = cmin + distribution_classes_size
+                    classes.append({
+                        'min': cmin,
+                        'max': cmax,
+                        'label': f"{cmin} - {cmax}",
+                        'values': [e for e in foods_emissions if cmax <= e < cmax]
+                    })
+                    cmin = cmax
+                print(f"Classes {len(classes)}")
+                for c in classes:
+                    if most_frequent_class is None or len(most_frequent_class['values']) < len(c['values']):
+                        most_frequent_class = c
         results[i] = {
             'similar_foods': similar_foods[i],
             'min': minV,
             'max': maxV,
             'mean': sum(foods_emissions) / len(foods_emissions),
             'classes': classes,
-            'mean_max_freq_class': sum(most_frequent_class['values']) / len(
-                most_frequent_class['values']) if most_frequent_class is not None else None
+            'mean_max_freq_class': sum(most_frequent_class['values']) / len(most_frequent_class['values']) if most_frequent_class is not None and len(most_frequent_class['values']) > 0 else None
         }
 
     return results
