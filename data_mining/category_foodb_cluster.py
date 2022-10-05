@@ -1,7 +1,11 @@
 import json
 import os
+
+import pymysql
+
 import database.connection
 import database.query
+
 
 def create_category_cluster():
     connection = database.connection.get_connection(os.environ.get('DB_DATABASE'))
@@ -16,13 +20,13 @@ def create_category_cluster():
 
     categoryCluster = {}
     for row in categoryAndEmission:
-        #Definisco il gruppo se non esiste
+        # Definisco il gruppo se non esiste
         if row["food_group"] not in categoryCluster:
             categoryCluster[row["food_group"]] = {}
 
-        #Definisco il sottogruppo se non esiste
+        # Definisco il sottogruppo se non esiste
         if row["food_subgroup"] not in categoryCluster[row["food_group"]]:
-            categoryCluster[row["food_group"]][row["food_subgroup"]] = {"items":[]}
+            categoryCluster[row["food_group"]][row["food_subgroup"]] = {"items": []}
 
         categoryCluster[row["food_group"]][row["food_subgroup"]]["items"].append({
             "edamam_food_id": row["edamam_food_id"],
@@ -35,19 +39,40 @@ def create_category_cluster():
             minVal = None
             avg = 0
             for item in categoryCluster[group][subgroup]["items"]:
-                emissionValue = 0 if item["emissions"] == ''else float(item["emissions"])
+                emissionValue = 0 if item["emissions"] == '' else float(item["emissions"])
                 if not maxVal or emissionValue > maxVal:
                     maxVal = emissionValue
                 if not minVal or emissionValue < minVal:
                     minVal = emissionValue
                 avg += emissionValue
-            avg = avg/len(categoryCluster[group][subgroup]["items"])
+            avg = avg / len(categoryCluster[group][subgroup]["items"])
 
             categoryCluster[group][subgroup]["max_value"] = maxVal
             categoryCluster[group][subgroup]["min_value"] = minVal
             categoryCluster[group][subgroup]["avg"] = avg
 
-
     json.dumps(categoryCluster)
     with open("data_mining/category_cluster.json", "w+") as f:
         json.dump(categoryCluster, f)
+
+
+def save_category_cluster():
+    f = open("data_mining/category_cluster.json")
+    categoryCluster = json.load(f)
+
+    connection = database.connection.get_connection(os.environ.get('DB_DATABASE'))
+    cursor = connection.cursor(pymysql.cursors.SSDictCursor)
+
+    for group in categoryCluster.keys():
+        for subgroup in categoryCluster[group]:
+            database.query.insert(cursor, 'group_with_emissions', {
+                "food_group": group,
+                "food_subgroup": subgroup,
+                "emissions_max_value": categoryCluster[group][subgroup]["max_value"],
+                "emissions_min_value": categoryCluster[group][subgroup]["min_value"],
+                "emissions_avg": categoryCluster[group][subgroup]["avg"]})
+
+            print(categoryCluster[group][subgroup])
+
+    connection.commit()
+    connection.close()

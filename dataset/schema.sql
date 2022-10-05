@@ -106,3 +106,25 @@ alter table 1m_recipes_ingredients
     add co2_mean_max_freq_class_by_hints_similarity varchar(128);
 alter table 1m_recipes_ingredients
     add co2_raw_data_hints_similarity text;
+
+
+--Crea la tabella contente le informaizoni gruppi-emissioni
+
+CREATE TABLE group_with_emissions (
+	food_group VARCHAR(255),
+    food_subgroup VARCHAR(255),
+    emissions_max_value VARCHAR(255),
+    emissions_min_value VARCHAR(255),
+    emissions_avg VARCHAR(255),
+    PRIMARY KEY (food_group, food_subgroup)
+)
+
+ALTER TABLE 1m_recipes_ingredients
+ADD co2_mean_groups VARCHAR(128)
+
+UPDATE 1m_recipes_ingredients 1m
+    LEFT JOIN edamam_foods ed ON 1m.edamam_food_id = ed.edamam_food_id
+    LEFT JOIN foodb_foods fd ON ed.edamam_food_id = fd.edamam_food_id
+    LEFT JOIN group_with_emissions gwe ON gwe.food_group = fd.food_group AND gwe.food_subgroup = fd.food_subgroup
+SET co2_mean_groups = emissions_avg
+WHERE 1
