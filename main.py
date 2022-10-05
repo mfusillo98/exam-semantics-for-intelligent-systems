@@ -27,8 +27,8 @@ def main():
     # feature_extraction.my_emission.fetch_me_food_edamam_foods()
     # feature_extraction.foodb.fetch_foodb_edamam_foods()
     # DATA MINING
-    #data_mining.recipe1m.estimate_co2_by_hints_similarity()
-    #data_mining.category_foodb_cluster.create_category_cluster()
+    # data_mining.recipe1m.estimate_co2_by_hints_similarity()
+    # data_mining.category_foodb_cluster.create_category_cluster()
     data_mining.category_foodb_cluster.save_category_cluster()
     pass
 

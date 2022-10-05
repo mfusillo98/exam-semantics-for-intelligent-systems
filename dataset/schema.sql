@@ -108,7 +108,7 @@ alter table 1m_recipes_ingredients
     add co2_raw_data_hints_similarity text;
 
 
---Crea la tabella contente le informaizoni gruppi-emissioni
+-- Crea la tabella contente le informaizoni gruppi-emissioni
 
 CREATE TABLE group_with_emissions (
 	food_group VARCHAR(255),
@@ -117,10 +117,10 @@ CREATE TABLE group_with_emissions (
     emissions_min_value VARCHAR(255),
     emissions_avg VARCHAR(255),
     PRIMARY KEY (food_group, food_subgroup)
-)
+);
 
 ALTER TABLE 1m_recipes_ingredients
-ADD co2_mean_groups VARCHAR(128)
+ADD co2_mean_groups VARCHAR(128);
 
 UPDATE 1m_recipes_ingredients 1m
     LEFT JOIN edamam_foods ed ON 1m.edamam_food_id = ed.edamam_food_id
