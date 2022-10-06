@@ -5,6 +5,7 @@ import feature_extraction.recipe1m
 import feature_extraction.foodb
 import feature_extraction.my_emission
 import feature_extraction.my_emission_edamam
+import feature_extraction.healabel_water_foodprint
 import data_mining.recipe1m
 
 os.environ['DB_USER'] = 'root'
@@ -26,10 +27,12 @@ def main():
     # feature_extraction.my_emission.import_my_emission()
     # feature_extraction.my_emission.fetch_me_food_edamam_foods()
     # feature_extraction.foodb.fetch_foodb_edamam_foods()
+    #feature_extraction.healabel_water_foodprint.import_healabel_water_foodprint()
+    feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
     # DATA MINING
     # data_mining.recipe1m.estimate_co2_by_hints_similarity()
-    # data_mining.category_foodb_cluster.create_category_cluster()
-    data_mining.category_foodb_cluster.save_category_cluster()
+    #data_mining.category_foodb_cluster.create_category_cluster()
+    #data_mining.category_foodb_cluster.save_category_cluster()
     pass
 
 
