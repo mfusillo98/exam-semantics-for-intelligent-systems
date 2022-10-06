@@ -22,7 +22,7 @@ def estimate_co2_by_hints_similarity():
         print(f"{counter}) Estimating {row['text']}")
         results = data_mining.co2_my_emissions_hints_similarity.estimate_co2(cursor, my_emissions_foods, '1m',
                                                                              row['text'],
-                                                                             [0.5, 0.6, 0.7, 0.8, 0.9])
+                                                                             [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
         threshold_idx = 3
         database.query.update(cursor, '1m_recipes_ingredients', {
             'co2_min_by_hints_similarity': results[threshold_idx]['min'],

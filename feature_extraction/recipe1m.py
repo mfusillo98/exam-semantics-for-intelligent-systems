@@ -39,18 +39,16 @@ def import_1m_recipes():
 def import_1m_recipes_ingredients():
     connection = database.connection.get_connection(os.environ.get('DB_DATABASE'))
     cursor = connection.cursor()
-
-    with open('dataset/1m_recipes_det_ingrs.json') as f:
-        recipesIngredients = json.load(f)
-        for recipeIngredients in recipesIngredients:
-            for i in range(0, len(recipeIngredients["ingredients"])):
-                ingredient = recipeIngredients["ingredients"][i]
-                valid = 1 if recipeIngredients["valid"][i] else 0
+    cursor.execute("SELECT * FROM `1m_recipe`")
+    for recipe in cursor.fetchall():
+        ingredients = json.loads(recipe['ingredients_json'])
+        print(f"Importing Recipe ")
+        for i in range(0, len(ingredients)):
             ingredientData = {
-                "1m_recipe_id": recipeIngredients['id'],
-                "ingredient_idx": i,
-                "valid": valid,
-                "text": ingredient["text"][:255]
+                "1m_recipe_id": recipe['1m_recipe_id'],
+                "ingredient_idx": i+1,
+                "valid": 1,
+                "text": ingredients[i]["text"][:255]
             }
             database.query.insert(cursor, '1m_recipes_ingredients', ingredientData)
     connection.commit()

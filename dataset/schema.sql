@@ -110,24 +110,51 @@ alter table 1m_recipes_ingredients
 
 -- Crea la tabella contente le informaizoni gruppi-emissioni
 
-CREATE TABLE group_with_emissions (
-	food_group VARCHAR(255),
-    food_subgroup VARCHAR(255),
+CREATE TABLE group_with_emissions
+(
+    food_group          VARCHAR(255),
+    food_subgroup       VARCHAR(255),
     emissions_max_value VARCHAR(255),
     emissions_min_value VARCHAR(255),
-    emissions_avg VARCHAR(255),
+    emissions_avg       VARCHAR(255),
     PRIMARY KEY (food_group, food_subgroup)
 );
 
 ALTER TABLE 1m_recipes_ingredients
-ADD co2_mean_groups VARCHAR(128);
+    ADD co2_mean_groups VARCHAR(128);
 
 UPDATE 1m_recipes_ingredients 1m
     LEFT JOIN edamam_foods ed ON 1m.edamam_food_id = ed.edamam_food_id
     LEFT JOIN foodb_foods fd ON ed.edamam_food_id = fd.edamam_food_id
     LEFT JOIN group_with_emissions gwe ON gwe.food_group = fd.food_group AND gwe.food_subgroup = fd.food_subgroup
 SET co2_mean_groups = emissions_avg
-WHERE 1
+WHERE 1;
+
+
+-- Recupero cibi edamam dai soli hints
+SELECT i.`1m_recipe_id`, i.text, ef.label, ef.known_as
+FROM `1m_recipes_ingredients` as i
+         join edamam_hints as h ON h.type = '1m' AND h.type_id = i.text
+         join edamam_foods ef on h.edamam_food_id = ef.edamam_food_id
+where i.valid = 1
+  and i.edamam_food_id IS NULL
+  and (
+        lower(i.text) LIKE CONCAT('%', lower(ef.label), '%') OR lower(i.text) LIKE CONCAT('%', lower(ef.known_as), '%')
+    )
+GROUP BY text;
+
+
+-- Corgis
+drop table if exists corgis_ingredients;
+create table corgis_ingredients
+(
+    corgis_food_id int(11) not null primary key auto_increment,
+    text           varchar(128),
+    category       varchar(128),
+    edamam_food_id  VARCHAR(255) default null,
+    FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
+);
+
 
 
 -- CREA LA TABELLA HEALABEL WATER
@@ -140,9 +167,9 @@ CREATE TABLE healabel_water_foodprint (
     me_json_response TEXT,
     edamam_food_id VARCHAR(255),
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
-)
+);
 
-ALTER TABLE `edamam_hints` CHANGE `type` `type` ENUM('1m','foodb','me','healabel') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `edamam_hints` CHANGE `type` `type` ENUM('1m','foodb','me','healabel','corgis') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
 
 UPDATE healabel_water_foodprint w
@@ -155,7 +182,7 @@ LEFT JOIN (SELECT lasso_id, min(h.edamam_food_id) id_eda
            )
            GROUP BY lasso_id) new_link ON w.lasso_id = new_link.lasso_id
 SET edamam_food_id = new_link.id_eda
-WHERE w.edamam_food_id = new_link.lasso_id
+WHERE w.edamam_food_id = new_link.lasso_id;
 
 SELECT COUNT(*)
 FROM `1m_recipes_ingredients` r
