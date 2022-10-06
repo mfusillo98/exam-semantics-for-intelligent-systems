@@ -151,41 +151,54 @@ create table corgis_ingredients
     corgis_food_id int(11) not null primary key auto_increment,
     text           varchar(128),
     category       varchar(128),
-    edamam_food_id  VARCHAR(255) default null,
+    edamam_food_id VARCHAR(255) default null,
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
 );
 
 
+-- Recupero cibi edamam dagli hints corgis
+
+UPDATE corgis_ingredients i
+    JOIN edamam_hints eh on i.corgis_food_id = eh.type_id and eh.type = 'corgis'
+    JOIN edamam_foods f on eh.edamam_food_id = f.edamam_food_id
+SET i.edamam_food_id = f.edamam_food_id
+where i.edamam_food_id IS NULL
+  -- AND (lower(f.known_as) = lower(i.text) OR lower(f.label) = lower(i.text))
+  AND (lower(f.known_as) LIKE CONCAT('%', lower(i.text), '%') OR lower(f.label) LIKE CONCAT('%', lower(i.text), '%'));
 
 -- CREA LA TABELLA HEALABEL WATER
 
-CREATE TABLE healabel_water_foodprint (
-    lasso_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    url TEXT,
-    name VARCHAR(255),
-    liters_per_kg VARCHAR(255),
+CREATE TABLE healabel_water_foodprint
+(
+    lasso_id         VARCHAR(255) NOT NULL PRIMARY KEY,
+    url              TEXT,
+    name             VARCHAR(255),
+    liters_per_kg    VARCHAR(255),
     me_json_response TEXT,
-    edamam_food_id VARCHAR(255),
+    edamam_food_id   VARCHAR(255),
     FOREIGN KEY (edamam_food_id) REFERENCES edamam_foods (edamam_food_id)
 );
 
-ALTER TABLE `edamam_hints` CHANGE `type` `type` ENUM('1m','foodb','me','healabel','corgis') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `edamam_hints`
+    CHANGE `type` `type` ENUM ('1m','foodb','me','healabel','corgis') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
 
 UPDATE healabel_water_foodprint w
-LEFT JOIN (SELECT lasso_id, min(h.edamam_food_id) id_eda
-           FROM healabel_water_foodprint w
-           LEFT join edamam_hints as h ON h.type = 'healabel' AND h.type_id = w.lasso_id
-           LEFT join edamam_foods ef on h.edamam_food_id = ef.edamam_food_id
-           where w.edamam_food_id IS NULL and (
-               lower(w.name) LIKE CONCAT('%',lower(ef.label),'%') OR lower(w.name) LIKE CONCAT('%',lower(ef.known_as),'%')
-           )
-           GROUP BY lasso_id) new_link ON w.lasso_id = new_link.lasso_id
+    LEFT JOIN (SELECT lasso_id, min(h.edamam_food_id) id_eda
+               FROM healabel_water_foodprint w
+                        LEFT join edamam_hints as h ON h.type = 'healabel' AND h.type_id = w.lasso_id
+                        LEFT join edamam_foods ef on h.edamam_food_id = ef.edamam_food_id
+               where w.edamam_food_id IS NULL
+                 and (
+                       lower(w.name) LIKE CONCAT('%', lower(ef.label), '%') OR
+                       lower(w.name) LIKE CONCAT('%', lower(ef.known_as), '%')
+                   )
+               GROUP BY lasso_id) new_link ON w.lasso_id = new_link.lasso_id
 SET edamam_food_id = new_link.id_eda
 WHERE w.edamam_food_id = new_link.lasso_id;
 
 SELECT COUNT(*)
 FROM `1m_recipes_ingredients` r
-LEFT JOIN healabel_water_foodprint w ON r.edamam_food_id = w.edamam_food_id
+         LEFT JOIN healabel_water_foodprint w ON r.edamam_food_id = w.edamam_food_id
 WHERE w.lasso_id IS NOT NULL;
 
