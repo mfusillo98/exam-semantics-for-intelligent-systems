@@ -197,8 +197,13 @@ UPDATE healabel_water_foodprint w
 SET edamam_food_id = new_link.id_eda
 WHERE w.edamam_food_id = new_link.lasso_id;
 
-SELECT COUNT(*)
-FROM `1m_recipes_ingredients` r
-         LEFT JOIN healabel_water_foodprint w ON r.edamam_food_id = w.edamam_food_id
-WHERE w.lasso_id IS NOT NULL;
+
+ALTER TABLE 1m_recipes_ingredients
+    ADD h20_liters_per_kg_direct_healabel VARCHAR(128);
+
+
+UPDATE 1m_recipes_ingredients 1m
+    LEFT JOIN healabel_water_foodprint w ON 1m.edamam_food_id = w.edamam_food_id
+SET h20_liters_per_kg_direct_healabel = liters_per_kg
+WHERE 1;
 

@@ -45,7 +45,6 @@ def save_ingredient_edamam_food_id(lasso_id, edamam_food_id, cursor):
 
 
 def save_edamam_food_hint(edamam_food_id, lasso_id, cursor):
-    print("QUI")
     database.query.insert(cursor, 'edamam_hints', {
         'edamam_food_id': edamam_food_id,
         'type_id': lasso_id,
