@@ -207,3 +207,38 @@ UPDATE 1m_recipes_ingredients 1m
 SET h20_liters_per_kg_direct_healabel = liters_per_kg
 WHERE 1;
 
+
+-- Nuovo raggruppamento
+
+CREATE TABLE corgis_category_emissions_h2o
+(
+    category          VARCHAR(255),
+    emissions_max_value VARCHAR(255),
+    emissions_min_value VARCHAR(255),
+    emissions_avg       VARCHAR(255),
+    liters_per_kg_max_value VARCHAR(255),
+    liters_per_kg_h2o_min_value VARCHAR(255),
+    liters_per_kg_h2o_avg       VARCHAR(255),
+    PRIMARY KEY (category)
+);
+
+UPDATE `healabel_water_foodprint` SET `liters_per_kg` = '1.599' WHERE `healabel_water_foodprint`.`lasso_id` = '3042';
+
+ALTER TABLE 1m_recipes_ingredients
+    ADD co2_corgis_category VARCHAR(128),
+    ADD h2o_corgis_category VARCHAR(128);
+
+-- Salvo i valori di h2o e co2 nuovi basati su corgis category
+
+UPDATE 1m_recipes_ingredients 1m
+    LEFT JOIN corgis_ingredients c ON 1m.edamam_food_id = c.edamam_food_id
+    LEFT JOIN corgis_category_emissions_h2o cc ON c.category = cc.category
+SET co2_corgis_category = emissions_avg
+WHERE 1;
+
+
+UPDATE 1m_recipes_ingredients 1m
+    LEFT JOIN corgis_ingredients c ON 1m.edamam_food_id = c.edamam_food_id
+    LEFT JOIN corgis_category_emissions_h2o cc ON c.category = cc.category
+SET h2o_corgis_category = liters_per_kg_h2o_avg
+WHERE 1;

@@ -8,6 +8,7 @@ import feature_extraction.my_emission_edamam
 import feature_extraction.healabel_water_foodprint
 import data_mining.recipe1m
 import feature_extraction.corgis
+import data_mining.category_corgis_cluster
 
 os.environ['DB_USER'] = 'root'
 os.environ['DB_PASSWORD'] = 'root'
@@ -31,11 +32,15 @@ def main():
     # feature_extraction.healabel_water_foodprint.import_healabel_water_foodprint()
     # feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
     # feature_extraction.corgis.import_ingredients()
-    feature_extraction.corgis.fetch_foodb_edamam_foods()
+    # feature_extraction.corgis.fetch_foodb_edamam_foods()
     # DATA MINING
     # data_mining.recipe1m.estimate_co2_by_hints_similarity()
     # data_mining.category_foodb_cluster.create_category_cluster()
     # data_mining.category_foodb_cluster.save_category_cluster()
+    # data_mining.category_corgis_cluster.create_co2_category_cluster()
+    # data_mining.category_corgis_cluster.save_co2_category_cluster()
+    # data_mining.category_corgis_cluster.create_h2o_category_cluster()
+    # data_mining.category_corgis_cluster.save_h2o_category_cluster()
     pass
 
 
