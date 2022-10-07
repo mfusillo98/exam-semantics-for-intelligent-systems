@@ -199,7 +199,7 @@ WHERE w.edamam_food_id = new_link.lasso_id;
 
 
 ALTER TABLE 1m_recipes_ingredients
-    ADD h20_liters_per_kg_direct_healabel VARCHAR(128);
+    ADD h20_liters_per_kg_direct_healabel VARCHAR(128) default null;
 
 
 UPDATE 1m_recipes_ingredients 1m
