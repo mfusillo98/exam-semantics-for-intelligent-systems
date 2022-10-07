@@ -29,9 +29,9 @@ def main():
     # feature_extraction.my_emission.fetch_me_food_edamam_foods()
     # feature_extraction.foodb.fetch_foodb_edamam_foods()
     # feature_extraction.healabel_water_foodprint.import_healabel_water_foodprint()
-    # feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
+    feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
     # feature_extraction.corgis.import_ingredients()
-    feature_extraction.corgis.fetch_foodb_edamam_foods()
+    # feature_extraction.corgis.fetch_foodb_edamam_foods()
     # DATA MINING
     # data_mining.recipe1m.estimate_co2_by_hints_similarity()
     # data_mining.category_foodb_cluster.create_category_cluster()
