@@ -30,7 +30,7 @@ def main():
     # feature_extraction.my_emission.fetch_me_food_edamam_foods()
     # feature_extraction.foodb.fetch_foodb_edamam_foods()
     # feature_extraction.healabel_water_foodprint.import_healabel_water_foodprint()
-    feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
+    # feature_extraction.healabel_water_foodprint.fetch_healabel_edamam_foods()
     # feature_extraction.corgis.import_ingredients()
     # feature_extraction.corgis.fetch_foodb_edamam_foods()
     # DATA MINING
@@ -39,8 +39,8 @@ def main():
     # data_mining.category_foodb_cluster.save_category_cluster()
     # data_mining.category_corgis_cluster.create_co2_category_cluster()
     # data_mining.category_corgis_cluster.save_co2_category_cluster()
-    # data_mining.category_corgis_cluster.create_h2o_category_cluster()
-    # data_mining.category_corgis_cluster.save_h2o_category_cluster()
+    data_mining.category_corgis_cluster.create_h2o_category_cluster()
+    data_mining.category_corgis_cluster.save_h2o_category_cluster()
     pass
 
 

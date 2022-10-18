@@ -222,7 +222,7 @@ CREATE TABLE corgis_category_emissions_h2o
     PRIMARY KEY (category)
 );
 
-UPDATE `healabel_water_foodprint` SET `liters_per_kg` = '1.599' WHERE `healabel_water_foodprint`.`lasso_id` = '3042';
+UPDATE `healabel_water_foodprint` SET `liters_per_kg` = '1599' WHERE `healabel_water_foodprint`.`lasso_id` = '3042';
 
 ALTER TABLE 1m_recipes_ingredients
     ADD co2_corgis_category VARCHAR(128),
