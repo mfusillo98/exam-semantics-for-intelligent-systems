@@ -1,0 +1,12 @@
+.btn{
+    margin-bottom:0;
+}
+
+
+.bootstrap-select.dropdown > .dropdown-menu {
+    margin-top: 42px!important;
+}
+
+.bootstrap-select.dropdown:not(.dropdown-hover) > .dropdown-menu .dropdown-menu {
+    margin-top: 0!important;
+}

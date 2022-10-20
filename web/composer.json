@@ -1,0 +1,14 @@
+{
+  "require": {
+    "phpmailer/phpmailer": "^6.1",
+    "ext-gd": "*",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-curl": "*"
+  },
+  "config": {
+    "platform": {
+      "php": "8"
+    }
+  }
+}

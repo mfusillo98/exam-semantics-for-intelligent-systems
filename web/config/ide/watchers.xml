@@ -1,0 +1,42 @@
+<TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="$FilePathRelativeToProjectRoot$ --out-file $FileDirRelativeToProjectRoot$/$FileNameWithoutExtension$.production.js --source-maps --presets=react-app/prod" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="jsx" />
+    <option name="immediateSync" value="false" />
+    <option name="name" value="Babel React Components" />
+    <option name="output" value="$ProjectFileDir$/public/react-components" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="$ProjectFileDir$/node_modules/.bin/babel" />
+    <option name="runOnExternalChanges" value="true" />
+    <option name="scopeName" value="public/react-components" />
+    <option name="trackOnlyRoot" value="false" />
+    <option name="workingDir" value="$ContentRoot$" />
+    <envs />
+  </TaskOptions>
+  <TaskOptions>
+    <option name="arguments" value="add public/react-components/**/*.production.js*" />
+    <option name="checkSyntaxErrors" value="true" />
+    <option name="description" />
+    <option name="exitCodeBehavior" value="ERROR" />
+    <option name="fileExtension" value="jsx" />
+    <option name="immediateSync" value="false" />
+    <option name="name" value="Babel React Components Git Add" />
+    <option name="output" value="$ProjectFileDir$/public/react-components" />
+    <option name="outputFilters">
+      <array />
+    </option>
+    <option name="outputFromStdout" value="false" />
+    <option name="program" value="git" />
+    <option name="runOnExternalChanges" value="true" />
+    <option name="scopeName" value="public/react-components" />
+    <option name="trackOnlyRoot" value="false" />
+    <option name="workingDir" value="$ContentRoot$" />
+    <envs />
+  </TaskOptions>
+</TaskOptions>
