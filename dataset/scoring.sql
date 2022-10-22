@@ -18,4 +18,4 @@ GROUP BY emissions_category_letter
 -- Trustness della ricetta per WFP (% ingredienti della ricetta con valore wfp espressa in intervallo 0÷1) "trust_h2o" = Nv / N, Nv = numero di ingredienti di cui conosco wfp, N = numero di ingredienti della ricetta
 -- is_meat_free = 1 : 0
 
--- Score (lower is better) = (emi / trust_co2) + (wmi / trust_h2o)
+-- Score (lower is better) = (emi / trust_co2) + (wmi / trust_h2o) + has_allergen_foods + has_meat
