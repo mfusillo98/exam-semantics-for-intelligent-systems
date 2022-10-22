@@ -4,7 +4,7 @@
 include_once (__DIR__."/environment.php");
 
 define("BRAND_NAME","uWorship");
-define("PROJECT_NAME","Easy didattica");
+define("PROJECT_NAME","Food LOver");
 
 define("OWNER_NAME", "uWorship");
 define("SITE_NAME", "uWorship.it");

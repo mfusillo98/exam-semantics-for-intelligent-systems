@@ -1,78 +1,150 @@
-<footer>
-    <div class="footer-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 m-md-auto align-self-center">
-                    <div class="block">
-                        <a href="public/themes/small-apps-premium/index.html"><img src="public/themes/small-apps-premium/images/logo-alt.png" alt="footer-logo"></a>
-                        <!-- Social Site Icons -->
-                        <ul class="social-icon list-inline">
-                            <li class="list-inline-item">
-                                <a href="https://www.facebook.com/themefisher"><i class="ti-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://twitter.com/themefisher"><i class="ti-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://www.instagram.com/themefisher/"><i class="ti-instagram"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+<footer class="footer pt-5 mt-5">
+    <div class="container">
+        <div class=" row">
+            <div class="col-md-3 mb-4 ms-auto">
+                <div>
+                    <a href="https://www.creative-tim.com/product/material-kit">
+                        <img src="../assets/img/logo-ct-dark.png" class="mb-3 footer-logo" alt="main_logo">
+                    </a>
+                    <h6 class="font-weight-bolder mb-4">Material Kit 2</h6>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                    <div class="block-2">
-                        <!-- heading -->
-                        <h6>Product</h6>
-                        <!-- links -->
-                        <ul>
-                            <li><a href="public/themes/small-apps-premium/index.html#features">Features</a></li>
-                            <li><a href="public/themes/small-apps-premium/homepage-3.html#testimonial">Testimonial</a></li>
-                            <li><a href="public/themes/small-apps-premium/FAQ.html">FAQs</a></li>
-                        </ul>
-                    </div>
+                <div>
+                    <ul class="d-flex flex-row ms-n3 nav">
+                        <li class="nav-item">
+                            <a class="nav-link pe-1" href="https://www.facebook.com/CreativeTim" target="_blank">
+                                <i class="fab fa-facebook text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pe-1" href="https://twitter.com/creativetim" target="_blank">
+                                <i class="fab fa-twitter text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pe-1" href="https://dribbble.com/creativetim" target="_blank">
+                                <i class="fab fa-dribbble text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pe-1" href="https://github.com/creativetimofficial" target="_blank">
+                                <i class="fab fa-github text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pe-1" href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w" target="_blank">
+                                <i class="fab fa-youtube text-lg opacity-8"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                    <div class="block-2">
-                        <!-- heading -->
-                        <h6>Resources</h6>
-                        <!-- links -->
-                        <ul>
-                            <li><a href="public/themes/small-apps-premium/sign-up.html">Singup</a></li>
-                            <li><a href="public/themes/small-apps-premium/sign-in.html">Login</a></li>
-                            <li><a href="public/themes/small-apps-premium/blog.html">Blog</a></li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-6 mb-4">
+                <div>
+                    <h6 class="text-sm">Company</h6>
+                    <ul class="flex-column ms-n3 nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/presentation" target="_blank">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/templates/free" target="_blank">
+                                Freebies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/templates/premium" target="_blank">
+                                Premium Tools
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/blog" target="_blank">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                    <div class="block-2">
-                        <!-- heading -->
-                        <h6>Company</h6>
-                        <!-- links -->
-                        <ul>
-                            <li><a href="public/themes/small-apps-premium/career.html">Career</a></li>
-                            <li><a href="public/themes/small-apps-premium/contact.html">Contact</a></li>
-                            <li><a href="public/themes/small-apps-premium/team.html">Investor</a></li>
-                            <li><a href="public/themes/small-apps-premium/privacy.html">Terms</a></li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-6 mb-4">
+                <div>
+                    <h6 class="text-sm">Resources</h6>
+                    <ul class="flex-column ms-n3 nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://iradesign.io/" target="_blank">
+                                Illustrations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/bits" target="_blank">
+                                Bits & Snippets
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/affiliates/new" target="_blank">
+                                Affiliate Program
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                    <div class="block-2">
-                        <!-- heading -->
-                        <h6>Company</h6>
-                        <!-- links -->
-                        <ul>
-                            <li><a href="public/themes/small-apps-premium/about.html">About</a></li>
-                            <li><a href="public/themes/small-apps-premium/contact.html">Contact</a></li>
-                            <li><a href="public/themes/small-apps-premium/team.html">Team</a></li>
-                            <li><a href="public/themes/small-apps-premium/privacy-policy.html">Privacy Policy</a></li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-6 mb-4">
+                <div>
+                    <h6 class="text-sm">Help & Support</h6>
+                    <ul class="flex-column ms-n3 nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/contact-us" target="_blank">
+                                Contact Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center" target="_blank">
+                                Knowledge Center
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://services.creative-tim.com/?ref=ct-mk2-footer" target="_blank">
+                                Custom Development
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/sponsorships" target="_blank">
+                                Sponsorships
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-6 mb-4 me-auto">
+                <div>
+                    <h6 class="text-sm">Legal</h6>
+                    <ul class="flex-column ms-n3 nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center/terms-of-service" target="_blank">
+                                Terms & Conditions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/knowledge-center/privacy-policy" target="_blank">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.creative-tim.com/license" target="_blank">
+                                Licenses (EULA)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="text-center">
+                    <p class="text-dark my-4 text-sm font-weight-normal">
+                        All rights reserved. Copyright © <script>
+                            document.write(new Date().getFullYear())
+                        </script> <a href="https://www.uniba.it" target="_blank">Uniba</a>.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="text-center bg-dark py-2">
-        <small class="text-secondary">Copyright &copy; 2022 a theme by <a href="https://themefisher.com/">Floriano & Co.</a></small class="text-secondary">
     </div>
 </footer>

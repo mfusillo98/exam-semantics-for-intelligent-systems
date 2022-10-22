@@ -1,410 +1,282 @@
-<!-- PALETTE DI RIFERIMENTO -->
-<!-- https://colorhunt.co/palette/3038413a475000adb5eeeeee-->
+<!--
+=========================================================
+* Material Kit 2 - v3.0.0
+=========================================================
 
+* Product Page:  https://www.creative-tim.com/product/material-kit
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
-<html lang="ita">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
 <head>
     <!-- SITE TITTLE -->
     <title><?=PROJECT_NAME?></title>
     <?= view('website/head') ?>
+
+    <style>
+        .card-top-recipes{
+            transition: 0.3s;
+        }
+
+        .card-top-recipes:hover{
+            margin-top: -50px;
+        }
+    </style>
 </head>
 
-<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+<body class="about-us bg-gray-200">
 
+<!-- Navbar Transparent -->
 <?= view('website/navbar')?>
+<!-- End Navbar -->
 
-<!--====================================
-=            Hero Section            =
-=====================================-->
-<section class="section gradient-banner">
-    <div class="shapes-container">
-        <div class="shape" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
-        <div class="shape" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
-        <div class="shape" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
-        <div class="shape" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
-        <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
-        <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
-        <div class="shape" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
-        <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
-        <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
-        <div class="shape" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
-        <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
-        <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
-        <div class="shape" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
-        <div class="shape" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
-        <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
-        <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
-    </div>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
-                <h1 class="text-white font-weight-bold mb-4">Questo sarà un bel titolo della piattaforma</h1>
-                <p class="text-white mb-5">In questa sezione invece verrà inserito un sottotitolo descrittivo del sistema, che sia di impatto per chi lo legge</p>
-                <a href="#" class="btn btn-main">Accedi</a>
-            </div>
-            <div class="col-md-6 text-center order-1 order-md-2">
-                <img class="img-fluid" src="public/themes/small-apps-premium/images/mobile.png" alt="screenshot">
+<!-- -------- START HEADER 7 w/ text and video ------- -->
+<header class="bg-gradient-dark">
+    <div class="page-header min-vh-75" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mx-auto my-auto">
+                    <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
+                    <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
+                    <button type="submit" class="btn bg-white text-dark">Let's start!</button>
+                    <h6 class="text-white mb-2 mt-5">Find us on</h6>
+                    <div class="d-flex justify-content-center">
+                        <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
+                        <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
+                        <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
+                        <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
-<!--====  End of Hero Section  ====-->
+</header>
 
-<section class="section pt-0 position-relative pull-top">
-    <div class="container">
-        <div class="rounded shadow p-5 bg-white">
+<!-- -------- END HEADER 7 w/ text and video ------- -->
+<div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <!-- Section with four info areas left & one card right with image and waves -->
+    <section>
+        <!--Search section -->
+        <div class="container pt-4">
+            <div class="row mb-5">
+                <div class="col-md-3 col-sm-0"></div>
+                <div class="col-md-6 text-center">
+                    <h2 class="text-primary">Find recipes! </h2>
+                    <span class="text-muted">What you want to cook today? Find your favorite no-emission food!</span>
+                    <div class="input-group shadow rounded-3 mt-3">
+                        <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..." style="max-height: 3em !important;"/>
+                        <button type="button" class="btn btn-primary m-0">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-0"></div>
+                <div class="col-12 mt-4">
+                    <div class="card card-body shadow-sm text-center">
+                        <img src="<?= asset('img/searchIngredientsBlankImg.svg') ?>" width="250" style="margin: auto">
+                        <span class="text-muted mt-2">Here you will see your results...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card section -->
+            <div class="row mt-7 mb-7">
+                <div class="col-12 text-center mb-3">
+                    <h3 class="text-secondary">Chose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
+                    <span class="text-muted">Our classify are always upgraded automatically, based on data collected towards our system. Visit the sections to know more!</span>
+                </div>
+                <div class="col-md-4 my-5">
+                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
+                        <div class="rounded-3" style="background-image: url('<?=asset('img/bestFoodsCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover"></div>
+                        <h3 class="mt-2"><span class="text-warning">Top 10</span> Recipes 🚀</h3>
+                        <span class="text-muted">Here you can find the best 10 recipes, based on carbon footprint, water footprint and healthy of recipes! Visit this section to know more </span>
+                    </div>
+                </div>
+                <div class="col-md-4 my-5">
+                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
+                        <div class="rounded-3" style="background-image: url('<?=asset('img/worstFoodCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
+                        <h3 class="mt-2"><span class="text-danger">Worst 10</span> Recipes 💀</h3>
+                        <span class="text-muted">Which are the most polluting recipes? Which recipes consume the most water in their production? <br> Find the results here!</span>
+                    </div>
+                </div>
+                <div class="col-md-4 my-5">
+                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
+                        <div class="rounded-3" style="background-image: url('<?=asset('img/yourRecipesCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
+                        <h3 class="mt-2"><span class="text-success">Your</span> recipes! 😋</h3>
+                        <span class="text-muted">This is your personalized section, do you have ingredients in your refrigerator? Compose your favorite recipes!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END Section with four info areas left & one card right with image and waves -->
+    <section class="pt-4 pb-6" id="count-stats">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-3">
+                    <h1 class="text-gradient text-primary" id="state1" countTo="1000000">0</h1>
+                    <h5>Ingredients</h5>
+                    <p>Number of ingredients collected in our dataset</p>
+                </div>
+                <div class="col-md-3">
+                    <h1 class="text-gradient text-primary"><span id="state2" countTo="51235">0</span>+</h1>
+                    <h5>Recipes</h5>
+                    <p>Number of recipes in our dataset</p>
+                </div>
+                <div class="col-md-3">
+                    <h1 class="text-gradient text-primary"><span id="state3" countTo="350">0</span></h1>
+                    <h5>Search done</h5>
+                    <p>How many time users searched somethings in pur system</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
+    <section class="my-5 pt-5">
+        <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0 text-center">
-                    <i class="ti-paint-bucket text-primary h1"></i>
-                    <h3 class="mt-4 text-capitalize h5 ">creativo e facile</h3>
-                    <p class="regular text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam non, recusandae
-                        tempore ipsam dignissimos molestias.</p>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0 text-center">
-                    <i class="ti-shine text-primary h1"></i>
-                    <h3 class="mt-4 text-capitalize h5 ">potente ed istruttivo</h3>
-                    <p class="regular text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam non, recusandae
-                        tempore ipsam dignissimos molestias.</p>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0 text-center">
-                    <i class="ti-thought text-primary h1"></i>
-                    <h3 class="mt-4 text-capitalize h5 ">sviluppa la creatività</h3>
-                    <p class="regular text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam non, recusandae
-                        tempore ipsam dignissimos molestias.</p>
+                <div class="col-md-6 m-auto">
+                    <h4>Contact us for everything!</h4>
+                    <p class="mb-4">
+                        If you want talk about our data our strategy and also,
+                        write your email and you will get answer in the shortest possible time!
                     </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<!--==================================
-=            Feature Grid            =
-===================================-->
-<section class="feature section pt-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 ml-auto justify-content-center">
-                <!-- Feature Mockup -->
-                <div class="image-content" data-aos="fade-right">
-                    <img class="img-fluid" src="public/themes/small-apps-premium/images/feature/feature-new-01.jpg" alt="iphone">
-                </div>
-            </div>
-            <div class="col-lg-6 mr-auto align-self-center">
-                <div class="feature-content">
-                    <!-- Feature Title -->
-                    <h2>Increase your productivity with <a
-                            href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a></h2>
-                    <!-- Feature Description -->
-                    <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat.</p>
-                </div>
-                <!-- Testimonial Quote -->
-                <div class="testimonial">
-                    <p>
-                        "InVision is a window into everything that's being designed at Twitter. It gets all of our best work in one
-                        place."
-                    </p>
-                    <ul class="list-inline meta">
-                        <li class="list-inline-item">
-                            <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="">
-                        </li>
-                        <li class="list-inline-item">Jonathon Andrew , Themefisher.com</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="feature section pt-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 ml-auto align-self-center">
-                <div class="feature-content">
-                    <!-- Feature Title -->
-                    <h2>Increase your productivity with <a
-                            href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a></h2>
-                    <!-- Feature Description -->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat.</p>
-                </div>
-                <!-- Testimonial Quote -->
-                <div class="testimonial">
-                    <p>
-                        "InVision is a window into everything that's being designed at Twitter. It gets all of our best work in one
-                        place."
-                    </p>
-                    <ul class="list-inline meta">
-                        <li class="list-inline-item">
-                            <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="">
-                        </li>
-                        <li class="list-inline-item">Jonathon Andrew , Themefisher.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-6 mr-auto justify-content-center">
-                <!-- Feature mockup -->
-                <div class="image-content" data-aos="fade-left">
-                    <img class="img-fluid" src="public/themes/small-apps-premium/images/feature/feature-new-02.jpg" alt="ipad">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--====  End of Feature Grid  ====-->
-
-<!--==============================
-=            Services            =
-===============================-->
-<section class="service section bg-gray">
-    <div class="container-fluid p-0">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>An Interface For Lifestyle</h2>
-                    <p><a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a> makes
-                        it easy to stay on top of your Life Style. No late tasks. No gimmicks.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="col-lg-6 align-self-center">
-                <!-- Feature Image -->
-                <div class="service-thumb left" data-aos="fade-right">
-                    <img class="img-fluid" src="public/themes/small-apps-premium/images/feature/iphone-ipad.jpg" alt="iphone-ipad">
-                </div>
-            </div>
-            <div class="col-lg-5 mr-auto align-self-center">
-                <div class="service-box">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 col-xs-12">
-                            <!-- Service 01 -->
-                            <div class="service-item">
-                                <!-- Icon -->
-                                <i class="ti-bookmark"></i>
-                                <!-- Heading -->
-                                <h3>Easy Prototyping</h3>
-                                <!-- Description -->
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+                    <div class="row">
+                        <div class="col-12 my-2">
+                            <div class="input-group input-group-outline">
+                                <label class="form-label">Email Here...</label>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6 col-xs-12">
-                            <!-- Service 01 -->
-                            <div class="service-item">
-                                <!-- Icon -->
-                                <i class="ti-pulse"></i>
-                                <!-- Heading -->
-                                <h3>Sensor Bridge</h3>
-                                <!-- Description -->
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
+                        <div class="col-12 my-2">
+                            <div class="input-group input-group-outline">
+                                <label class="form-label">Some text here...</label>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6 col-xs-12">
-                            <!-- Service 01 -->
-                            <div class="service-item">
-                                <!-- Icon -->
-                                <i class="ti-bar-chart"></i>
-                                <!-- Heading -->
-                                <h3>Strategist</h3>
-                                <!-- Description -->
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
-                            </div>
+                        <div class="col-12 my-2 text-center">
+                            <button type="button" class="btn bg-gradient-primary">Send info</button>
                         </div>
-                        <div class="col-md-6 col-xs-12">
-                            <!-- Service 01 -->
-                            <div class="service-item">
-                                <!-- Icon -->
-                                <i class="ti-panel"></i>
-                                <!-- Heading -->
-                                <h3>Art Direction</h3>
-                                <!-- Description -->
-                                <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur aliquet quam id dui</p>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ms-auto">
+                    <div class="position-relative">
+                        <img class="max-width-50 w-100 position-relative z-index-2" src="<?=asset('img/pcHomepage.png')?>" alt="image">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--====  End of Services  ====-->
+    </section>
+    <!-- -------- END PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
+</div>
+
+<?=view("website/footer")?>
+
+<!--   Core JS Files   -->
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/core/popper.min.js") ?>" type="text/javascript"></script>
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/core/bootstrap.min.js") ?>" type="text/javascript"></script>
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/plugins/perfect-scrollbar.min.js") ?>"></script>
+<!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/plugins/countup.min.js") ?>"></script>
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/assets/js/plugins/parallax.min.js") ?>"></script>
+<!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/material-kit.min.js?v=3.0.0")?>" type="text/javascript"></script>
 
 
-<!--=================================
-=            Video Promo            =
-==================================-->
-<section class="video-promo section bg-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="content-block">
-                    <!-- Heading -->
-                    <h2>Watch Our Promo Video</h2>
-                    <!-- Promotional Speech -->
-                    <p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet et,
-                        porttitor at sem. Vivamus </p>
-                    <!-- Popup Video -->
-                    <a data-fancybox href="https://www.youtube.com/watch?v=jrkvirglgaQ">
-                        <i class="ti-control-play video"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--====  End of Video Promo  ====-->
+<script>
+    // get the element to animate
+    var element = document.getElementById('count-stats');
+    var elementHeight = element.clientHeight;
 
-<!--=================================
-=            Testimonial            =
-==================================-->
-<section class="section testimonial" id="testimonial">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Testimonial Slider -->
-                <div class="testimonial-slider owl-carousel owl-theme">
-                    <!-- Testimonial 01 -->
-                    <div class="item">
-                        <div class="block shadow">
-                            <!-- Speech -->
-                            <p>
-                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-                                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-                                sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-                                pretium ut lacinia in, elementum id enim.
-                            </p>
-                            <!-- Person Thumb -->
-                            <div class="image">
-                                <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-                            </div>
-                            <!-- Name and Company -->
-                            <cite>Abraham Linkon , Themefisher.com</cite>
-                        </div>
-                    </div>
-                    <!-- Testimonial 01 -->
-                    <div class="item">
-                        <div class="block shadow">
-                            <!-- Speech -->
-                            <p>
-                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-                                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-                                sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-                                pretium ut lacinia in, elementum id enim.
-                            </p>
-                            <!-- Person Thumb -->
-                            <div class="image">
-                                <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-                            </div>
-                            <!-- Name and Company -->
-                            <cite>Abraham Linkon , Themefisher.com</cite>
-                        </div>
-                    </div>
-                    <!-- Testimonial 01 -->
-                    <div class="item">
-                        <div class="block shadow">
-                            <!-- Speech -->
-                            <p>
-                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-                                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-                                sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-                                pretium ut lacinia in, elementum id enim.
-                            </p>
-                            <!-- Person Thumb -->
-                            <div class="image">
-                                <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-                            </div>
-                            <!-- Name and Company -->
-                            <cite>Abraham Linkon , Themefisher.com</cite>
-                        </div>
-                    </div>
-                    <!-- Testimonial 01 -->
-                    <div class="item">
-                        <div class="block shadow">
-                            <!-- Speech -->
-                            <p>
-                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
-                                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor
-                                sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi,
-                                pretium ut lacinia in, elementum id enim.
-                            </p>
-                            <!-- Person Thumb -->
-                            <div class="image">
-                                <img src="public/themes/small-apps-premium/images/testimonial/feature-testimonial-thumb.jpg" alt="image">
-                            </div>
-                            <!-- Name and Company -->
-                            <cite>Abraham Linkon , Themefisher.com</cite>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    // listen for scroll event and call animate function
 
+    document.addEventListener('scroll', animate);
 
+    // check if element is in view
+    function inView() {
+        // get window height
+        var windowHeight = window.innerHeight;
+        // get number of pixels that the document is scrolled
+        var scrollY = window.scrollY || window.pageYOffset;
+        // get current scroll position (distance from the top of the page to the bottom of the current viewport)
+        var scrollPosition = scrollY + windowHeight;
+        // get element position (distance from the top of the page to the bottom of the element)
+        var elementPosition = element.getBoundingClientRect().top + scrollY + elementHeight;
 
+        // is scroll position greater than element position? (is element in view?)
+        if (scrollPosition > elementPosition) {
+            return true;
+        }
 
+        return false;
+    }
 
-<!--====  End of Testimonial  ====-->
+    var animateComplete = true;
+    // animate element when it is in view
+    function animate() {
 
-<section class="call-to-action-app section bg-blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>It's time to change your mind</h2>
-                <p>Download over 2 million humans .Get <a href="https://themefisher.com/products/small-apps-free-app-landing-page-template/">Small Apps</a> free forever!
-                    <br>We say you won’t look back.</p>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a href="" class="btn btn-rounded-icon">
-                            <i class="ti-apple"></i>
-                            Iphone
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="" class="btn btn-rounded-icon">
-                            <i class="ti-android"></i>
-                            Android
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="" class="btn btn-rounded-icon">
-                            <i class="ti-microsoft-alt"></i>
-                            Windows
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+        // is element in view?
+        if (inView()) {
+            if (animateComplete) {
+                if (document.getElementById('state1')) {
+                    const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+                    if (!countUp.error) {
+                        countUp.start();
+                    } else {
+                        console.error(countUp.error);
+                    }
+                }
+                if (document.getElementById('state2')) {
+                    const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+                    if (!countUp1.error) {
+                        countUp1.start();
+                    } else {
+                        console.error(countUp1.error);
+                    }
+                }
+                if (document.getElementById('state3')) {
+                    const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+                    if (!countUp2.error) {
+                        countUp2.start();
+                    } else {
+                        console.error(countUp2.error);
+                    };
+                }
+                animateComplete = false;
+            }
+        }
+    }
 
-<!--============================
-=            Footer            =
-=============================-->
-
-<?= view("website/footer")?>
-
-
-<!-- JAVASCRIPTS -->
-<script src="public/themes/small-apps-premium/plugins/jquery/jquery.js"></script>
-<script src="public/themes/small-apps-premium/plugins/popper/popper.min.js"></script>
-<script src="public/themes/small-apps-premium/plugins/bootstrap/bootstrap.min.js"></script>
-<script src="public/themes/small-apps-premium/plugins/owl-carousel/owl.carousel.min.js"></script>
-<script src="public/themes/small-apps-premium/plugins/fancybox/jquery.fancybox.min.js"></script>
-<script src="public/themes/small-apps-premium/plugins/syotimer/jquery.syotimer.min.js"></script>
-<script src="public/themes/small-apps-premium/plugins/aos/aos.js"></script>
-<!-- google map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
-<script src="public/themes/small-apps-premium/plugins/google-map/gmap.js"></script>
-
-<script src="public/themes/small-apps-premium/js/custom.js"></script>
+    if (document.getElementById('typed')) {
+        var typed = new Typed("#typed", {
+            stringsElement: '#typed-strings',
+            typeSpeed: 90,
+            backSpeed: 90,
+            backDelay: 200,
+            startDelay: 500,
+            loop: true
+        });
+    }
+</script>
+<script>
+    if (document.getElementsByClassName('page-header')) {
+        window.onscroll = debounce(function() {
+            var scrollPosition = window.pageYOffset;
+            var bgParallax = document.querySelector('.page-header');
+            var oVal = (window.scrollY / 3);
+            bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
+        }, 6);
+    }
+</script>
 </body>
 
 </html>
