@@ -39,17 +39,22 @@ create table food_print.ingredients
     carbohydrates_weight     float        default null,
     fiber                    float        default null,
     fiber_weight             float        default null,
-    vendor_recipe_ids        LONGTEXT         default null comment 'A list of strings in format idx@recipe_vendor_id which help to assign an ingredient to a vendor recipe',
+    vendor_recipe_ids        LONGTEXT     default null comment 'A list of strings in format idx@recipe_vendor_id which help to assign an ingredient to a vendor recipe',
     created_at               timestamp    default current_timestamp,
     updated_at               timestamp    default current_timestamp on update current_timestamp
 );
 
 -- All ingredients with edamam
-SET group_concat_max_len=3000000;
-SET @@group_concat_max_len=3000000;
-SET GLOBAL group_concat_max_len=3000000;
-INSERT INTO food_print.ingredients (name, category_name, carbon_foot_print, carbon_foot_print_source, carbon_foot_print_weight, water_foot_print, water_foot_print_source, water_foot_print_weight, kcal, kcal_weight, protein, protein_weight, fat, fat_weight, carbohydrates, carbohydrates_weight, fiber, fiber_weight, vendor_recipe_ids)
-SELECT i.text, c.category as category_name,
+SET group_concat_max_len = 3000000;
+SET @@group_concat_max_len = 3000000;
+SET GLOBAL group_concat_max_len = 3000000;
+INSERT INTO food_print.ingredients (name, category_name, carbon_foot_print, carbon_foot_print_source,
+                                    carbon_foot_print_weight, water_foot_print, water_foot_print_source,
+                                    water_foot_print_weight, kcal, kcal_weight, protein, protein_weight, fat,
+                                    fat_weight, carbohydrates, carbohydrates_weight, fiber, fiber_weight,
+                                    vendor_recipe_ids)
+SELECT i.text,
+       c.category                                                                                               as category_name,
        IFNULL(i.co2_direct_my_emission, IFNULL(i.co2_corgis_category, IFNULL(i.co2_mean_by_hints_similarity,
                                                                              IFNULL(i.co2_mean_groups, NULL)))) as carbon_foot_print,
        IF(i.co2_direct_my_emission IS NOT NULL, 'myemissions.green',
@@ -84,4 +89,29 @@ FROM `1m_recipes_ingredients` i
          LEFT JOIN corgis_ingredients c ON c.edamam_food_id = i.edamam_food_id
 where i.edamam_food_id IS NOT NULL
 GROUP BY i.edamam_food_id;
+
+INSERT INTO food_print.ingredients (name, vendor_recipe_ids)
+SELECT i.text,
+       CONCAT('[',
+              GROUP_CONCAT(CONCAT('{"idx":"', i.ingredient_idx, '","recipe_id":"', i.`1m_recipe_id`, '"}')),
+              ']') as vendor_recipe_ids
+from `1m_recipes_ingredients` i
+where i.edamam_food_id IS NULL
+group by i.text;
+
+drop table if exists food_print.categories;
+create table food_print.categories (
+    category_id int(11) not null primary key auto_increment,
+    name varchar(50) not null,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp
+);
+
+insert into food_print.categories (name)
+select category_name from food_print.ingredients where category_name is not null group by category_name;
+
+alter table food_print.ingredients add category_id int(11) default null after name;
+alter table food_print.ingredients add foreign key (category_id) references food_print.categories(category_id) on update cascade on delete cascade;
+update food_print.ingredients i JOIN food_print.categories c ON i.category_name = c.name SET i.category_id = c.category_id where i.category_name is not null;
+alter table food_print.ingredients drop column category_name;
 
