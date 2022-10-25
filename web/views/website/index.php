@@ -21,6 +21,7 @@
     <style>
         .card-top-recipes{
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .card-top-recipes:hover{
@@ -37,7 +38,7 @@
 
 <!-- -------- START HEADER 7 w/ text and video ------- -->
 <header class="bg-gradient-dark">
-    <div class="page-header min-vh-75" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
+    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
             <div class="row justify-content-center">
@@ -62,28 +63,9 @@
 <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
     <!-- Section with four info areas left & one card right with image and waves -->
     <section>
-        <!--Search section -->
         <div class="container pt-4">
-            <div class="row mb-5">
-                <div class="col-md-3 col-sm-0"></div>
-                <div class="col-md-6 text-center">
-                    <h2 class="text-primary">Find recipes! </h2>
-                    <span class="text-muted">What you want to cook today? Find your favorite no-emission food!</span>
-                    <div class="input-group shadow rounded-3 mt-3">
-                        <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..." style="max-height: 3em !important;"/>
-                        <button type="button" class="btn btn-primary m-0">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-0"></div>
-                <div class="col-12 mt-4">
-                    <div class="card card-body shadow-sm text-center">
-                        <img src="<?= asset('img/searchIngredientsBlankImg.svg') ?>" width="250" style="margin: auto">
-                        <span class="text-muted mt-2">Here you will see your results...</span>
-                    </div>
-                </div>
-            </div>
+            <!--Search section -->
+            <?=view('website/recipesSearchSection')?>
 
             <!-- card section -->
             <div class="row mt-7 mb-7">
