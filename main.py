@@ -9,6 +9,7 @@ import feature_extraction.healabel_water_foodprint
 import data_mining.recipe1m
 import feature_extraction.corgis
 import data_mining.category_corgis_cluster
+import feature_extraction.standardization
 
 os.environ['DB_USER'] = 'root'
 os.environ['DB_PASSWORD'] = 'root'
@@ -39,8 +40,9 @@ def main():
     # data_mining.category_foodb_cluster.save_category_cluster()
     # data_mining.category_corgis_cluster.create_co2_category_cluster()
     # data_mining.category_corgis_cluster.save_co2_category_cluster()
-    data_mining.category_corgis_cluster.create_h2o_category_cluster()
-    data_mining.category_corgis_cluster.save_h2o_category_cluster()
+    # data_mining.category_corgis_cluster.create_h2o_category_cluster()
+    # data_mining.category_corgis_cluster.save_h2o_category_cluster()
+    feature_extraction.standardization.populate_recipes_ingredients_pivot()
     pass
 
 

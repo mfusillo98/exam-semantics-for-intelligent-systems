@@ -3,15 +3,18 @@ SET sql_mode = 'ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTIT
 drop table if exists food_print.recipes;
 create table food_print.recipes
 (
-    recipe_id  int(11)      not null primary key auto_increment,
-    title      varchar(128),
-    url        varchar(255),
-    vendor_id  varchar(128) not null,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp on update current_timestamp
+    recipe_id    int(11)      not null primary key auto_increment,
+    title        varchar(128),
+    url          varchar(255),
+    vendor_id    varchar(128) not null,
+    static_score double    default null,
+    mcfp         double    default null,
+    trust_cfp    double    default null,
+    mwfp         double    default null,
+    trust_wfp    double    default null,
+    created_at   timestamp default current_timestamp,
+    updated_at   timestamp default current_timestamp on update current_timestamp
 );
-alter table food_print.recipes
-    add index (vendor_id);
 
 insert into food_print.recipes (title, url, vendor_id)
 select title, url, `1m_recipe_id`
@@ -43,6 +46,7 @@ create table food_print.ingredients
     created_at               timestamp    default current_timestamp,
     updated_at               timestamp    default current_timestamp on update current_timestamp
 );
+
 
 -- All ingredients with edamam
 SET group_concat_max_len = 3000000;
@@ -100,18 +104,145 @@ where i.edamam_food_id IS NULL
 group by i.text;
 
 drop table if exists food_print.categories;
-create table food_print.categories (
-    category_id int(11) not null primary key auto_increment,
-    name varchar(50) not null,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp on update current_timestamp
+create table food_print.categories
+(
+    category_id int(11)     not null primary key auto_increment,
+    name        varchar(50) not null,
+    created_at  timestamp default current_timestamp,
+    updated_at  timestamp default current_timestamp on update current_timestamp
 );
 
 insert into food_print.categories (name)
-select category_name from food_print.ingredients where category_name is not null group by category_name;
+select category_name
+from food_print.ingredients
+where category_name is not null
+group by category_name;
 
-alter table food_print.ingredients add category_id int(11) default null after name;
-alter table food_print.ingredients add foreign key (category_id) references food_print.categories(category_id) on update cascade on delete cascade;
-update food_print.ingredients i JOIN food_print.categories c ON i.category_name = c.name SET i.category_id = c.category_id where i.category_name is not null;
-alter table food_print.ingredients drop column category_name;
+alter table food_print.ingredients
+    add category_id int(11) default null after name;
+alter table food_print.ingredients
+    add foreign key (category_id) references food_print.categories (category_id) on update cascade on delete cascade;
+update food_print.ingredients i JOIN food_print.categories c ON i.category_name = c.name
+SET i.category_id = c.category_id
+where i.category_name is not null;
+alter table food_print.ingredients
+    drop column category_name;
 
+drop table if exists food_print.ingredients_recipes;
+create table food_print.ingredients_recipes
+(
+    recipe_id        int(11) not null,
+    ingredient_id    int(11) not null,
+    ingredient_index int(2) default 1,
+    primary key (recipe_id, ingredient_id),
+    foreign key (recipe_id) references food_print.recipes (recipe_id) on update cascade on delete cascade,
+    foreign key (ingredient_id) references food_print.ingredients (ingredient_id) on update cascade on delete cascade
+);
+
+-- #########################################################################################################################
+-- At this point you have to execute the function in feature_extraction.standardization.populate_recipes_ingredients_pivot()
+-- #########################################################################################################################
+
+
+-- Functions used to compute part of the score related to Carbon Foot Print (CFP)
+DROP FUNCTION IF EXISTS `get_mean_cfp`;
+DELIMITER //
+CREATE FUNCTION `get_mean_cfp`(recipe_id int(11))
+    RETURNS DOUBLE
+    DETERMINISTIC
+    NO SQL
+    COMMENT 'mcfp = 1/N • ∑carbon_foot_print(n) where N is the number of the ingredients we know CFP value'
+BEGIN
+    declare mcfp DOUBLE(10, 7) default 0.0;
+
+    SELECT AVG(i.carbon_foot_print)
+    INTO mcfp
+    FROM food_print.ingredients_recipes ir
+             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    WHERE ir.recipe_id = recipe_id
+      AND i.carbon_foot_print IS NOT NULL;
+
+    RETURN mcfp;
+END;
+//
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS `get_trust_cfp`;
+DELIMITER //
+CREATE FUNCTION `get_trust_cfp`(recipe_id int(11))
+    RETURNS DOUBLE
+    DETERMINISTIC
+    NO SQL
+    COMMENT 'trust_cfp is the number of ingredients we know the cfp value over the total number of ingredient of the recipe'
+BEGIN
+    declare trust_cfp DOUBLE(10, 7) default 0.0;
+
+    SELECT COUNT(i.carbon_foot_print) / COUNT(*)
+    INTO trust_cfp
+    FROM food_print.ingredients_recipes ir
+             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    WHERE ir.recipe_id = recipe_id;
+
+    RETURN trust_cfp;
+END;
+//
+DELIMITER ;
+
+
+-- Functions used to compute part of the score related to Water Foot Print (WFP)
+DROP FUNCTION IF EXISTS `get_mean_wfp`;
+DELIMITER //
+CREATE FUNCTION `get_mean_wfp`(recipe_id int(11))
+    RETURNS DOUBLE
+    DETERMINISTIC
+    NO SQL
+    COMMENT 'mwfp = 1/N • ∑carbon_foot_print(n) where N is the number of the ingredients we know wfp value'
+BEGIN
+    declare mwfp DOUBLE(10, 7) default 0.0;
+
+    SELECT AVG(i.carbon_foot_print)
+    INTO mwfp
+    FROM food_print.ingredients_recipes ir
+             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    WHERE ir.recipe_id = recipe_id
+      AND i.carbon_foot_print IS NOT NULL;
+
+    RETURN mwfp;
+END;
+//
+DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS `get_trust_wfp`;
+DELIMITER //
+CREATE FUNCTION `get_trust_wfp`(recipe_id int(11))
+    RETURNS DOUBLE
+    DETERMINISTIC
+    NO SQL
+    COMMENT 'trust_wfp is the number of ingredients we know the wfp value over the total number of ingredient of the recipe'
+BEGIN
+    declare trust_wfp DOUBLE(10, 7) default 0.0;
+
+    SELECT COUNT(i.carbon_foot_print) / COUNT(*)
+    INTO trust_wfp
+    FROM food_print.ingredients_recipes ir
+             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    WHERE ir.recipe_id = recipe_id;
+
+    RETURN trust_wfp;
+END;
+//
+DELIMITER ;
+
+
+UPDATE food_print.recipes
+SET mcfp      = get_mean_cfp(recipe_id),
+    trust_cfp = get_trust_cfp(recipe_id),
+    mwfp      = get_mean_wfp(recipe_id),
+    trust_wfp = get_trust_wfp(recipe_id)
+WHERE 1;
+
+UPDATE food_print.recipes
+SET static_score = (mcfp / IF(trust_cfp > 0, trust_cfp, 0.00001)) + (mwfp / IF(trust_wfp > 0, trust_wfp, 0.00001))
+WHERE 1;
