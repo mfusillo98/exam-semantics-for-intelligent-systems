@@ -3,6 +3,9 @@
 namespace App\Controllers\Website;
 
 
+use App\Models\IngredientsModel;
+use App\Models\IngredientsRecipesModel;
+use App\Models\RecipesModel;
 use Fux\Database\Pagination\Cursor\Pagination;
 use Fux\FuxQueryBuilder;
 use Fux\FuxResponse;
@@ -28,9 +31,14 @@ class RecipesSearchController {
         $pagination = new Pagination(
             (new FuxQueryBuilder())
                 ->select("*")
-                ->from(CoursesModel::class)
-                ->SQLWhere("title LIKE '%$queryParams[query]%'"),
-            ["course_id"],
+                ->from((new FuxQueryBuilder())
+                    ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ', ') as ingredients_list")
+                    ->from(RecipesModel::class, "r")
+                    ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
+                    ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
+                    ->groupBy("r.recipe_id"), "recipes")
+                ->SQLWhere("ingredients_list LIKE '%$queryParams[query]%'"),
+            ["recipe_id"],
             10,
             'DESC'
         );

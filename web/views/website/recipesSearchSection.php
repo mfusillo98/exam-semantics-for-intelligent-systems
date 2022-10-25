@@ -1,3 +1,22 @@
+<style>
+    .loader {
+        margin: auto;
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #e92564; /* Primary */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+</style>
+
+
 <div class="row mb-5">
     <div class="col-md-3 col-sm-0"></div>
     <div class="col-md-6 text-center">
@@ -13,17 +32,18 @@
     <div class="col-md-3 col-sm-0"></div>
 
     <!-- before research -->
-    <div class="col-12 mt-4">
+    <div class="col-12 mt-4" id="before-search-container">
         <div class="card card-body shadow-sm text-center">
             <img src="<?= asset('img/searchIngredientsBlankImg.svg') ?>" width="250" style="margin: auto">
-            <span class="text-muted mt-2">Here you will see your results...</span>
+            <span class="text-muted mt-2">Here you will see results...</span>
         </div>
     </div>
 
-    <!-- search container -->
-    <div class="col-12" id="results-container">
+    <!-- loader container -->
+    <div class="col-12 mt-4 loader d-none" id="loader-container"></div>
 
-    </div>
+    <!-- search container -->
+    <div class="col-12 mt-4" id="results-container"></div>
 </div>
 
 <?= assetOnce('/lib/FuxFramework/AsyncCrud.js', "script") ?>
@@ -43,13 +63,13 @@
         clearTimeout(typingTimer);
         if (this.value.length > 1) {
             typingTimer = setTimeout(_ => {
-                showWelcomeContainer(false)
+                showBeforeSearchContainer(false)
                 doSearch(this.value)
             }, doneTypingTimer);
         }else {
             let container = document.getElementById('results-container')
             container.innerHTML = "";
-            showWelcomeContainer(true)
+            showBeforeSearchContainer(true)
         }
     });
 
@@ -59,29 +79,26 @@
 
         FuxCursorPaginator({
             container: container,
-            onItemRender: function (course) {
-                console.log(course)
+            onItemRender: function (recipes) {
+                console.log(recipes)
+                $("#loader-container").addClass("d-none")
                 const el = document.createElement('div');
-                const startDate = moment(course.start_date);
-                const endDate = moment(course.end_date);
+                const createdAt = moment(recipes.created_at);
                 el.innerHTML = `
-                    <a class="list-group-item mb-3 list-group-item-action shadow-sm" data-toggle="collapse" data-target="#collapse-${course.course_id}" aria-expanded="false" aria-controls="collapse-${course.course_id}" style="cursor: pointer">
+                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer">
                         <h3 class="font-weight-bold m-0">
-                            ${course.title}
+                            ${recipes.title}
                         </h3>
-                        <div class="mb-3">${course.description}</div>
-                        <div id="collapse-${course.course_id}" class="collapse">
-                            <div>${course.program}</div>
-                        </div>
-                        <i class="fas fa-caret-down"></i>
-                        <span class="text-muted">
-                            Data di rilascio: ${startDate.format('DD-MM-YYYY')}
+                        <div class="mb-3">${recipes.ingredients_list}</div>
+                        <small class="text-muted">
+                            Inserted at: ${createdAt.format('DD-MM-YYYY')}
                         </small>
                     </a>
                 `;
                 return el;
             },
             onPageRequest: function (cursor) {
+                $("#loader-container").removeClass("d-none")
                 return new Promise((resolve, reject) => {
                     const url = `<?= routeFullUrl("/recipes-search/do-search") ?>`;
                     FuxHTTP.get(url, {
@@ -93,11 +110,12 @@
                 });
             },
             onEmptyPage: function () {
+                $("#loader-container").addClass("d-none")
                 const el = document.createElement('div');
                 el.innerHTML = `
                     <div class="card shadow-sm text-center w-100 p-3 border-0">
-                        <h5>Non ci sono corsi con questo nome 🤨</h5>
-                        <h2 class="text-primary font-weight-bold">Cerca ancora! 💪🏼</h2>
+                        <h5>We have not yet recipes with this ingredient 🤨</h5>
+                        <h2 class="text-primary font-weight-bold">Try with some other! 💪🏼</h2>
                     </div>
                 `;
                 return el;
@@ -105,11 +123,11 @@
         })
     }
 
-    function showWelcomeContainer(show){
+    function showBeforeSearchContainer(show){
         if(show){
-            $("#search-welcome-container").removeClass("d-none")
+            $("#before-search-container").removeClass("d-none")
         }else {
-            $("#search-welcome-container").addClass("d-none")
+            $("#before-search-container").addClass("d-none")
         }
     }
 
