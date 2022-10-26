@@ -15,7 +15,7 @@
 
 <head>
     <!-- SITE TITTLE -->
-    <title><?=PROJECT_NAME?></title>
+    <title><?=PROJECT_NAME?> | Worst Recipes</title>
     <?= view('website/head') ?>
 
     <style>
@@ -38,14 +38,13 @@
 
 <!-- -------- START HEADER 7 w/ text and video ------- -->
 <header class="bg-gradient-dark">
-    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
+    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/worstFoodsHeaderImg.jpg')?>');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mx-auto my-auto">
-                    <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
-                    <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
-                    <button type="submit" class="btn bg-white text-dark">Let's start!</button>
+                    <h1 class="text-white"><span class="text-danger">WORST 10</span> Recipes! </h1>
+                    <p class="lead mb-4 text-white">Which are the <span class="text-danger">most polluting</span> recipes? Which recipes consume the most water in their production?!</p>
                     <h6 class="text-white mb-2 mt-5">Find us on</h6>
                     <div class="d-flex justify-content-center">
                         <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
@@ -64,37 +63,7 @@
     <!-- Section with four info areas left & one card right with image and waves -->
     <section>
         <div class="container pt-4">
-            <!--Search section -->
-            <?=view('website/recipesSearchSection')?>
 
-            <!-- card section -->
-            <div class="row mt-7 mb-7">
-                <div class="col-12 text-center mb-3">
-                    <h3 class="text-secondary">Chose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
-                    <span class="text-muted">Our classify are always upgraded automatically, based on data collected towards our system. Visit the sections to know more!</span>
-                </div>
-                <div class="col-md-4 my-5">
-                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/top-recipes')?>'">
-                        <div class="rounded-3" style="background-image: url('<?=asset('img/bestFoodsCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover"></div>
-                        <h3 class="mt-2"><span class="text-warning">Top 10</span> Recipes 🚀</h3>
-                        <span class="text-muted">Here you can find the best 10 recipes, based on carbon footprint, water footprint and healthy of recipes! Visit this section to know more </span>
-                    </div>
-                </div>
-                <div class="col-md-4 my-5">
-                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/worst-recipes')?>'">
-                        <div class="rounded-3" style="background-image: url('<?=asset('img/worstFoodCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
-                        <h3 class="mt-2"><span class="text-danger">Worst 10</span> Recipes 💀</h3>
-                        <span class="text-muted">Which are the most polluting recipes? Which recipes consume the most water in their production? <br> Find the results here!</span>
-                    </div>
-                </div>
-                <div class="col-md-4 my-5">
-                    <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
-                        <div class="rounded-3" style="background-image: url('<?=asset('img/yourRecipesCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
-                        <h3 class="mt-2"><span class="text-success">Your</span> recipes! 😋</h3>
-                        <span class="text-muted">This is your personalized section, do you have ingredients in your refrigerator? Compose your favorite recipes!</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- END Section with four info areas left & one card right with image and waves -->
