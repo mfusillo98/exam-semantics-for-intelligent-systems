@@ -11,14 +11,16 @@ use Fux\FuxQueryBuilder;
 use Fux\FuxResponse;
 use Fux\Request;
 
-class RecipesSearchController {
+class RecipesSearchController
+{
 
     /**
      * Effettua una ricerca all'interno dei corsi
      * @param Request $request
      * @return FuxResponse
      */
-    public static function doSearch(Request $request){
+    public static function doSearch(Request $request)
+    {
         /**
          * @var array $queryParams = [
          *     "query" => "history",
@@ -28,16 +30,28 @@ class RecipesSearchController {
 
         $queryParams = $request->getQueryStringParams();
 
-        $pagination = new Pagination(
-            (new FuxQueryBuilder())
-                ->select("*")
-                ->from((new FuxQueryBuilder())
-                    ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ', ') as ingredients_list")
+        $ingredients = explode(";", $queryParams['query']);
+
+        $qb = (new FuxQueryBuilder())
+            ->select("*")
+            ->from(
+                (new FuxQueryBuilder())
+                    ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.static_score")
                     ->from(RecipesModel::class, "r")
                     ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
                     ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
-                    ->groupBy("r.recipe_id"), "recipes")
-                ->SQLWhere("ingredients_list LIKE '%$queryParams[query]%'"),
+                    ->whereGreaterEqThan("r.trust_cfp", 0.75)
+                    ->whereGreaterEqThan("r.trust_wfp", 0.75)
+                    ->groupBy("r.recipe_id")
+                , "recipes");
+
+        foreach ($ingredients as $ingredient) {
+            $qb->whereLike("ingredients_list", "%$ingredient%");
+        }
+        $qb->orderBy("static_score","ASC");
+
+        $pagination = new Pagination(
+            $qb,
             ["recipe_id"],
             10,
             'DESC'
