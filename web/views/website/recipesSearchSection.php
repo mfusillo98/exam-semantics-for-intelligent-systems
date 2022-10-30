@@ -86,9 +86,10 @@
                 const createdAt = moment(recipes.created_at);
                 el.innerHTML = `
                     <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer">
-                        <h3 class="font-weight-bold m-0">
-                            ${recipes.title}
-                        </h3>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="font-weight-bold m-0">${recipes.title}</h3>
+                            <small class="btn btn-primary btn-sm">${recipes.static_score.slice(0, 7)}</small>
+                        </div>
                         <div class="mb-3">${recipes.ingredients_list}</div>
                         <small class="text-muted">
                             Inserted at: ${createdAt.format('DD-MM-YYYY')}

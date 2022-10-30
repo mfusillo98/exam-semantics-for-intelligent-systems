@@ -67,27 +67,38 @@
         </div>
     </section>
     <!-- END Section with four info areas left & one card right with image and waves -->
-    <section class="pt-4 pb-6" id="count-stats">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary" id="state1" countTo="1000000">0</h1>
-                    <h5>Ingredients</h5>
-                    <p>Number of ingredients collected in our dataset</p>
+
+    <!-- card section -->
+    <div class="container">
+        <div class="row mt-7 mb-7">
+            <div class="col-12 text-center mb-3">
+                <h3 class="text-secondary">Visit <span class="text-danger">other section</span> to know more about foot print of your recipes!</h3>
+                <span class="text-muted">Surf between different section and discover more about Foods' CO2 emission, Water foot print and more!</span>
+            </div>
+            <div class="col-md-4 my-5">
+                <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/')?>'">
+                    <div class="rounded-3" style="background-image: url('<?=asset('img/homepageCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
+                    <h3 class="mt-2"><span class="text-primary">Home</span> page!</h3>
+                    <span class="text-muted">Search new recipes by their ingredient and discover what you can cook with low ambient impact!</span>
                 </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state2" countTo="51235">0</span>+</h1>
-                    <h5>Recipes</h5>
-                    <p>Number of recipes in our dataset</p>
+            </div>
+            <div class="col-md-4 my-5">
+                <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/top-recipes')?>'">
+                    <div class="rounded-3" style="background-image: url('<?=asset('img/bestFoodsCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover"></div>
+                    <h3 class="mt-2"><span class="text-warning">Top 10</span> Recipes 🚀</h3>
+                    <span class="text-muted">Here you can find the best 10 recipes, based on carbon footprint, water footprint and healthy of recipes! Visit this section to know more </span>
                 </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state3" countTo="350">0</span></h1>
-                    <h5>Search done</h5>
-                    <p>How many time users searched somethings in pur system</p>
+            </div>
+            <div class="col-md-4 my-5">
+                <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
+                    <div class="rounded-3" style="background-image: url('<?=asset('img/yourRecipesCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
+                    <h3 class="mt-2"><span class="text-success">Your</span> recipes! 😋</h3>
+                    <span class="text-muted">This is your personalized section, do you have ingredients in your refrigerator? Compose your favorite recipes!</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
     <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
     <section class="my-5 pt-5">
         <div class="container">
@@ -112,7 +123,7 @@
                             </div>
                         </div>
                         <div class="col-12 my-2 text-center">
-                            <button type="button" class="btn bg-gradient-primary">Send info</button>
+                            <button type="button" class="btn bg-gradient-danger">Send info</button>
                         </div>
                     </div>
                 </div>

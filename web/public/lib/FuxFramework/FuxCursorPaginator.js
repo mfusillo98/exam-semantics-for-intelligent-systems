@@ -34,7 +34,7 @@ function FuxCursorPaginator(options) {
         prevBtn.disabled = !page.prev;
         nextBtn.disabled = !page.next;
 
-        paginationLabel.innerHTML = `Pagina ${currentPage} di ${Math.ceil(page.total / page.max_items)}`
+        paginationLabel.innerHTML = `Page ${currentPage} of ${Math.ceil(page.total / page.max_items)}`
     }
 
     const fetch = cursor => {
@@ -83,10 +83,10 @@ function FuxCursorPaginator(options) {
         <div class="d-flex justify-content-center" style="display: none;">
             <nav class="text-center">
                 <ul class="pagination">
-                    <li class="page-item"><button class="page-link" data-role="prev">Precedente</button></li>
-                    <li class="page-item"><button class="page-link" data-role="next">Successivo</button></li>
+                    <li class="page-item"><button class="page-link" data-role="prev">Prev</button></li>
+                    <li class="page-item"><button class="page-link" data-role="next">Next</button></li>
                 </ul>
-                <span data-role="label">Pagina 1 di 1</span>
+                <span data-role="label">Page 1 of 1</span>
             </nav>
         </div>
         `;

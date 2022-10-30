@@ -38,11 +38,12 @@
 
 <!-- -------- START HEADER 7 w/ text and video ------- -->
 <header class="bg-gradient-dark">
-    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
+    <div class="page-header min-vh-75" style="background-image: url('<?=asset('img/homepageHeaderImg.png')?>');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mx-auto my-auto">
+                    <div class="mb-3" style="background-image: url('<?=asset('img/footPrintLogo.png')?>'); background-repeat: no-repeat; width:150px; height: 150px; background-size: cover; background-position: center; margin: auto"></div>
                     <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
                     <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
                     <button type="submit" class="btn bg-white text-dark">Let's start!</button>
