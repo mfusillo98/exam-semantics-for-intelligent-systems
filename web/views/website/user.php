@@ -15,7 +15,7 @@
 
 <head>
     <!-- SITE TITTLE -->
-    <title><?=PROJECT_NAME?> | Top Recipes</title>
+    <title><?=PROJECT_NAME?> | Your Recipes</title>
     <?= view('website/head') ?>
 
     <style>
@@ -37,14 +37,16 @@
 <!-- End Navbar -->
 
 <!-- -------- START HEADER 7 w/ text and video ------- -->
-<header class="bg-gradient-dark">
-    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/bestFoodsHeaderImg.jpg')?>');">
+<header class="bg-gradient-dark" >
+    <div class="page-header min-vh-50" style="background-image: url('<?=asset('img/userHeaderImg.jpg')?>');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mx-auto my-auto">
-                    <h1 class="text-white"><span class="text-warning">TOP 10</span> Recipes!</h1>
-                    <p class="lead mb-4 text-white">Here you can find the <span class="text-warning">best 10 recipes</span>, based on carbon footprint, water footprint and healthy of recipes! </p>
+                    <h1 class="text-white"><span class="text-success">YOUR</span> Recipes!</h1>
+                    <p class="lead mb-4 text-white">
+                        This is your <span class="text-success">personalized section</span>, do you have ingredients in your refrigerator?<br>
+                        Compose <span class="text-success">your favorite recipes</span>!</p>
                     <h6 class="text-white mb-2 mt-5">Find us on</h6>
                     <div class="d-flex justify-content-center">
                         <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
@@ -62,15 +64,23 @@
 <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
     <!-- Section with four info areas left & one card right with image and waves -->
     <section>
-        <div class="container pt-4">
-
+        <div class="container pt-4 text-center">
+            <h2>Your <span class="text-success">own profile</span> 🤤</h2>
+            <span>
+                In your personal area you will receive recommendations about FOODS that you can enjoy. <br>
+                You will be able to find recommendations based on your personal characteristics, that you can simply select during account's creation, or modify when it
+                is been created.
+            </span>
+            <a class="my-5 btn btn-success btn-lg align-items-center" href="<?=routeFullUrl('/user/login')?>">
+                Go to account area
+            </a>
         </div>
     </section>
     <!-- card section -->
     <div class="container">
         <div class="row mt-7 mb-7">
             <div class="col-12 text-center mb-3">
-                <h3 class="text-secondary">Visit <span class="text-warning">other section</span> to know more about foot print of your recipes!</h3>
+                <h3 class="text-secondary">Visit <span class="text-success">other section</span> to know more about foot print of your recipes!</h3>
                 <span class="text-muted">Surf between different section and discover more about Foods' CO2 emission, Water foot print and more!</span>
             </div>
             <div class="col-md-4 my-5">
@@ -88,10 +98,10 @@
                 </div>
             </div>
             <div class="col-md-4 my-5">
-                <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/user')?>'">
-                    <div class="rounded-3" style="background-image: url('<?=asset('img/yourRecipesCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
-                    <h3 class="mt-2"><span class="text-success">Your</span> recipes! 😋</h3>
-                    <span class="text-muted">This is your personalized section, do you have ingredients in your refrigerator? Compose your favorite recipes!</span>
+                <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/top-recipes')?>'">
+                    <div class="rounded-3" style="background-image: url('<?=asset('img/bestFoodsCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover"></div>
+                    <h3 class="mt-2"><span class="text-warning">Top 10</span> Recipes 🚀</h3>
+                    <span class="text-muted">Here you can find the best 10 recipes, based on carbon footprint, water footprint and healthy of recipes! Visit this section to know more </span>
                 </div>
             </div>
         </div>
@@ -120,7 +130,7 @@
                             </div>
                         </div>
                         <div class="col-12 my-2 text-center">
-                            <button type="button" class="btn bg-gradient-warning">Send info</button>
+                            <button type="button" class="btn bg-gradient-success">Send info <i class="fas fa-sign-in"></i></button>
                         </div>
                     </div>
                 </div>

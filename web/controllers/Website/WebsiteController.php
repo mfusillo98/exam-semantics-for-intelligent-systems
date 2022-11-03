@@ -16,4 +16,8 @@ class WebsiteController{
         return view("website/contact");
     }
 
+    public static function user(){
+        return view("website/user");
+    }
+
 }

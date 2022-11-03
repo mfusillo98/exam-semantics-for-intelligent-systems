@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="col-md-4 my-5">
-                <div class="card h-100 card-body shadow-sm text-center card-top-recipes">
+                <div class="card h-100 card-body shadow-sm text-center card-top-recipes" onclick="location.href='<?=routeFullUrl('/user')?>'">
                     <div class="rounded-3" style="background-image: url('<?=asset('img/yourRecipesCard.jpg')?>'); background-repeat: no-repeat; height: 200px; background-size: cover; background-position: center;"></div>
                     <h3 class="mt-2"><span class="text-success">Your</span> recipes! 😋</h3>
                     <span class="text-muted">This is your personalized section, do you have ingredients in your refrigerator? Compose your favorite recipes!</span>

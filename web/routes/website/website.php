@@ -11,3 +11,7 @@
 \Fux\Routing\Routing::router()->get('/contact', function () {
     return \App\Controllers\Website\WebsiteController::contact();
 });
+
+\Fux\Routing\Routing::router()->get('/user', function () {
+    return \App\Controllers\Website\WebsiteController::user();
+});

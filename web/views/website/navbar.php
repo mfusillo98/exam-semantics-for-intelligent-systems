@@ -16,7 +16,7 @@
                 <li class="nav-item dropdown dropdown-hover mx-2 ms-lg-6">
                     <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages8" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="material-icons opacity-6 me-2 text-md">dashboard</i>
-                        Pages
+                        Website
                         <img src="<?=asset('themes/material-kit-2-3.0.0/assets/img/down-arrow-white.svg')?>" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
                         <img src="<?=asset('themes/material-kit-2-3.0.0/assets/img/down-arrow-dark.svg')?>" alt="down-arrow" class="arrow ms-2 d-lg-none d-block">
                     </a>
@@ -37,8 +37,8 @@
                             <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1 mt-3">
                                 Account
                             </h6>
-                            <a href="../pages/sign-in.html" class="dropdown-item border-radius-md">
-                                <span>Sign In</span>
+                            <a href="<?=routeFullUrl('/user/login')?>" class="dropdown-item border-radius-md">
+                                <span>Log In</span>
                             </a>
                         </div>
                         <div class="d-lg-none">
