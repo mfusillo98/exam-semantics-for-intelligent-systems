@@ -38,7 +38,7 @@
                     <div class="card-body">
                         <form role="form" class="text-start">
                             <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Email</label>
+                                <label class="form-label">Username</label>
                                 <input type="email" class="form-control">
                             </div>
                             <div class="input-group input-group-outline mb-3">
@@ -54,7 +54,7 @@
                             </div>
                             <p class="mt-4 text-sm text-center">
                                 Don't have an account?
-                                <a href="javascript:;" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                <a href="<?=routeFullUrl('/user/signup')?>" class="text-primary text-gradient font-weight-bold">Sign up</a>
                             </p>
                         </form>
                     </div>
@@ -87,16 +87,13 @@
         </div>
     </footer>
 </div>
-<!--   Core JS Files   -->
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-<script src="../assets/js/plugins/parallax.min.js"></script>
-<!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-<script src="../assets/js/material-kit.min.js?v=3.0.0" type="text/javascript"></script>
+
+<?= assetOnce('themes/material-kit-2-3.0.0/assets/js/core/popper.min.js', 'script')?>
+<?= assetOnce('themes/material-kit-2-3.0.0/assets/js/core/bootstrap.min.js', 'script')?>
+<?= assetOnce('themes/material-kit-2-3.0.0/assets/js/plugins/perfect-scrollbar.min.js', 'script')?>
+<?= assetOnce('themes/material-kit-2-3.0.0/assets/js/plugins/parallax.min.js', 'script')?>
+<?= assetOnce('themes/material-kit-2-3.0.0/assets/js/material-kit.min.js?v=3.0.0', 'script')?>
+
 </body>
 
 </html>
