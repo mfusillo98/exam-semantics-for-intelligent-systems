@@ -7,13 +7,17 @@
     <?= view('website/head') ?>
 
     <style>
-        .card-top-recipes {
-            transition: 0.3s;
+        .ingredients-badge {
+            font-size: 12px;
+            background-color: #f0f3f5;
+            padding: 5px;
+            margin: 5px 5px 5px 5px;
             cursor: pointer;
         }
 
-        .card-top-recipes:hover {
-            margin-top: -50px;
+        .ingredients-badge:hover{
+            background-color: #e91e63;
+            color: white;
         }
     </style>
 </head>
@@ -97,12 +101,28 @@
                                 </div>
                                 <div class="input-group input-group-outline mt-2 ">
                                     <label class="form-label">Ingredients</label>
-                                    <input type="text" class="form-control" name="weight">
+                                    <input type="text" class="form-control" name="ingredients" id="ingredientsBar">
                                 </div>
+
+                                <!-- before research -->
+                                <div class="col-12 mt-4" id="before-search-container">
+                                    <div class="card card-body shadow-sm text-center">
+                                        <img src="<?= asset('img/searchIngredientsBlankImg.svg') ?>" width="250" style="margin: auto">
+                                        <span class="text-muted mt-2">Here you will see results...</span>
+                                    </div>
+                                </div>
+
+                                <!-- loader container -->
+                                <div class="col-12 mt-4 loader d-none" id="loader-container"></div>
+
+                                <!-- Ingredients container -->
+                                <div class="my-2" id="ingredientsContainer"></div>
+
                                 <div class="text-center">
                                     <button type="button" onclick="changeStep(2)" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -144,6 +164,13 @@
 <?= assetOnce('themes/material-kit-2-3.0.0/assets/js/plugins/parallax.min.js', 'script')?>
 <?= assetOnce('themes/material-kit-2-3.0.0/assets/js/material-kit.min.js?v=3.0.0', 'script')?>
 
+<?= assetOnce('/lib/FuxFramework/AsyncCrud.js', "script") ?>
+<?= assetOnce('/lib/FuxFramework/FuxUtility.js', "script") ?>
+<?= assetOnce('/lib/FuxFramework/FuxHTTP.js', "script") ?>
+<?= assetOnce('/lib/FuxFramework/FuxSwalUtility.js', "script") ?>
+<?= assetOnce('/lib/FuxFramework/FuxCursorPaginator.js', "script") ?>
+<?= assetOnce('/lib/moment/moment.js', "script") ?>
+
 <script>
     $('#confirm_password').on('keyup', function () {
         if ($('#password').val() === $('#confirm_password').val()) {
@@ -166,6 +193,48 @@
                 break
         }
     }
+</script>
+
+<script>
+    let typingTimer = null
+    let doneTypingTimer = 300
+
+    //Gestisce il timeout della ricerca
+    $('#ingredientsBar').on('keyup', function () {
+        clearTimeout(typingTimer);
+        if (this.value.length > 1) {
+            typingTimer = setTimeout(_ => {
+                showBeforeSearchContainer(false)
+                getIngredients(this.value)
+            }, doneTypingTimer);
+        }else {
+            let container = document.getElementById('ingredientsContainer')
+            container.innerHTML = "";
+            showBeforeSearchContainer(true)
+        }
+    });
+
+
+    function getIngredients(query){
+        FuxHTTP.get('<?=routeFullUrl('/user/signup/get-ingredients')?>', {query: query}, FuxHTTP.RESOLVE_DATA, FuxHTTP.REJECT_MESSAGE)
+        .then(data =>{
+            console.log(data)
+            data.ingredients.map(d =>{
+                $("#ingredientsContainer").append(`<span class='ingredients-badge'>${d.name}</span>`)
+            })
+        })
+    }
+
+    function showBeforeSearchContainer(show){
+        if(show){
+            $("#before-search-container").removeClass("d-none")
+        }else {
+            $("#before-search-container").addClass("d-none")
+        }
+    }
+
+
+
 </script>
 
 </body>
