@@ -13,4 +13,9 @@ class UserAuthController {
         return new FuxResponse(FuxResponse::SUCCESS, "Ingredients taken", ["ingredients" => IngredientsModel::listWhere("name like '%$query%'")]);
     }
 
+    public static function signUp(Request $request){
+        $body = $request->getBody();
+        echo json_encode($body);
+    }
+
 }

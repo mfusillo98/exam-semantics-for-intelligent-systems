@@ -11,7 +11,7 @@
             font-size: 12px;
             background-color: #f0f3f5;
             padding: 5px;
-            margin: 5px 5px 5px 5px;
+            margin: 10px;
             cursor: pointer;
         }
 
@@ -29,7 +29,7 @@
 <!-- End Navbar -->
 
 <div class="page-header align-items-start min-vh-100"
-     style="background-image: url('<?= asset('img/userHeaderImg.jpg') ?>');" loading="lazy">
+     style="background-image: url('<?= asset('img/userHeaderImg.jpg') ?>'); padding-top: 10%; padding-bottom: 10%" loading="lazy">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
         <div class="row">
@@ -40,7 +40,7 @@
                             <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign up</h4>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body page-inner">
                         <form role="form" class="text-start">
                             <div class="first-step">
                                 <div class="input-group input-group-outline">
@@ -104,12 +104,9 @@
                                     <input type="text" class="form-control" name="ingredients" id="ingredientsBar">
                                 </div>
 
-                                <!-- before research -->
-                                <div class="col-12 mt-4" id="before-search-container">
-                                    <div class="card card-body shadow-sm text-center">
-                                        <img src="<?= asset('img/searchIngredientsBlankImg.svg') ?>" width="250" style="margin: auto">
-                                        <span class="text-muted mt-2">Here you will see results...</span>
-                                    </div>
+                                <!-- chosen ingredients container -->
+                                <div class="col-12 my-2 card card-body p-1 shadow-sm text-center" id="ingredientsChosenContainer">
+                                    <small class="text-muted mt-2">Here you will see chosen ingredients...</small>
                                 </div>
 
                                 <!-- loader container -->
@@ -119,7 +116,7 @@
                                 <div class="my-2" id="ingredientsContainer"></div>
 
                                 <div class="text-center">
-                                    <button type="button" onclick="changeStep(2)" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
+                                    <button type="button" onclick="saveData()" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
                                 </div>
                             </div>
 
@@ -198,19 +195,19 @@
 <script>
     let typingTimer = null
     let doneTypingTimer = 300
+    let chosenIngredients = []
+    let foundIngredients = []
 
     //Gestisce il timeout della ricerca
     $('#ingredientsBar').on('keyup', function () {
         clearTimeout(typingTimer);
         if (this.value.length > 1) {
             typingTimer = setTimeout(_ => {
-                showBeforeSearchContainer(false)
                 getIngredients(this.value)
             }, doneTypingTimer);
         }else {
             let container = document.getElementById('ingredientsContainer')
             container.innerHTML = "";
-            showBeforeSearchContainer(true)
         }
     });
 
@@ -218,22 +215,57 @@
     function getIngredients(query){
         FuxHTTP.get('<?=routeFullUrl('/user/signup/get-ingredients')?>', {query: query}, FuxHTTP.RESOLVE_DATA, FuxHTTP.REJECT_MESSAGE)
         .then(data =>{
-            console.log(data)
-            data.ingredients.map(d =>{
-                $("#ingredientsContainer").append(`<span class='ingredients-badge'>${d.name}</span>`)
-            })
+            foundIngredients = data.ingredients
+            printIngredients()
         })
     }
 
-    function showBeforeSearchContainer(show){
-        if(show){
-            $("#before-search-container").removeClass("d-none")
-        }else {
-            $("#before-search-container").addClass("d-none")
-        }
+    function printIngredients(){
+        $("#ingredientsContainer").empty()
+        console.log("WE")
+        foundIngredients.map(i =>{
+            if(chosenIngredients.findIndex(ingredient =>{return ingredient.ingredient_id == i.ingredient_id}) < 0){
+                $("#ingredientsContainer").append(`<span class='ingredients-badge' onclick='handlerChosenIngredient(${i.ingredient_id}, "${i.name}")'>${i.name}</span>`)
+            }
+        })
     }
 
+    function printChosenIngredients(){
+        $("#ingredientsChosenContainer").empty()
+        chosenIngredients.map(i =>{
+            $("#ingredientsChosenContainer").append(`<span class='ingredients-badge' onclick='handlerChosenIngredient(${i.ingredient_id}, "${i.name}")'>${i.name}</span>`)
+        })
 
+    }
+
+    function handlerChosenIngredient(ingredient_id, name){
+        let index = chosenIngredients.findIndex(ingredient =>{
+            return ingredient.ingredient_id === ingredient_id
+        });
+        if(index > -1){
+            chosenIngredients.splice(index, 1)
+        }else{
+            chosenIngredients.push({ingredient_id: ingredient_id, name: name})
+        }
+        printIngredients()
+        printChosenIngredients()
+    }
+
+    function saveData(){
+        let formData = {}
+        $(".page-inner form").each(function(){
+           $(this).find(':input').not(':input[type=button], :input[type=submit]').each(function (){
+               if(!$(this)[0].value){
+                   FuxSwalUtility.error("Set an input for " + $(this)[0].name)
+                   return 0;
+               }
+               formData[$(this)[0].name] = $(this)[0].value
+           })
+        });
+
+        FuxHTTP.post('<?=routeFullUrl('/user/signup')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
+
+    }
 
 </script>
 
