@@ -67,9 +67,8 @@
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="gender" required>
                                                 <option value="">Choose your gender</option>
-                                                <option value="m">Male</option>
-                                                <option value="f">Female</option>
-                                                <option value="o">Other</option>
+                                                <option value="1">Male</option>
+                                                <option value="0">Female</option>
                                             </select>
                                         </div>
                                     </div>
@@ -263,7 +262,13 @@
            })
         });
 
+        formData["ingredients"] = chosenIngredients.map(ingredient =>{
+            return ingredient.ingredient_id
+        })
+
         FuxHTTP.post('<?=routeFullUrl('/user/signup')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
+        .then(msg =>FuxSwalUtility.success(msg))
+        .catch(msg => FuxSwalUtility.error(msg))
 
     }
 
