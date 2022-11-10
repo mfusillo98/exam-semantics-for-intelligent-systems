@@ -44,6 +44,8 @@ class RecipesSearchController
             ->groupBy("r.recipe_id");
 
 
+        //In order to use carbon free ingredients data of the logged user we need to edit the select statement of the query
+        //And we need to join our recipes with a dynamically computed cfp z-score for the given ingredients
         if (($queryParams['useCarbonFreeIngredients'] ?? 0) == 1) {
             $user_id = null; //TODO check for logged user
             $carbonFreeIngredientIds = IngredientsUserModel::listWhere(["type" => "km0", "user_id" => $user_id])->column('ingredient_id');
@@ -61,6 +63,7 @@ class RecipesSearchController
             }
         }
 
+        //Assigning a "row num" to the filtered recipes sorted by static score. This is needed in order to use a cursor pagination.
         $rankedRecipes = (new FuxQueryBuilder())->select("*",'@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
 
         foreach ($ingredients as $ingredient) {
