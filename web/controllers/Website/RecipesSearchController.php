@@ -61,18 +61,20 @@ class RecipesSearchController
             }
         }
 
-        $qb = (new FuxQueryBuilder())->select("*")->from($recipeScoreQb, "recipes");
+        $rankedRecipes = (new FuxQueryBuilder())->select("*",'@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
 
         foreach ($ingredients as $ingredient) {
-            $qb->whereLike("ingredients_list", "%$ingredient%");
+            $rankedRecipes->whereLike("ingredients_list", "%$ingredient%");
         }
-        $qb->orderBy("static_score", "ASC");
+        $rankedRecipes->orderBy("static_score", "ASC");
+
+        $qb = (new FuxQueryBuilder())->select("*")->from($rankedRecipes, "ranked_recipes");
 
         $pagination = new Pagination(
             $qb,
-            ["recipe_id"],
+            ["rank"],
             10,
-            'DESC'
+            'ASC'
         );
 
         return new FuxResponse(FuxResponse::SUCCESS, null, $pagination->get(($queryParams['cursor'] ?? null) ?: null));

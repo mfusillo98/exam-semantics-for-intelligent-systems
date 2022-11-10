@@ -83,8 +83,8 @@ function FuxCursorPaginator(options) {
         <div class="d-flex justify-content-center" style="display: none;">
             <nav class="text-center">
                 <ul class="pagination">
-                    <li class="page-item"><button class="page-link" data-role="prev">Prev</button></li>
-                    <li class="page-item"><button class="page-link" data-role="next">Next</button></li>
+                    <li class="page-item"><button class="page-link" data-role="prev"><i class="fas fa-chevron-left"></i></button></li>
+                    <li class="page-item"><button class="page-link" data-role="next"><i class="fas fa-chevron-right"></i></button></li>
                 </ul>
                 <span data-role="label">Page 1 of 1</span>
             </nav>
