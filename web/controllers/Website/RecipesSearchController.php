@@ -35,7 +35,7 @@ class RecipesSearchController
         $ingredients = explode(";", $queryParams['query']);
 
         $recipeScoreQb = (new FuxQueryBuilder())
-            ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score)")
+            ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) as static_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
@@ -50,7 +50,7 @@ class RecipesSearchController
 
             if ($carbonFreeIngredientIds) {
                 //Modifico la select della query
-                $recipeScoreQb->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score)");
+                $recipeScoreQb->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) as static_score");
 
                 $tmpTable = [];
                 foreach ($carbonFreeIngredientIds as $ingredient_id) {
