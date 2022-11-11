@@ -353,3 +353,27 @@ alter table food_print.ingredients
 -- Computing Z-normalization for cfp/wfp => cfp_std = (cfp - µ) / σ
 UPDATE food_print.ingredients SET carbon_foot_print_z_score = (carbon_foot_print - food_print.get_global_mean_cfp())/food_print.get_global_std_dev_cfp() where carbon_foot_print IS NOT NULL;
 UPDATE food_print.ingredients SET water_foot_print_z_score = (water_foot_print - food_print.get_global_mean_wfp())/food_print.get_global_std_dev_wfp() where water_foot_print IS NOT NULL;
+
+
+-- Users
+CREATE TABLE users (
+                       user_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                       username varchar(255) NOT NULL,
+                       password varchar(255) NOT NULL,
+                       age INT(3) NOT NULL,
+                       gender INT(1) NOT NULL,
+                       height float(3,2) NOT NULL,
+                       weight float(3,2) NOT NULL,
+                       `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                       `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE ingredients_user (
+                                  user_id INT(11) NOT NULL,
+                                  ingredient_id INT(11) NOT NULL,
+                                  type VARCHAR(255) NOT NULL,
+                                  PRIMARY KEY (user_id, ingredient_id, type),
+                                  FOREIGN KEY (user_id) REFERENCES users(user_id),
+                                  FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id)
+);
