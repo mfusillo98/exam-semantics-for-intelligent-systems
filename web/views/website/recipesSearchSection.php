@@ -104,7 +104,8 @@
                     const url = `<?= routeFullUrl("/recipes-search/do-search") ?>`;
                     FuxHTTP.get(url, {
                         query: query,
-                        cursor: cursor
+                        cursor: cursor,
+                        useCfi: <?=$useCfi ?? 0?>
                     }, FuxHTTP.RESOLVE_DATA, FuxHTTP.REJECT_MESSAGE)
                         .then(paginationPage => resolve(paginationPage))
                         .catch(FuxSwalUtility.error);
