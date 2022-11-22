@@ -39,6 +39,7 @@ class RecipesSearchController
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
+            ->where("disabled",0)
             ->whereGreaterEqThan("r.trust_cfp", 1)
             ->whereGreaterEqThan("r.trust_wfp", 1)
             ->groupBy("r.recipe_id");
