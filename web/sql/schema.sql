@@ -23,6 +23,10 @@ CREATE TABLE ingredients_user (
 -- Disabling recipes based on blacklist keywords
 alter table recipes add disabled int(1) default 0;
 alter table recipes add index(disabled);
+alter table recipes add rating int(1) default null;
+alter table recipes add index(rating);
+alter table recipes add rating_count int(5) default null;
+alter table recipes add index(rating_count);
 update recipes set disabled = 1 where title like '% dip%' or title like 'dip %';
 update recipes set disabled = 1 where title like '% dipping%' or title like 'dipping %';
 update recipes set disabled = 1 where title like '% cocktail%' or title like 'cocktail %';

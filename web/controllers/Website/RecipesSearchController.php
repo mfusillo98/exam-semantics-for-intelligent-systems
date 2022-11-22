@@ -29,6 +29,7 @@ class RecipesSearchController
          *     "query" => "history",
          *     "cursor" => "asd123",
          *     "useCfi" => 1 | 0, //optional, whether to use user carbon free ingredients
+         *     "sustainabilityWeight" => 0.5, //a value in range [0,1]
          * ]
          */
 
