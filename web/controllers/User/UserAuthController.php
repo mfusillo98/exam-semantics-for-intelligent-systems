@@ -5,11 +5,53 @@ namespace App\Controllers\User;
 use App\Models\IngredientsModel;
 use App\Models\IngredientsUserModel;
 use App\Models\UsersModel;
+use App\Packages\Auth\Auth;
 use Fux\DB;
 use Fux\FuxResponse;
 use Fux\Request;
 
 class UserAuthController {
+
+    /**
+     * Execute a login attempt. Return the redirect URL in case of success
+     *
+     * @param Request $request
+     *
+     * @return FuxResponse
+     *
+     * @throws \App\Packages\Auth\Exceptions\InvalidCredentialsException
+     */
+    public static function doLogin(Request $request)
+    {
+
+        /**
+         * @var array $body = [
+         *     "username" => "salvo",
+         *     "password" => "plain-text-pw"
+         * ]
+         */
+        $body = $request->getBody();
+
+        if (Auth::attempt(UsersModel::class, [
+            "username" => $body['username'],
+            "password" => $body['password'],
+        ])) {
+            return new FuxResponse(FuxResponse::SUCCESS, null, routeFullUrl('/user/dashboard'));
+        }
+
+        return new FuxResponse(FuxResponse::ERROR, "Non è stato possibile completare il login");
+    }
+
+
+    /**
+     * Execute a logout action and redirect to login page
+     */
+    public static function doLogout()
+    {
+        Auth::logout(StudentsModel::class);
+        redirect(STUDENT_DASHBOARD_PACKAGE['BASE_ROUTE'] . '/login');
+    }
+
 
     public static function getIngredients(Request $request){
         $query = $request->getQueryStringParams()["query"];

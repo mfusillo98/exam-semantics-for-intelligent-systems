@@ -7,6 +7,8 @@ use App\Models\IngredientsModel;
 use App\Models\IngredientsRecipesModel;
 use App\Models\IngredientsUserModel;
 use App\Models\RecipesModel;
+use App\Models\UsersModel;
+use App\Packages\Auth\Auth;
 use Fux\Database\Pagination\Cursor\Pagination;
 use Fux\FuxQueryBuilder;
 use Fux\FuxResponse;
@@ -48,7 +50,7 @@ class RecipesSearchController
         //In order to use carbon free ingredients data of the logged user we need to edit the select statement of the query
         //And we need to join our recipes with a dynamically computed cfp z-score for the given ingredients
         if (($queryParams['useCarbonFreeIngredients'] ?? 0) == 1) {
-            $user_id = null; //TODO check for logged user
+            $user_id = Auth::user(UsersModel::class)["user_id"];
             $carbonFreeIngredientIds = IngredientsUserModel::listWhere(["type" => "km0", "user_id" => $user_id])->column('ingredient_id');
 
             if ($carbonFreeIngredientIds) {
