@@ -42,3 +42,49 @@ update recipes set disabled = 1 where title like '% dressing%' or title like 'dr
 update recipes set disabled = 1 where title like '% shake%' or title like 'shake %';
 update recipes set disabled = 1 where title like '% syrup%' or title like 'syrup %';
 update recipes set disabled = 1 where title like '% ice cream%' or title like 'ice cream %';
+
+-- SURVEY USERS
+CREATE TABLE survey_users (
+                              survey_user_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                              age INT(3) NOT NULL,
+                              gender VARCHAR(255) NOT NULL,
+                              height float(3,2) NOT NULL,
+                              weight float(3,2) NOT NULL,
+                              importance_healthy_lifestyle varchar(255) NOT NULL,
+                              healthy_of_your_lifestyle varchar(255) NOT NULL,
+                              healthy_food_choices varchar(255) NOT NULL,
+                              look_nutritional_value_of_food_bought varchar(255) NOT NULL,
+                              employment varchar(255) NOT NULL,
+                              recipe_website_usage varchar(255) NOT NULL,
+                              preparing_home_cooked_meals varchar(255) NOT NULL,
+                              cooking_experience varchar(255) NOT NULL,
+                              max_cost varchar(255) NOT NULL,
+                              time_for_cooking varchar(255) NOT NULL,
+                              goal varchar(255) NOT NULL,
+                              mood varchar(255) NOT NULL,
+                              physical_activity varchar(255) NOT NULL,
+                              h_of_sleep varchar(255) NOT NULL,
+                              stressed varchar(255) NOT NULL,
+                              depressed varchar(255) NOT NULL,
+                              diabetes int(1) NOT NULL,
+                              pregnant int(1) NOT NULL,
+                              vegetarian int(1) NOT NULL,
+                              lactose_free int(1) NOT NULL,
+                              gluten_free int(1) NOT NULL,
+                              low_nickel int(1) NOT NULL,
+                              light_recipe int(1) NOT NULL,
+                              `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                              `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE survey_users_recipes (
+    survey_user_id int(11) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    chosen_recipe_id int(11) NOT NULL,
+    other_recipe_id INT(11) NOT NULL,
+    PRIMARY KEY (survey_user_id, chosen_recipe_id, other_recipe_id),
+    FOREIGN KEY (survey_user_id) REFERENCES survey_users(survey_user_id),
+    FOREIGN KEY (chosen_recipe_id) REFERENCES recipes(recipe_id),
+    FOREIGN KEY (other_recipe_id) REFERENCES recipes(recipe_id)
+);
