@@ -10,8 +10,12 @@
     }
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 
 </style>
@@ -23,10 +27,22 @@
         <h2 class="text-primary">Find recipes! </h2>
         <span class="text-muted">What you want to cook today? Find your favorite no-emission food!</span>
         <div class="input-group shadow rounded-3 mt-3">
-            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..." style="max-height: 3em !important;"/>
+            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..."
+                   style="max-height: 3em !important;"/>
             <button type="button" class="btn btn-primary m-0">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+        <div class="d-flex align-items-center my-3">
+            <b>
+                High rating recipes
+            </b>
+            <div class="flex-grow-1 mx-3">
+                <input type="range" min="0" max="100" value="100" class="w-100" id="sustainabilityWeight"/>
+            </div>
+            <b>
+                Sustainable recipes
+            </b>
         </div>
     </div>
     <div class="col-md-3 col-sm-0"></div>
@@ -57,24 +73,27 @@
 
     let typingTimer = null
     let doneTypingTimer = 300
+    const queryInput = document.getElementById('searchBar');
+    const sustainabilityRange = document.getElementById('sustainabilityWeight');
+    const container = document.getElementById('results-container');
 
-    //Gestisce il timeout della ricerca
-    $('#searchBar').on('keyup', function () {
+    queryInput.addEventListener('keyup', handleSearchParamsChange);
+    sustainabilityRange.addEventListener('change', handleSearchParamsChange);
+
+    function handleSearchParamsChange() {
         clearTimeout(typingTimer);
-        if (this.value.length > 1) {
+        if (queryInput.value.length > 1) {
             typingTimer = setTimeout(_ => {
                 showBeforeSearchContainer(false)
-                doSearch(this.value)
+                doSearch(queryInput.value, parseInt(sustainabilityRange.value))
             }, doneTypingTimer);
-        }else {
-            let container = document.getElementById('results-container')
+        } else {
             container.innerHTML = "";
             showBeforeSearchContainer(true)
         }
-    });
+    }
 
-    function doSearch(query) {
-        let container = document.getElementById('results-container')
+    function doSearch(query, sustainabilityWeight) {
         container.innerHTML = "";
 
         FuxCursorPaginator({
@@ -88,7 +107,15 @@
                     <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="font-weight-bold m-0">${recipes.title}</h3>
-                            <small class="btn btn-primary btn-sm">${recipes.static_score.slice(0, 7)}</small>
+                            <div>
+                                <small class="btn btn-success btn-sm">
+                                    Sustainability: ${recipes.sustainability_score.slice(0, 7)}
+                                </small>
+                                <small class="btn btn-info btn-sm">${recipes.rating} <i class='fas fa-star'></i></small>
+                                <small class="btn btn-primary btn-sm">
+                                    Score: ${recipes.weighted_score.slice(0, 7)}
+                                </small>
+                            </div>
                         </div>
                         <div class="mb-3">${recipes.ingredients_list}</div>
                         <small class="text-muted">
@@ -104,6 +131,7 @@
                     const url = `<?= routeFullUrl("/recipes-search/do-search") ?>`;
                     FuxHTTP.get(url, {
                         query: query,
+                        sustainabilityWeight: sustainabilityWeight,
                         cursor: cursor,
                         useCfi: <?=$useCfi ?? 0?>
                     }, FuxHTTP.RESOLVE_DATA, FuxHTTP.REJECT_MESSAGE)
@@ -125,10 +153,10 @@
         })
     }
 
-    function showBeforeSearchContainer(show){
-        if(show){
+    function showBeforeSearchContainer(show) {
+        if (show) {
             $("#before-search-container").removeClass("d-none")
-        }else {
+        } else {
             $("#before-search-container").addClass("d-none")
         }
     }

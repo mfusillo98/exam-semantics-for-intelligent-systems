@@ -9,6 +9,7 @@ use App\Models\IngredientsUserModel;
 use App\Models\RecipesModel;
 use App\Models\UsersModel;
 use App\Packages\Auth\Auth;
+use App\Utils\RecipeUtils;
 use Fux\Database\Pagination\Cursor\Pagination;
 use Fux\FuxQueryBuilder;
 use Fux\FuxResponse;
@@ -16,6 +17,11 @@ use Fux\Request;
 
 class RecipesSearchController
 {
+
+    const TRUST_CFP_MIN = 1;
+    const TRUST_WFP_MIN = 1;
+    const ONLY_ENABLED_RECIPES = true;
+    const ONLY_RATED_RECIPES = true;
 
     /**
      * Effettua una ricerca all'interno dei corsi
@@ -37,15 +43,35 @@ class RecipesSearchController
 
         $ingredients = explode(";", $queryParams['query']);
 
+        //We need to apply a min-max normalization on recipes sustainability score. This is needed because we have to weight both sustainability score and rating score
+        $sustainabilityRange = RecipeUtils::getMinMaxSustainabilityScore(
+            self::ONLY_ENABLED_RECIPES ? 0 : null,
+            self::TRUST_CFP_MIN,
+            self::TRUST_WFP_MIN,
+            false //We consider all recipes also those that were not rated on the website
+        );
+        $sustainabilityRangeSize = $sustainabilityRange['max'] - $sustainabilityRange['min'];
+
+        $sustainabilityWeight = min(1, ($queryParams['sustainabilityWeight'] ?? 100) / 100);
+        $ratingWeight = 1 - $sustainabilityWeight;
+
+
+        $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
+
         $recipeScoreQb = (new FuxQueryBuilder())
-            ->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) as static_score")
+            ->select(
+                "r.recipe_id", "r.title", "r.rating" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
+                "$sustainabilityScoreSQL as sustainability_score",
+                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - r.rating/5) as weighted_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
-            ->where("disabled",0)
-            ->whereGreaterEqThan("r.trust_cfp", 1)
-            ->whereGreaterEqThan("r.trust_wfp", 1)
             ->groupBy("r.recipe_id");
+
+        if (self::TRUST_CFP_MIN) $recipeScoreQb->whereGreaterEqThan("r.trust_cfp", self::TRUST_CFP_MIN);
+        if (self::TRUST_WFP_MIN) $recipeScoreQb->whereGreaterEqThan("r.trust_wfp", self::TRUST_WFP_MIN);
+        if (self::ONLY_ENABLED_RECIPES) $recipeScoreQb->where("r.disabled", 0);
+        if (self::ONLY_RATED_RECIPES) $recipeScoreQb->whereNotNull("r.rating");
 
 
         //In order to use carbon free ingredients data of the logged user we need to edit the select statement of the query
@@ -56,7 +82,11 @@ class RecipesSearchController
 
             if ($carbonFreeIngredientIds) {
                 //Modifico la select della query
-                $recipeScoreQb->select("r.recipe_id, r.title, GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) as static_score");
+                $sustainabilityScoreSQL = "((SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) - $sustainabilityRange[min]) / $sustainabilityRangeSize)";
+                $recipeScoreQb->select("r.recipe_id", "r.title", "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
+                    "$sustainabilityScoreSQL as sustainability_score",
+                    "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - r.rating/5) as weighted_score"
+                );
 
                 $tmpTable = [];
                 foreach ($carbonFreeIngredientIds as $ingredient_id) {
@@ -68,12 +98,12 @@ class RecipesSearchController
         }
 
         //Assigning a "row num" to the filtered recipes sorted by static score. This is needed in order to use a cursor pagination.
-        $rankedRecipes = (new FuxQueryBuilder())->select("*",'@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
+        $rankedRecipes = (new FuxQueryBuilder())->select("*", '@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
 
         foreach ($ingredients as $ingredient) {
             $rankedRecipes->whereLike("ingredients_list", "%$ingredient%");
         }
-        $rankedRecipes->orderBy("static_score", "ASC");
+        $rankedRecipes->orderBy("weighted_score", "ASC");
 
         $qb = (new FuxQueryBuilder())->select("*")->from($rankedRecipes, "ranked_recipes");
 
