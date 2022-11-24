@@ -1,3 +1,11 @@
+<?php
+
+/**
+ * @var $recipes
+ */
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
@@ -345,19 +353,19 @@
                                             <label class="form-check-label" for="vegetarian">Vegetarian</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="lactose-free" name="lactose-free">
+                                            <input type="checkbox" id="lactose-free" name="lactose_free">
                                             <label class="form-check-label" for="lactose-free">Lactose-free</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="gluten-free" name="gluten-free">
+                                            <input type="checkbox" id="gluten-free" name="gluten_free">
                                             <label class="form-check-label" for="gluten-free">Gluten-free</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="low-nickel" name="low-nickel">
+                                            <input type="checkbox" id="low-nickel" name="low_nickel">
                                             <label class="form-check-label" for="low-nickel">Low-Nickel</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="light-recipe" name="light-recipe">
+                                            <input type="checkbox" id="light-recipe" name="light_recipe">
                                             <label class="form-check-label" for="light-recipe">Light recipe</label>
                                         </div>
                                     </div>
@@ -371,24 +379,36 @@
                             <div class="second-step d-none">
                                 <a class="text-primary" onclick="changeStep(1)" style="cursor: pointer">< Prev step</a>
                                 <div class="text-center">
-                                    <h3 class="text-primary">Km 0 ingredients</h3>
-                                    <span>In this section you should insert some ingredients that you can get at km 0, form your garden for example, or other same stuff</span>
+                                    <h3 class="text-primary">Choose recipe</h3>
+                                    <span>In this section you should choose witch one of two proposed recipes in your opinion is less polluting</span>
                                 </div>
-                                <div class="input-group input-group-outline mt-2 ">
-                                    <label class="form-label">Ingredients</label>
-                                    <input type="text" class="form-control" name="ingredients" id="ingredientsBar">
+                                <div class="container">
+                                    <div class="row">
+                                        <?php foreach (["firsts", "seconds_meat", "desserts"] as $type) {
+                                            $bestOrWorst = array("best_recipes", "worst_recipes");
+                                            shuffle($bestOrWorst);
+                                            ?>
+                                        <div class="col-6 mt-5">
+                                            <input type="radio" id="<?=$type.$bestOrWorst[0]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[0]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[1]][$type]["recipe_id"]?>"><br>
+                                            <label class="form-check-label" for="<?=$type.$bestOrWorst[0]?>">
+                                                <div class="card card-body p-2 border-0 shadow-sm">
+                                                    <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[0]][$type]["title"]?></span>
+                                                    <small class="text-muted"><?=$recipes[$bestOrWorst[0]][$type]["ingredients_list"]?></small>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="col-6 mt-5">
+                                            <input type="radio" id="<?=$type.$bestOrWorst[1]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[1]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[0]][$type]["recipe_id"]?>"><br>
+                                            <label class="form-check-label" for="<?=$type.$bestOrWorst[1]?>">
+                                                <div class="card card-body p-2 border-0 shadow-sm">
+                                                    <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></span>
+                                                    <small class="text-muted"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></small>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
-
-                                <!-- chosen ingredients container -->
-                                <div class="col-12 my-2 card card-body p-1 shadow-sm text-center" id="ingredientsChosenContainer">
-                                    <small class="text-muted mt-2">Here you will see chosen ingredients...</small>
-                                </div>
-
-                                <!-- loader container -->
-                                <div class="col-12 mt-4 loader d-none" id="loader-container"></div>
-
-                                <!-- Ingredients container -->
-                                <div class="my-2" id="ingredientsContainer"></div>
 
                                 <div class="text-center">
                                     <button type="button" onclick="saveData()" class="btn bg-gradient-primary w-100 my-4 mb-2">Submit</button>
@@ -468,64 +488,6 @@
 </script>
 
 <script>
-    let typingTimer = null
-    let doneTypingTimer = 300
-    let chosenIngredients = []
-    let foundIngredients = []
-
-    //Gestisce il timeout della ricerca
-    $('#ingredientsBar').on('keyup', function () {
-        clearTimeout(typingTimer);
-        if (this.value.length > 1) {
-            typingTimer = setTimeout(_ => {
-                getIngredients(this.value)
-            }, doneTypingTimer);
-        }else {
-            let container = document.getElementById('ingredientsContainer')
-            container.innerHTML = "";
-        }
-    });
-
-
-    function getIngredients(query){
-        FuxHTTP.get('<?=routeFullUrl('/user/signup/get-ingredients')?>', {query: query}, FuxHTTP.RESOLVE_DATA, FuxHTTP.REJECT_MESSAGE)
-            .then(data =>{
-                foundIngredients = data.ingredients
-                printIngredients()
-            })
-    }
-
-    function printIngredients(){
-        $("#ingredientsContainer").empty()
-        console.log("WE")
-        foundIngredients.map(i =>{
-            if(chosenIngredients.findIndex(ingredient =>{return ingredient.ingredient_id == i.ingredient_id}) < 0){
-                $("#ingredientsContainer").append(`<span class='ingredients-badge' onclick='handlerChosenIngredient(${i.ingredient_id}, "${i.name}")'>${i.name}</span>`)
-            }
-        })
-    }
-
-    function printChosenIngredients(){
-        $("#ingredientsChosenContainer").empty()
-        chosenIngredients.map(i =>{
-            $("#ingredientsChosenContainer").append(`<span class='ingredients-badge' onclick='handlerChosenIngredient(${i.ingredient_id}, "${i.name}")'>${i.name}</span>`)
-        })
-
-    }
-
-    function handlerChosenIngredient(ingredient_id, name){
-        let index = chosenIngredients.findIndex(ingredient =>{
-            return ingredient.ingredient_id === ingredient_id
-        });
-        if(index > -1){
-            chosenIngredients.splice(index, 1)
-        }else{
-            chosenIngredients.push({ingredient_id: ingredient_id, name: name})
-        }
-        printIngredients()
-        printChosenIngredients()
-    }
-
     function saveData(){
         let formData = {}
         $(".page-inner form").each(function(){
@@ -538,11 +500,7 @@
             })
         });
 
-        formData["ingredients"] = chosenIngredients.map(ingredient =>{
-            return ingredient.ingredient_id
-        })
-
-        FuxHTTP.post('<?=routeFullUrl('/user/signup')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
+        FuxHTTP.post('<?=routeFullUrl('/survey-users/save')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
             .then(msg =>FuxSwalUtility.success(msg))
             .catch(msg => FuxSwalUtility.error(msg))
 
