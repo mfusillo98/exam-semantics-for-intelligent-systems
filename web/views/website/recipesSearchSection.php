@@ -116,10 +116,7 @@
                                             `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
                                     }
                                 </small>
-                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count} reviews)</small>
-                                <small class="btn btn-primary btn-sm">
-                                    Score: ${recipes.weighted_score.slice(0, 7)}
-                                </small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count || 1} reviews)</small>
                             </div>
                         </div>
                         <div class="mb-3">${recipes.ingredients_list}</div>
