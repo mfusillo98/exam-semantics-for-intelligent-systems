@@ -52,17 +52,27 @@ class RecipesSearchController
         );
         $sustainabilityRangeSize = $sustainabilityRange['max'] - $sustainabilityRange['min'];
 
+        $ratingCountRange = RecipeUtils::getMinMaxRatingCountScore(
+            self::ONLY_ENABLED_RECIPES ? 0 : null,
+            self::TRUST_CFP_MIN,
+            self::TRUST_WFP_MIN,
+            false //We consider all recipes also those that were not rated on the website
+        );
+        $ratingCountRangeSize = $ratingCountRange['max'] - $ratingCountRange['min'];
+
         $sustainabilityWeight = min(1, ($queryParams['sustainabilityWeight'] ?? 100) / 100);
         $ratingWeight = 1 - $sustainabilityWeight;
 
 
         $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
+        $ratingScoreSQL = "((r.rating_count - $ratingCountRange[min])/$ratingCountRangeSize)";
 
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
-                "r.recipe_id", "r.title", "r.rating" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
+                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
                 "$sustainabilityScoreSQL as sustainability_score",
-                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - r.rating/5) as weighted_score")
+                "$sustainabilityScoreSQL as sustainability_score",
+                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
@@ -85,7 +95,7 @@ class RecipesSearchController
                 $sustainabilityScoreSQL = "((SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) - $sustainabilityRange[min]) / $sustainabilityRangeSize)";
                 $recipeScoreQb->select("r.recipe_id", "r.title", "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
                     "$sustainabilityScoreSQL as sustainability_score",
-                    "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - r.rating/5) as weighted_score"
+                    "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score"
                 );
 
                 $tmpTable = [];

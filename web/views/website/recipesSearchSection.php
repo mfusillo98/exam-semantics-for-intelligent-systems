@@ -111,7 +111,7 @@
                                 <small class="btn btn-success btn-sm">
                                     Sustainability: ${recipes.sustainability_score.slice(0, 7)}
                                 </small>
-                                <small class="btn btn-info btn-sm">${recipes.rating} <i class='fas fa-star'></i></small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count} reviews)</small>
                                 <small class="btn btn-primary btn-sm">
                                     Score: ${recipes.weighted_score.slice(0, 7)}
                                 </small>

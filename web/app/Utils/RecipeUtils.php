@@ -31,4 +31,25 @@ class RecipeUtils
             ->first();
     }
 
+    public static function getMinMaxRatingCountScore($disabled = null, $trust_cfp_min = 0.75, $trust_wfp_min = 0.75, $onlyWithRating = false)
+    {
+
+        $_qb = (new FuxQueryBuilder())
+            ->select("r.rating_count")
+            ->from(RecipesModel::class, "r")
+            ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
+            ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
+        ->groupBy("r.recipe_id");
+
+        if ($disabled !== null) $_qb->where("disabled", $disabled);
+        if ($trust_cfp_min) $_qb->whereGreaterEqThan("r.trust_cfp", $trust_cfp_min);
+        if ($trust_wfp_min) $_qb->whereGreaterEqThan("r.trust_wfp", $trust_wfp_min);
+        if ($onlyWithRating) $_qb->whereNotNull("r.rating");
+
+        return (new FuxQueryBuilder())
+            ->select("MIN(t.rating_count) as min", "MAX(t.rating_count) as max")
+            ->from($_qb, "t")
+            ->first();
+    }
+
 }
