@@ -71,7 +71,6 @@ class RecipesSearchController
             ->select(
                 "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
                 "$sustainabilityScoreSQL as sustainability_score",
-                "$sustainabilityScoreSQL as sustainability_score",
                 "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
