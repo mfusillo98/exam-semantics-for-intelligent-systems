@@ -65,7 +65,7 @@ class RecipesSearchController
 
 
         $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
-        $ratingScoreSQL = "((r.rating_count - $ratingCountRange[min])/$ratingCountRangeSize)";
+        $ratingScoreSQL = "((IFNULL(r.rating_count, 1) - $ratingCountRange[min])/$ratingCountRangeSize)";
 
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
