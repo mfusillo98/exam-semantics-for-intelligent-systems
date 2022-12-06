@@ -35,13 +35,13 @@
         </div>
         <div class="d-flex align-items-center my-3">
             <b>
-                High rating recipes
+                More popular
             </b>
             <div class="flex-grow-1 mx-3">
                 <input type="range" min="0" max="100" value="100" class="w-100" id="sustainabilityWeight"/>
             </div>
             <b>
-                Sustainable recipes
+                More sustainable
             </b>
         </div>
     </div>
