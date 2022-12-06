@@ -108,8 +108,13 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="font-weight-bold m-0">${recipes.title}</h3>
                             <div>
-                                <small class="btn btn-success btn-sm">
-                                    Sustainability: ${recipes.sustainability_score.slice(0, 7)}
+                                <small>
+                                    ${recipes.sustainability_score <= 0.33 ?
+                                        `<span class="btn btn-success btn-sm">Very sustainable</span>` :
+                                        recipes.sustainability_score <= 0.66 ?
+                                            `<span class="btn btn-warning btn-sm">Sustainable</span>` :
+                                            `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
+                                    }
                                 </small>
                                 <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count} reviews)</small>
                                 <small class="btn btn-primary btn-sm">
