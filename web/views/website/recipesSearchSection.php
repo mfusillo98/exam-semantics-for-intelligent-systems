@@ -27,7 +27,7 @@
         <h2 class="text-primary">Find recipes! </h2>
         <span class="text-muted">What you want to cook today? Find your favorite no-emission food!</span>
         <div class="input-group shadow rounded-3 mt-3">
-            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..."
+            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient... (e.g. chicken, tomato)"
                    style="max-height: 3em !important;"/>
             <button type="button" class="btn btn-primary m-0">
                 <i class="fas fa-search"></i>
@@ -104,9 +104,9 @@
                 const el = document.createElement('div');
                 const createdAt = moment(recipes.created_at);
                 el.innerHTML = `
-                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer">
+                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipes.url}" target="_blank">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="font-weight-bold m-0">${recipes.title}</h3>
+                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipes.title}</div>
                             <div>
                                 <small>
                                     ${recipes.sustainability_score <= 0.33 ?
@@ -119,9 +119,10 @@
                                 <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count || 1} reviews)</small>
                             </div>
                         </div>
-                        <div class="mb-3">${recipes.ingredients_list}</div>
-                        <small class="text-muted">
-                            Inserted at: ${createdAt.format('DD-MM-YYYY')}
+                        <span class="mb-3">${recipes.ingredients_list}</span>
+                        <small class="text-muted" style="font-size: 10px">
+                            Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
+                            Taken from: ${recipes.url}
                         </small>
                     </a>
                 `;
@@ -147,7 +148,7 @@
                 el.innerHTML = `
                     <div class="card shadow-sm text-center w-100 p-3 border-0">
                         <h5>We have not yet recipes with this ingredient 🤨</h5>
-                        <h2 class="text-primary font-weight-bold">Try with some other! 💪🏼</h2>
+                        <h2 class="text-primary font-weight-bold">Try with some other (e.g. apple, cheese)! 💪🏼</h2>
                     </div>
                 `;
                 return el;

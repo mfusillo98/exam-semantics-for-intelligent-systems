@@ -69,7 +69,7 @@ class RecipesSearchController
 
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
-                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
+                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.url",
                 "$sustainabilityScoreSQL as sustainability_score",
                 "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
@@ -92,7 +92,7 @@ class RecipesSearchController
             if ($carbonFreeIngredientIds) {
                 //Modifico la select della query
                 $sustainabilityScoreSQL = "((SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) - $sustainabilityRange[min]) / $sustainabilityRangeSize)";
-                $recipeScoreQb->select("r.recipe_id", "r.title", "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list",
+                $recipeScoreQb->select("r.recipe_id", "r.title", "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.url",
                     "$sustainabilityScoreSQL as sustainability_score",
                     "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score"
                 );
