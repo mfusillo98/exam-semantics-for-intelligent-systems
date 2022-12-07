@@ -94,20 +94,15 @@
     <section class="pt-4 pb-6" id="count-stats">
         <div class="container">
             <div class="row justify-content-center text-center">
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary" id="state1" countTo="1000000">0</h1>
+                <div class="col-md-6">
+                    <h1 class="text-gradient text-primary" id="state1" countTo="<?=$totIngredients?>">0</h1>
                     <h5>Ingredients</h5>
                     <p>Number of ingredients collected in our dataset</p>
                 </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state2" countTo="51235">0</span>+</h1>
+                <div class="col-md-6">
+                    <h1 class="text-gradient text-primary"><span id="state2" countTo="<?=$totRecipes?>">0</span>+</h1>
                     <h5>Recipes</h5>
                     <p>Number of recipes in our dataset</p>
-                </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state3" countTo="350">0</span></h1>
-                    <h5>Search done</h5>
-                    <p>How many time users searched somethings in pur system</p>
                 </div>
             </div>
         </div>

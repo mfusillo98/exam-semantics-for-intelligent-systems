@@ -101,32 +101,7 @@
             onItemRender: function (recipes) {
                 console.log(recipes)
                 $("#loader-container").addClass("d-none")
-                const el = document.createElement('div');
-                const createdAt = moment(recipes.created_at);
-                el.innerHTML = `
-                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipes.url}" target="_blank">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipes.title}</div>
-                            <div>
-                                <small>
-                                    ${recipes.sustainability_score <= 0.33 ?
-                                        `<span class="btn btn-success btn-sm">Very sustainable</span>` :
-                                        recipes.sustainability_score <= 0.66 ?
-                                            `<span class="btn btn-warning btn-sm">Sustainable</span>` :
-                                            `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
-                                    }
-                                </small>
-                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count || 1} reviews)</small>
-                            </div>
-                        </div>
-                        <span class="mb-3">${recipes.ingredients_list}</span>
-                        <small class="text-muted" style="font-size: 10px">
-                            Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
-                            Taken from: ${recipes.url}
-                        </small>
-                    </a>
-                `;
-                return el;
+                return printRecipesUtils(recipes)
             },
             onPageRequest: function (cursor) {
                 $("#loader-container").removeClass("d-none")
@@ -162,6 +137,35 @@
         } else {
             $("#before-search-container").addClass("d-none")
         }
+    }
+
+    function printRecipesUtils(recipe){
+        const el = document.createElement('div');
+        const createdAt = moment(recipe.created_at);
+        el.innerHTML = `
+                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipe.title}</div>
+                            <div>
+                                <small>
+                                    ${recipe.sustainability_score <= 0.33 ?
+            `<span class="btn btn-success btn-sm">Very sustainable</span>` :
+            recipe.sustainability_score <= 0.66 ?
+                `<span class="btn btn-warning btn-sm">Sustainable</span>` :
+                `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
+        }
+                                </small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
+                            </div>
+                        </div>
+                        <span class="mb-3">${recipe.ingredients_list}</span>
+                        <small class="text-muted" style="font-size: 10px">
+                            Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
+                            Taken from: ${recipe.url}
+                        </small>
+                    </a>
+                `;
+        return el;
     }
 
 </script>
