@@ -46,14 +46,6 @@
                     <div class="mb-3" style="background-image: url('<?=asset('img/footPrintLogo.png')?>'); background-repeat: no-repeat; width:150px; height: 150px; background-size: cover; background-position: center; margin: auto"></div>
                     <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
                     <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
-                    <button type="submit" class="btn bg-white text-dark">Let's start!</button>
-                    <h6 class="text-white mb-2 mt-5">Find us on</h6>
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-                    </div>
                 </div>
             </div>
         </div>

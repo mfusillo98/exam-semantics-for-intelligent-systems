@@ -9,9 +9,9 @@ namespace App\Models;
  * @property int gender,
  * @property float height,
  * @property float weight,
- * @property string importance_healthy_lifestyle,
- * @property string healthy_of_your_lifestyle,
- * @property string healthy_food_choices,
+ * @property string importance_sustainable_lifestyle,
+ * @property string sustainability_of_your_lifestyle,
+ * @property string sustainable_food_choices,
  * @property string look_nutritional_value_of_food_bought,
  * @property string employment,
  * @property string recipe_website_usage,
@@ -41,7 +41,7 @@ class SurveyUsersModel extends \Fux\Database\Model\Model
 {
 
     protected static $tableName = 'survey_users';
-    protected static $tableFields = ['survey_user_id', 'age', 'gender', 'height', 'weight', 'importance_healthy_lifestyle', 'healthy_of_your_lifestyle', 'healthy_food_choices',
+    protected static $tableFields = ['survey_user_id', 'age', 'gender', 'height', 'weight', 'importance_sustainable_lifestyle', 'sustainability_of_your_lifestyle', 'sustainable_food_choices',
         'look_nutritional_value_of_food_bought', 'employment', 'recipe_website_usage', 'preparing_home_cooked_meals', 'cooking_experience',
         'max_cost', 'time_for_cooking', 'goal', 'mood', 'physical_activity', 'h_of_sleep', 'stressed', 'depressed', 'diabetes', 'pregnant', 'vegetarian', 'lactose_free',
         'gluten_free', 'low_nickel', 'light_recipe', 'created_at', 'updated_at'];

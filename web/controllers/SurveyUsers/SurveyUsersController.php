@@ -42,6 +42,10 @@ class SurveyUsersController {
     public static function save(Request $request){
         $body = $request->getBody();
 
+        if(!isset($body["age"]) || $body["age"] < 18){
+            return new FuxResponse(FuxResponse::ERROR, "Pay attention to the age field");
+        }
+
         DB::ref()->begin_transaction();
         if(!$user_id = SurveyUsersModel::save($body)){
             DB::ref()->rollback();

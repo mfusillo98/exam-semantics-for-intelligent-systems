@@ -47,13 +47,6 @@
                     <p class="lead mb-4 text-white">
                         This is your <span class="text-success">personalized section</span>, do you have ingredients in your refrigerator?<br>
                         Compose <span class="text-success">your favorite recipes</span>!</p>
-                    <h6 class="text-white mb-2 mt-5">Find us on</h6>
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-                    </div>
                 </div>
             </div>
         </div>

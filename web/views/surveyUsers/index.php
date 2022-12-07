@@ -50,6 +50,8 @@
                     </div>
                     <div class="card-body page-inner">
                         <form role="form" class="text-start">
+
+                            <!-- FIRST STEP-->
                             <div class="first-step">
                                 <div class="w-100 text-center">
                                     Here you can answer to some question about your physic and your lifestyle and in the end
@@ -60,16 +62,16 @@
                                     <div class="col-md-6 p-2">
                                         <div class="input-group input-group-outline">
                                             <label class="form-label">Age</label>
-                                            <input type="number" class="form-control" name="age" autocomplete="off">
+                                            <input id="age-input" type="number" class="form-control" name="age" autocomplete="off">
                                         </div>
+                                        <small id="age-error" class="text-danger d-none">To continue you must be almost 18 years old</small>
                                     </div>
                                     <div class="col-md-6 p-2">
                                         <div class="input-group input-group-outline" autocomplete="off">
                                             <select class="form-control" name="gender" required>
-                                                <option value="">Choose your gender</option>
                                                 <option value="1">Male</option>
                                                 <option value="0">Female</option>
-                                                <option value="-1">Other</option>
+                                                <option value="-1" selected>Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -88,12 +90,12 @@
 
                                     <div class="col-md-6 col-sm-3 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            In your opinion, to have a healthy lifestyle is:
+                                            In your opinion, to have a sustainable lifestyle is:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="importance_healthy_lifestyle" required>
+                                            <select class="form-control" name="importance_sustainable_lifestyle" required>
                                                 <option value="not_important">Not important</option>
                                                 <option value="poorly_important">Poorly important</option>
                                                 <option value="important">Important</option>
@@ -109,41 +111,24 @@
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="healthy_of_your_lifestyle" required>
-                                                <option value="absolutely_not_healthy">Absolutely not healthy</option>
-                                                <option value="not_healthy">Not healthy</option>
-                                                <option value="quite_healthy">Quite healthy</option>
-                                                <option value="healthy">Healthy </option>
-                                                <option value="very_healthy">Very healthy</option>
+                                            <select class="form-control" name="sustainability_of_your_lifestyle" required>
+                                                <option value="absolutely_not_healthy">Absolutely not sustainable</option>
+                                                <option value="not_healthy">Not sustainable</option>
+                                                <option value="quite_healthy">Quite sustainable</option>
+                                                <option value="healthy">Sustainable </option>
+                                                <option value="very_healthy">Very sustainable</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            I try to make healthy food choices every day:
+                                            I try to make sustainable food choices every day:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="healthy_food_choices" required>
-                                                <option value="always">Always</option>
-                                                <option value="often">Often</option>
-                                                <option value="usually">Usually</option>
-                                                <option value="rarely">Rarely</option>
-                                                <option value="never">Never</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            I look at the nutritional value of food products I buy:
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="look_nutritional_value_of_food_bought" required>
+                                            <select class="form-control" name="sustainable_food_choices" required>
                                                 <option value="always">Always</option>
                                                 <option value="often">Often</option>
                                                 <option value="usually">Usually</option>
@@ -202,51 +187,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-3 mt-4 p-2">
-                                        <div class="input-group input-group-outline">
-                                            Cooking experience:
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 mt-4 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="cooking_experience" required>
-                                                <option value="very_low">Very low</option>
-                                                <option value="low">Low</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="high">High</option>
-                                                <option value="very_high">Very high</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            Maximum cost of the recipe:
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="max_cost" required>
-                                                <option value="very_low">Very low</option>
-                                                <option value="low">Low</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="high">High</option>
-                                                <option value="not_important">Not important</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 p-2 my-4">
-                                        <div class="input-group input-group-outline">
-                                            Time Available for Cooking (max time in min. 0 = no constraints):
-                                        </div>
-                                    </div>
-                                    <div class="col-6 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <input type="number" class="form-control" name="time_for_cooking" value="0" autocomplete="off">
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
                                             What is your goal?
@@ -261,135 +201,29 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            What is your mood right now?
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="mood" required>
-                                                <option value="good">Good</option>
-                                                <option value="neutral">Neutral</option>
-                                                <option value="bad">Bad</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            How much physical activity do you do in a week?
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="physical_activity" required>
-                                                <option value="9">A lot (>9)</option>
-                                                <option value="6">Neutral (=6)</option>
-                                                <option value="3">Not enough (<3)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            How many hours of sleep do you usually get?
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="h_of_sleep" required>
-                                                <option value="min8">min of 8h</option>
-                                                <option value="maj8">maj of 8h</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            Do you feel stressed?
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="stressed" required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 p-2">
-                                        <div class="input-group input-group-outline">
-                                            Do you feel depressed?
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 p-2">
-                                        <div class="input-group input-group-outline">
-                                            <select class="form-control" name="depressed" required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-3 mt-4 p-2">
-                                        <div class="input-group input-group-outline">
-                                            Select your restrictions
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-9 mt-4 p-2">
-                                        <div class="form-check">
-                                            <input type="checkbox" id="diabetes" name="diabetes">
-                                            <label class="form-check-label" for="diabetes">Diabetes</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="pregnant" name="pregnant">
-                                            <label class="form-check-label" for="pregnant">Pregnant or breastfeeding</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="vegetarian" name="vegetarian">
-                                            <label class="form-check-label" for="vegetarian">Vegetarian</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="lactose-free" name="lactose_free">
-                                            <label class="form-check-label" for="lactose-free">Lactose-free</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="gluten-free" name="gluten_free">
-                                            <label class="form-check-label" for="gluten-free">Gluten-free</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="low-nickel" name="low_nickel">
-                                            <label class="form-check-label" for="low-nickel">Low-Nickel</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" id="light-recipe" name="light_recipe">
-                                            <label class="form-check-label" for="light-recipe">Light recipe</label>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="button" onclick="changeStep(2)" class="btn bg-gradient-primary w-100 my-4 mb-2">Next step (1 of 2)</button>
+                                    <button type="button" onclick="changeStep('second-step')" class="btn bg-gradient-primary w-100 my-4 mb-2">Next step (1 of 4)</button>
                                 </div>
                             </div>
 
+
+                            <!-- SECOND STEP-->
                             <div class="second-step d-none">
-                                <a class="text-primary" onclick="changeStep(1)" style="cursor: pointer">< Prev step</a>
+                                <a class="text-primary" onclick="changeStep('first-step')" style="cursor: pointer">< Prev step</a>
                                 <div class="text-center">
                                     <h3 class="text-primary">Choose recipe</h3>
                                     <span>In this section you should choose witch one of two proposed recipes in your opinion is less polluting</span>
                                 </div>
                                 <div class="container">
                                     <div class="row">
-                                        <?php foreach (["firsts", "seconds_meat", "desserts"] as $type) {
+                                        <?php foreach (["firsts"] as $type) {
                                             $bestOrWorst = array("best_recipes", "worst_recipes");
                                             shuffle($bestOrWorst);
                                             ?>
                                         <div class="col-6 mt-5">
-                                            <input type="radio" id="<?=$type.$bestOrWorst[0]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[0]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[1]][$type]["recipe_id"]?>"><br>
+                                            <input type="radio" id="<?=$type.$bestOrWorst[0]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[0]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[1]][$type]["recipe_id"]?>" checked><br>
                                             <label class="form-check-label" for="<?=$type.$bestOrWorst[0]?>">
                                                 <div class="card card-body p-2 border-0 shadow-sm">
                                                     <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[0]][$type]["title"]?></span>
@@ -406,6 +240,86 @@
                                                 </div>
                                             </label>
                                         </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="button" onclick="changeStep('third-step')" class="btn bg-gradient-primary w-100 my-4 mb-2">Next step (2 of 4)</button>
+                                </div>
+                            </div>
+
+                            <!-- THIRD STEP -->
+                            <div class="third-step d-none">
+                                <a class="text-primary" onclick="changeStep('second-step')" style="cursor: pointer">< Prev step</a>
+                                <div class="text-center">
+                                    <h3 class="text-primary">Choose recipe</h3>
+                                    <span>In this section you should choose witch one of two proposed recipes in your opinion is less polluting</span>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <?php foreach (["seconds_meat"] as $type) {
+                                            $bestOrWorst = array("best_recipes", "worst_recipes");
+                                            shuffle($bestOrWorst);
+                                            ?>
+                                            <div class="col-6 mt-5">
+                                                <input type="radio" id="<?=$type.$bestOrWorst[0]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[0]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[1]][$type]["recipe_id"]?>" checked><br>
+                                                <label class="form-check-label" for="<?=$type.$bestOrWorst[0]?>">
+                                                    <div class="card card-body p-2 border-0 shadow-sm">
+                                                        <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[0]][$type]["title"]?></span>
+                                                        <small class="text-muted"><?=$recipes[$bestOrWorst[0]][$type]["ingredients_list"]?></small>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-6 mt-5">
+                                                <input type="radio" id="<?=$type.$bestOrWorst[1]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[1]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[0]][$type]["recipe_id"]?>"><br>
+                                                <label class="form-check-label" for="<?=$type.$bestOrWorst[1]?>">
+                                                    <div class="card card-body p-2 border-0 shadow-sm">
+                                                        <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></span>
+                                                        <small class="text-muted"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></small>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="button" onclick="changeStep('fourth-step')" class="btn bg-gradient-primary w-100 my-4 mb-2">Next step (3 of 4)</button>
+                                </div>
+                            </div>
+
+                            <!-- FOURTH STEP -->
+                            <div class="fourth-step d-none">
+                                <a class="text-primary" onclick="changeStep('third-step')" style="cursor: pointer">< Prev step</a>
+                                <div class="text-center">
+                                    <h3 class="text-primary">Choose recipe</h3>
+                                    <span>In this section you should choose witch one of two proposed recipes in your opinion is less polluting</span>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <?php foreach (["desserts"] as $type) {
+                                            $bestOrWorst = array("best_recipes", "worst_recipes");
+                                            shuffle($bestOrWorst);
+                                            ?>
+                                            <div class="col-6 mt-5">
+                                                <input type="radio" id="<?=$type.$bestOrWorst[0]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[0]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[1]][$type]["recipe_id"]?>" checked><br>
+                                                <label class="form-check-label" for="<?=$type.$bestOrWorst[0]?>">
+                                                    <div class="card card-body p-2 border-0 shadow-sm">
+                                                        <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[0]][$type]["title"]?></span>
+                                                        <small class="text-muted"><?=$recipes[$bestOrWorst[0]][$type]["ingredients_list"]?></small>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-6 mt-5">
+                                                <input type="radio" id="<?=$type.$bestOrWorst[1]?>" name="<?=$type?>" value="<?=$recipes[$bestOrWorst[1]][$type]["recipe_id"]."_".$recipes[$bestOrWorst[0]][$type]["recipe_id"]?>"><br>
+                                                <label class="form-check-label" for="<?=$type.$bestOrWorst[1]?>">
+                                                    <div class="card card-body p-2 border-0 shadow-sm">
+                                                        <span class="font-weight-bold m-0 text-primary"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></span>
+                                                        <small class="text-muted"><?=$recipes[$bestOrWorst[1]][$type]["title"]?></small>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -439,10 +353,6 @@
                         <li class="nav-item">
                             <a href="<?= routeFullUrl('/') ?>" class="nav-link text-white">Homepage</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?= routeFullUrl('/user') ?>" class="nav-link text-white" target="_blank">About
-                                this section</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -472,17 +382,42 @@
     });
 </script>
 
+<!-- Age check -->
+<script>
+    $("#age-input").on('keyup', function() {
+        if ($('#age-input').val() < 18) {
+            $('#age-error').removeClass("d-none")
+        } else
+            $('#age-error').addClass("d-none")
+    });
+</script>
+
 <script>
     function changeStep(step){
+        //Verify fields
         switch (step){
-            case 1:
-                $('.first-step').removeClass(" d-none ")
-                $('.second-step').addClass(" d-none ")
+            case 'first-step':
                 break
-            case 2:
-                $('.first-step').addClass(" d-none ")
-                $('.second-step').removeClass(" d-none ")
+            case 'second-step':
+                if ($('#age-input').val() < 18) {return FuxSwalUtility.error("Check age field")}
+                if ($('input[name="height"]').val() < 50) {return FuxSwalUtility.error("Check height field")}
+                if ($('input[name="weight"]').val() < 30) {return FuxSwalUtility.error("Check weight field")}
                 break
+            case 'third-step':
+                console.log($('input[name="firsts"]').val())
+                if (!$('input[name="firsts"]').val()) {return FuxSwalUtility.error("Choose one")}
+                break
+        }
+
+        let steps = ["first-step", "second-step", "third-step", "fourth-step"]
+
+        for(let i=0; i<steps.length; i++){
+            if(step === steps[i]){
+                console.log(steps[i])
+                $('.'+steps[i]).removeClass(" d-none ")
+            }else{
+                $('.'+steps[i]).addClass(" d-none ")
+            }
         }
     }
 </script>
@@ -501,7 +436,7 @@
         });
 
         FuxHTTP.post('<?=routeFullUrl('/survey-users/save')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
-            .then(msg =>FuxSwalUtility.success(msg))
+            .then(window.location.href = "<?=routeFullUrl('/survey-users/thank-you-page')?>")
             .catch(msg => FuxSwalUtility.error(msg))
 
     }
