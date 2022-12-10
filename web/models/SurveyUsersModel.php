@@ -33,7 +33,8 @@ namespace App\Models;
  * @property string low_nickel,
  * @property string light_recipe,
  * @property string created_at,
- * @property string updated_at
+ * @property string updated_at,
+ * @property string with_suggestion,
  */
 
 
@@ -44,7 +45,7 @@ class SurveyUsersModel extends \Fux\Database\Model\Model
     protected static $tableFields = ['survey_user_id', 'age', 'gender', 'height', 'weight', 'importance_sustainable_lifestyle', 'sustainability_of_your_lifestyle', 'sustainable_food_choices',
         'look_nutritional_value_of_food_bought', 'employment', 'recipe_website_usage', 'preparing_home_cooked_meals', 'cooking_experience',
         'max_cost', 'time_for_cooking', 'goal', 'mood', 'physical_activity', 'h_of_sleep', 'stressed', 'depressed', 'diabetes', 'pregnant', 'vegetarian', 'lactose_free',
-        'gluten_free', 'low_nickel', 'light_recipe', 'created_at', 'updated_at'];
+        'gluten_free', 'low_nickel', 'light_recipe', 'created_at', 'updated_at', 'with_suggestion'];
     protected static $primaryKey = ['survey_user_id'];
 }
 

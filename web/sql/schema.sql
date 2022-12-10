@@ -88,3 +88,6 @@ CREATE TABLE survey_users_recipes (
     FOREIGN KEY (chosen_recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (other_recipe_id) REFERENCES recipes(recipe_id)
 );
+
+ALTER TABLE survey_users
+    ADD with_suggestion INT(11) default 0

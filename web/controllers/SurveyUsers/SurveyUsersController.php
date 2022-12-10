@@ -22,6 +22,8 @@ class SurveyUsersController {
      */
     public static function index()
     {
+        $withSuggestions =  rand(0,1);
+
         $recipes = [];
 
         //Get a random element for best recipes
@@ -35,7 +37,7 @@ class SurveyUsersController {
         $recipes["worst_recipes"]["desserts"] = RecipesUtils::getRecipeInformation(RecipesConstants::WORST_RECIPES["desserts"][array_rand(RecipesConstants::WORST_RECIPES["desserts"])]);
 
 
-        return view('surveyUsers/index', ["recipes" => $recipes]);
+        return view('surveyUsers/index', ["recipes" => $recipes, "withSuggestions" => $withSuggestions]);
     }
 
 
