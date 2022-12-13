@@ -22,13 +22,12 @@ class RecipesUtils {
 
         $ingredientsSelect =
             "CONCAT('
-                {ingredients_list:[', 
-                GROUP_CONCAT(DISTINCT CONCAT('{name:`', i.name, '`, carbon_foot_print:', i.carbon_foot_print, '}') SEPARATOR ','), 
+                {\"ingredients_list\":[', 
+                GROUP_CONCAT(DISTINCT CONCAT('{\"name\":\"', i.name, '\", \"carbon_foot_print\":\"', i.carbon_foot_print, '\"}') SEPARATOR ','), 
                 ']}') as ingredients_list";
 
         $additionalInfo = (new FuxQueryBuilder())->select(
-            $ingredientsSelect,
-            "SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) as static_score")
+            $ingredientsSelect)
             ->from(IngredientsRecipesModel::class, "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id=i.ingredient_id", "i")
             ->where("ir.recipe_id", $recipe_id)
@@ -36,8 +35,7 @@ class RecipesUtils {
             ->execute()[0];
 
         $recipe["ingredients_list"] = json_decode($additionalInfo["ingredients_list"], true);
-        $recipe["static_score"] = $additionalInfo["static_score"];
-
+        $recipe["ingredients_list"] = $recipe["ingredients_list"]["ingredients_list"];
         return $recipe;
     }
 
