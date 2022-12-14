@@ -108,7 +108,7 @@
         </div>
     </section>
     <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
-    <section class="my-5 pt-5">
+    <section class="my-5 pt-5 d-none">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 m-auto">
