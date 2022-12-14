@@ -125,14 +125,15 @@
                                         </div>
                                     </div>
 
+                                    <!-- SUSTAINABLE FOOD CHOICE -->
                                     <div class="col-md-6 col-sm-3 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            In your opinion, to have a sustainable lifestyle is:
+                                            In your opinion, make sustainable food choice is:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="importance_sustainable_lifestyle"
+                                            <select class="form-control" name="importance_sustainable_food_choice"
                                                     required>
                                                 <option value="not_important">Not important</option>
                                                 <option value="poorly_important">Poorly important</option>
@@ -144,19 +145,19 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            How do you consider your lifestyle:
+                                            How do you consider your food choice:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="sustainability_of_your_lifestyle"
+                                            <select class="form-control" name="sustainability_of_your_food_choice"
                                                     required>
-                                                <option value="absolutely_not_healthy">Absolutely not sustainable
+                                                <option value="absolutely_not_sustainable">Absolutely not sustainable
                                                 </option>
-                                                <option value="not_healthy">Not sustainable</option>
-                                                <option value="quite_healthy">Quite sustainable</option>
-                                                <option value="healthy">Sustainable</option>
-                                                <option value="very_healthy">Very sustainable</option>
+                                                <option value="not_sustainable">Not sustainable</option>
+                                                <option value="quite_sustainable">Quite sustainable</option>
+                                                <option value="sustainable">Sustainable</option>
+                                                <option value="very_sustainable">Very sustainable</option>
                                             </select>
                                         </div>
                                     </div>
@@ -178,6 +179,61 @@
                                         </div>
                                     </div>
 
+                                    <!-- HEALTHY FOOD CHOICE -->
+                                    <div class="col-md-6 col-sm-3 mt-3 p-2">
+                                        <div class="input-group input-group-outline">
+                                            In your opinion, make healthy food choice is:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-9 mt-3 p-2">
+                                        <div class="input-group input-group-outline">
+                                            <select class="form-control" name="importance_healthy_lifestyle"
+                                                    required>
+                                                <option value="not_important">Not important</option>
+                                                <option value="poorly_important">Poorly important</option>
+                                                <option value="important">Important</option>
+                                                <option value="very_important">Very important</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-3 p-2">
+                                        <div class="input-group input-group-outline">
+                                            How do you consider your food choice:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-9 p-2">
+                                        <div class="input-group input-group-outline">
+                                            <select class="form-control" name="healthy_of_your_lifestyle"
+                                                    required>
+                                                <option value="absolutely_not_healthy">Absolutely not healthy
+                                                </option>
+                                                <option value="not_healthy">Not healthy</option>
+                                                <option value="quite_healthy">Quite healthy</option>
+                                                <option value="healthy">Healthy</option>
+                                                <option value="very_healthy">Very healthy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-3 p-2">
+                                        <div class="input-group input-group-outline">
+                                            I try to make healthy food choices every day:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-9 p-2">
+                                        <div class="input-group input-group-outline">
+                                            <select class="form-control" name="healthy_food_choices" required>
+                                                <option value="always">Always</option>
+                                                <option value="often">Often</option>
+                                                <option value="usually">Usually</option>
+                                                <option value="rarely">Rarely</option>
+                                                <option value="never">Never</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- IMPIEGO-->
                                     <div class="col-md-6 col-sm-3 mt-4 p-2">
                                         <div class="input-group input-group-outline">
                                             Employment:

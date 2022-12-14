@@ -44,37 +44,29 @@ update recipes set disabled = 1 where title like '% syrup%' or title like 'syrup
 update recipes set disabled = 1 where title like '% ice cream%' or title like 'ice cream %';
 
 -- SURVEY USERS
+
+DROP TABLE survey_users;
+DROP TABLE survey_users_recipes;
+
 CREATE TABLE survey_users (
                               survey_user_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                               age INT(3) NOT NULL,
                               gender VARCHAR(255) NOT NULL,
                               height VARCHAR(255) NOT NULL,
                               weight VARCHAR(255) NOT NULL,
-                              importance_sustainable_lifestyle varchar(255) ,
-                              sustainability_of_your_lifestyle varchar(255) ,
-                              sustainable_food_choices varchar(255) ,
-                              look_nutritional_value_of_food_bought varchar(255) ,
+                              importance_sustainable_food_choice varchar(255),
+                              sustainability_of_your_food_choice varchar(255),
+                              sustainable_food_choices varchar(255),
+                              importance_healthy_lifestyle varchar(255) NOT NULL,
+                              healthy_of_your_lifestyle varchar(255) NOT NULL,
+                              healthy_food_choices varchar(255) NOT NULL,
                               employment varchar(255) ,
                               recipe_website_usage varchar(255) ,
-                              preparing_home_cooked_meals varchar(255) ,
-                              cooking_experience varchar(255) ,
-                              max_cost varchar(255) ,
-                              time_for_cooking varchar(255) ,
+                              preparing_home_cooked_meals varchar(255),
                               goal varchar(255) ,
-                              mood varchar(255) ,
-                              physical_activity varchar(255) ,
-                              h_of_sleep varchar(255) ,
-                              stressed varchar(255) ,
-                              depressed varchar(255) ,
-                              diabetes int(1) ,
-                              pregnant int(1) ,
-                              vegetarian int(1) ,
-                              lactose_free int(1) ,
-                              gluten_free int(1) ,
-                              low_nickel int(1) ,
-                              light_recipe int(1) ,
                               `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                              `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                              `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                              with_suggestion INT(11) default 0
 );
 
 
@@ -88,6 +80,3 @@ CREATE TABLE survey_users_recipes (
     FOREIGN KEY (chosen_recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (other_recipe_id) REFERENCES recipes(recipe_id)
 );
-
-ALTER TABLE survey_users
-    ADD with_suggestion INT(11) default 0
