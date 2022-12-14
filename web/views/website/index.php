@@ -45,7 +45,7 @@
                 <div class="col-lg-8 text-center mx-auto my-auto">
                     <div class="mb-3" style="background-image: url('<?=asset('img/footPrintLogo.png')?>'); background-repeat: no-repeat; width:150px; height: 150px; background-size: cover; background-position: center; margin: auto"></div>
                     <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
-                    <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
+                    <p class="lead mb-4 text-white">We want help you to choose recipes that can save <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
             <!-- card section -->
             <div class="row mt-7 mb-7">
                 <div class="col-12 text-center mb-3">
-                    <h3 class="text-secondary">Chose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
+                    <h3 class="text-secondary">Choose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
                     <span class="text-muted">Our classify are always upgraded automatically, based on data collected towards our system. Visit the sections to know more!</span>
                 </div>
                 <div class="col-md-4 my-5">
