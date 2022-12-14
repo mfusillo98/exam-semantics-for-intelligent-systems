@@ -152,7 +152,7 @@
             `<span class="btn btn-success btn-sm">Very sustainable</span>` :
             recipe.sustainability_score <= 0.66 ?
                 `<span class="btn btn-warning btn-sm">Sustainable</span>` :
-                `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
+                `<span class="btn btn-danger btn-sm">Not sustainable</b>`
         }
                                 </small>
                                 <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
