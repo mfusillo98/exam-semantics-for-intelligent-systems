@@ -142,6 +142,7 @@
     function printRecipesUtils(recipe){
         const el = document.createElement('div');
         const createdAt = moment(recipe.created_at);
+
         el.innerHTML = `
                     <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
                         <div class="d-flex align-items-center justify-content-between">
@@ -158,7 +159,14 @@
                                 <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
                             </div>
                         </div>
-                        <span class="mb-3">${recipe.ingredients_list}</span>
+                        <span class="mb-3">
+                              ${
+                                    recipe.ingredients_list.map(i =>{
+                                        let color = i.carbon_foot_print >= 0.7 ? "text-danger" : i.carbon_foot_print <= 0.3 ? "text-success" : ""
+                                        return `<span class="${color}">${i.name} </span>`
+                                    })
+                                }
+                        </span>
                         <small class="text-muted" style="font-size: 10px">
                             Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
                             Taken from: ${recipe.url}
