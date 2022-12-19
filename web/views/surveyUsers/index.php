@@ -597,7 +597,7 @@
         });
 
         FuxHTTP.post('<?=routeFullUrl('/survey-users/save')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
-            //.then(window.location.href = "routeFullUrl('/survey-users/thank-you-page')?>")
+            .then(window.location.href = "<?=routeFullUrl('/survey-users/thank-you-page')?>")
             .catch(msg => FuxSwalUtility.error(msg))
 
     }
