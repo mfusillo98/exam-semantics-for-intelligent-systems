@@ -56,11 +56,22 @@ class SurveyUsersController {
 
         foreach (["firsts", "seconds_meat", "desserts"] as $type){
             $recipes = explode("_", $body[$type]);
+
+            //Why selection string
+            $whySelection = "";
+            foreach (["personal_knowledge", "intuition", "ui", "chance"] as $why){
+                $whySelection = isset($body[$type."_why_selection_".$why]) ? $whySelection.$why."," : "";
+            }
+
             if(!SurveyUsersRecipesModel::save([
                 "survey_user_id" => $user_id,
                 "type" => $type,
                 "chosen_recipe_id" => $recipes[0],
-                "other_recipe_id" => $recipes[1]
+                "other_recipe_id" => $recipes[1],
+                "why_selection" => $whySelection,
+                "favorite_to_cook" => explode("_", $body[$type."_favorite_to_cook"])[0],
+                "favorite_to_cook_why" => $body[$type."_favorite_to_cook_why"],
+                "better_recipe_id" => in_array($recipes[0], RecipesConstants::BEST_RECIPES) ? $recipes[0] : $recipes[1]
             ])){
                 DB::ref()->rollback();
                 return new FuxResponse(FuxResponse::ERROR, "We cannot save your information, try later");

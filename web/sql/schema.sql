@@ -80,3 +80,12 @@ CREATE TABLE survey_users_recipes (
     FOREIGN KEY (chosen_recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (other_recipe_id) REFERENCES recipes(recipe_id)
 );
+
+
+ALTER TABLE survey_users_recipes
+    ADD why_selection VARCHAR(255),
+    ADD favorite_to_cook VARCHAR(255),
+    ADD favorite_to_cook_why VARCHAR(255),
+    ADD better_recipe_id INT(11) NOT NULL,
+    ADD FOREIGN KEY (better_recipe_id) REFERENCES recipes(recipe_id)
+;

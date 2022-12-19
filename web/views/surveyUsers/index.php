@@ -29,35 +29,42 @@
         }
 
         .rating {
-            float:left;
-            width:300px;
+            float: left;
+            width: 300px;
         }
-        .rating span { float:right; position:relative; }
+
+        .rating span {
+            float: right;
+            position: relative;
+        }
+
         .rating span input {
-            position:absolute;
-            top:0px;
-            left:0px;
-            opacity:0;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            opacity: 0;
         }
+
         .rating span label {
-            display:inline-block;
-            width:30px;
-            height:30px;
-            text-align:center;
-            color:#FFF;
-            background:#ccc;
-            font-size:30px;
-            margin-right:2px;
-            line-height:30px;
-            border-radius:50%;
-            -webkit-border-radius:50%;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            color: #FFF;
+            background: #ccc;
+            font-size: 30px;
+            margin-right: 2px;
+            line-height: 30px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
         }
+
         .rating span:hover ~ span label,
         .rating span:hover label,
         .rating span.checked label,
         .rating span.checked ~ span label {
-            background:#F90;
-            color:#FFF;
+            background: #F90;
+            color: #FFF;
         }
     </style>
 </head>
@@ -83,7 +90,7 @@
                     </div>
                     <div class="card-body page-inner">
                         <form role="form" class="text-start">
-                            <input class="d-none" name="with_suggestion" value="<?=$withSuggestions?>">
+                            <input class="d-none" name="with_suggestion" value="<?= $withSuggestions ?>">
 
                             <!-- FIRST STEP-->
                             <div class="first-step">
@@ -399,6 +406,12 @@
 <?= assetOnce('/lib/FuxFramework/FuxCursorPaginator.js', "script") ?>
 <?= assetOnce('/lib/moment/moment.js', "script") ?>
 
+<!-- Bootstrap select -->
+<link rel="stylesheet" href="<?= asset("lib/bootstrap-select/bootstrap-select.min.css") ?>">
+<?= assetOnce('lib/popper/popper-2.11.5.min.js', 'script'); ?>
+<script defer src="<?= asset("lib/bootstrap-select/bootstrap-select.min.js") ?>"></script>
+
+
 <script>
     $('#confirm_password').on('keyup', function () {
         if ($('#password').val() === $('#confirm_password').val()) {
@@ -419,6 +432,7 @@
 </script>
 
 <script>
+
     function changeStep(step) {
         //Verify fields
         switch (step) {
@@ -477,18 +491,18 @@
         return `<div class="container mt-3">
                     <div class="row">
                         <div class="col-6">
-                            `+singleRecipeView(recipes[0], withSuggestions)+`
+                            ` + singleRecipeView(recipes[0], withSuggestions) + `
                         </div>
                         <div class="col-6">
-                            `+singleRecipeView(recipes[1], withSuggestions)+`
+                            ` + singleRecipeView(recipes[1], withSuggestions) + `
                         </div>
 
                         <div class="col-12 d-flex justify-content-between mt-5">
                             Given ingredients, in your opinion, which recipe has a lower carbon food print?
                             <div class="input-group input-group-outline">
                                 <select name="${type}" class="form-control">
-                                    <option value="${recipes[0].recipe_id+"_"+recipes[1].recipe_id}">${recipes[0].title}</option>
-                                    <option value="${recipes[1].recipe_id+"_"+recipes[0].recipe_id}">${recipes[1].title}</option>
+                                    <option value="${recipes[0].recipe_id + "_" + recipes[1].recipe_id}">Left</option>
+                                    <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
                                 </select>
                             </div>
                         </div>
@@ -497,12 +511,48 @@
 
                         <div class="col-12">
                             <div class="col-12 text-center mb-5">
-                                <h4>Why did you choose this recipe?</h4>
+                                <h4>Give us more information!</h4>
                                 <span>There is not correct answer, you have to choose following your way of thinking</span>
                             </div>
-                            ${ratingInForm('This is a input type to get info', type+"question")}
-                             ${ratingInForm('This is a input type to get info', type+"question")}
-                             ${ratingInForm('This is a input type to get info', type+"question")}
+
+                            <div class="row my-3">
+                                <div class="col-5"><b>Why?</b></div>
+                                <div class="col-7">
+                                    <div class="form-group">
+                                        <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1"><label>My selection is based on personal knowledge</label></input><br>
+                                        <input type="checkbox" name="${type}_why_selection_intuition" value="1"><label>My selection is based on simple intuition</label></input><br>
+                                        <input type="checkbox" name="${type}_why_selection_ui" value="1"><label>My selection is based on the information provided by the UI</label></input><br>
+                                        <input type="checkbox" name="${type}_why_selection_chance" value="1"><label>My selection is made by chance</label></input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-5"><b>Select the recipe you would prefer to cook</b></div>
+                                <div class="col-7">
+                                    <div class="input-group input-group-outline">
+                                        <select name="${type}_favorite_to_cook" class="form-control">
+                                            <option value="${recipes[0].recipe_id + "_" + recipes[1].recipe_id}">Left</option>
+                                            <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-5"><b>Why?</b></div>
+                                <div class="col-7">
+                                    <div class="input-group input-group-outline">
+                                        <select class="form-control" name="${type}_favorite_to_cook_why" >
+                                            <option value="1"><label>It matches my food tastes and preferences</label></option><br>
+                                            <option value="2"><label>It seems savory and tastier</label></option><br>
+                                            <option value="3"><label>It helps me to eat more healthily</label></option><br>
+                                            <option value="4"><label>It helps me to eat in a more sustainable way</label></option><br>
+                                            <option value="5"><label>It seems easier to prepare</label></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>`
@@ -511,41 +561,23 @@
     /**
      * Create one recipe card
      */
-    function singleRecipeView(recipe, withSuggestions){
+    function singleRecipeView(recipe, withSuggestions) {
         return `<div class="card text-center">
                     <div class="card-header p-3">
                         <h5>${recipe.title}</h5>
                     </div>
                     <div class="card-body py-3 pb-3">
-                        ${recipe.ingredients_list.map(i =>{
-                            let color = ""
-                            if(withSuggestions){
-                                color = i.carbon_foot_print >= 0.7 ? "text-danger" : i.carbon_foot_print <= 0.3 ? "text-success" : ""
-                            }
-                            return `<span class="${color}">${i.name} </span>`
-                        })}
+                        ${recipe.ingredients_list.map(i => {
+            let color = ""
+            if (withSuggestions) {
+                color = i.carbon_foot_print >= 0.7 ? "text-danger" : i.carbon_foot_print <= 0.3 ? "text-success" : ""
+            }
+            return `<span class="${color}">${i.name} </span>`
+        })}
                     </div>
                 </div>`
     }
 
-
-    function ratingInForm(text, name){
-
-        return `<div class="row my-2">
-                    <div class="col-10">${text}</div>
-                    <div class="col-2">
-                        <div class="input-group input-group-outline">
-                            <select name="${name}" class="form-control">
-                                    <option value="5" selected>5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
-                             </select>
-                        </div>
-                    </div>
-                </div>`
-    }
 </script>
 
 <script>
@@ -557,12 +589,15 @@
                     FuxSwalUtility.error("Set an input for " + $(this)[0].name)
                     return 0;
                 }
+                if($(this)[0].type === 'checkbox' && !$(this)[0].checked){
+                    return;
+                }
                 formData[$(this)[0].name] = $(this)[0].value
             })
         });
 
         FuxHTTP.post('<?=routeFullUrl('/survey-users/save')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
-            .then(window.location.href = "<?=routeFullUrl('/survey-users/thank-you-page')?>")
+            //.then(window.location.href = "routeFullUrl('/survey-users/thank-you-page')?>")
             .catch(msg => FuxSwalUtility.error(msg))
 
     }
