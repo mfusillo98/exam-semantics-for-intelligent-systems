@@ -86,6 +86,16 @@ ALTER TABLE survey_users_recipes
     ADD why_selection VARCHAR(255),
     ADD favorite_to_cook VARCHAR(255),
     ADD favorite_to_cook_why VARCHAR(255),
-    ADD better_recipe_id INT(11) NOT NULL,
+    ADD better_recipe_id INT(11),
     ADD FOREIGN KEY (better_recipe_id) REFERENCES recipes(recipe_id)
+;
+
+
+ALTER TABLE survey_users_recipes
+    DROP column favorite_to_cook_why,
+    ADD matches_preferences VARCHAR(255),
+    ADD tastier VARCHAR(255),
+    ADD helps_eat_healthily VARCHAR(255),
+    ADD helps_eat_sustainable INT(11),
+    ADD easy_to_prepare INT(11)
 ;

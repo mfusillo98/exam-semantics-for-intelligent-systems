@@ -28,44 +28,72 @@
             color: white;
         }
 
-        .rating {
-            float: left;
-            width: 300px;
+        .star-rating {
+            font-size: 0;
+            white-space: nowrap;
+            display: inline-block;
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+            background-size: contain;
         }
-
-        .rating span {
-            float: right;
+        .star-rating i {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            /* width: 20%; remove this */
+            z-index: 1;
+            background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+            background-size: contain;
+        }
+        .star-rating input {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            opacity: 0;
+            display: inline-block;
+            /* width: 20%; remove this */
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 2;
             position: relative;
         }
-
-        .rating span input {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            opacity: 0;
+        .star-rating input:hover + i,
+        .star-rating input:checked + i {
+            opacity: 1;
         }
-
-        .rating span label {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
+        .star-rating i ~ i {
+            width: 40%;
+        }
+        .star-rating i ~ i ~ i {
+            width: 60%;
+        }
+        .star-rating i ~ i ~ i ~ i {
+            width: 80%;
+        }
+        .star-rating i ~ i ~ i ~ i ~ i {
+            width: 100%;
+        }
+        ::after,
+        ::before {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
             text-align: center;
-            color: #FFF;
-            background: #ccc;
-            font-size: 30px;
-            margin-right: 2px;
-            line-height: 30px;
-            border-radius: 50%;
-            -webkit-border-radius: 50%;
+            vertical-align: middle;
         }
 
-        .rating span:hover ~ span label,
-        .rating span:hover label,
-        .rating span.checked label,
-        .rating span.checked ~ span label {
-            background: #F90;
-            color: #FFF;
-        }
+        .star-rating.star-5 {width: 250px;}
+        .star-rating.star-5 input,
+        .star-rating.star-5 i {width: 20%;}
+        .star-rating.star-5 i ~ i {width: 40%;}
+        .star-rating.star-5 i ~ i ~ i {width: 60%;}
+        .star-rating.star-5 i ~ i ~ i ~ i {width: 80%;}
+        .star-rating.star-5 i ~ i ~ i ~ i ~i {width: 100%;}
     </style>
 </head>
 
@@ -439,13 +467,13 @@
             case 'first-step':
                 break
             case 'second-step':
-                if ($('#age-input').val() < 18) {
+                if ($('#age-input').val() < 18 || $('#age-input').val() > 180) {
                     return FuxSwalUtility.error("Check age field")
                 }
-                if ($('input[name="height"]').val() < 50) {
+                if ($('input[name="height"]').val() < 50 || $('input[name="height"]').val() > 250) {
                     return FuxSwalUtility.error("Check height field")
                 }
-                if ($('input[name="weight"]').val() < 30) {
+                if ($('input[name="weight"]').val() < 30 || $('input[name="weight"]').val() > 250) {
                     return FuxSwalUtility.error("Check weight field")
                 }
                 break
@@ -527,7 +555,7 @@
                                 </div>
                             </div>
 
-                            <div class="row my-3">
+                            <div class="row mt-5 mb-3">
                                 <div class="col-5"><b>Select the recipe you would prefer to cook</b></div>
                                 <div class="col-7">
                                     <div class="input-group input-group-outline">
@@ -540,19 +568,70 @@
                             </div>
 
                             <div class="row my-3">
-                                <div class="col-5"><b>Why?</b></div>
-                                <div class="col-7">
-                                    <div class="input-group input-group-outline">
-                                        <select class="form-control" name="${type}_favorite_to_cook_why" >
-                                            <option value="1"><label>It matches my food tastes and preferences</label></option><br>
-                                            <option value="2"><label>It seems savory and tastier</label></option><br>
-                                            <option value="3"><label>It helps me to eat more healthily</label></option><br>
-                                            <option value="4"><label>It helps me to eat in a more sustainable way</label></option><br>
-                                            <option value="5"><label>It seems easier to prepare</label></option>
-                                        </select>
-                                    </div>
+                                <div class="col-md-5 col-12"><b>It matches my food tastes and preferences</b></div>
+                                <div class="col-md-7 col-12 text-center">
+                                <span class="star-rating star-5">
+                                    <input type="radio" name="${type}_matches_preferences" value="1"><i></i>
+                                    <input type="radio" name="${type}_matches_preferences" value="2"><i></i>
+                                    <input type="radio" name="${type}_matches_preferences" value="3"><i></i>
+                                    <input type="radio" name="${type}_matches_preferences" value="4"><i></i>
+                                    <input type="radio" name="${type}_matches_preferences" value="5"><i></i>
+                                </span>
                                 </div>
                             </div>
+
+                            <div class="row my-3">
+                                <div class="col-md-5 col-12"><b>It seems savory and tastier</b></div>
+                                <div class="col-md-7 col-12 text-center">
+                                <span class="star-rating star-5">
+                                    <input type="radio" name="${type}_tastier" value="1"><i></i>
+                                    <input type="radio" name="${type}_tastier" value="2"><i></i>
+                                    <input type="radio" name="${type}_tastier" value="3"><i></i>
+                                    <input type="radio" name="${type}_tastier" value="4"><i></i>
+                                    <input type="radio" name="${type}_tastier" value="5"><i></i>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-md-5 col-12"><b>It helps me to eat more healthily</b></div>
+                                <div class="col-md-7 col-12 text-center">
+                                <span class="star-rating star-5">
+                                    <input type="radio" name="${type}_helps_eat_healthily" value="1"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_healthily" value="2"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_healthily" value="3"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_healthily" value="4"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_healthily" value="5"><i></i>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-md-5 col-12"><b>It helps me to eat in a more sustainable way</b></div>
+                                <div class="col-md-7 col-12 text-center">
+                                <span class="star-rating star-5">
+                                    <input type="radio" name="${type}_helps_eat_sustainable" value="1"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_sustainable" value="2"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_sustainable" value="3"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_sustainable" value="4"><i></i>
+                                    <input type="radio" name="${type}_helps_eat_sustainable" value="5"><i></i>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-md-5 col-12"><b>It seems easier to prepare</b></div>
+                                <div class="col-md-7 col-12 text-center">
+                                <span class="star-rating star-5">
+                                    <input type="radio" name="${type}_easy_to_prepare" value="1"><i></i>
+                                    <input type="radio" name="${type}_easy_to_prepare" value="2"><i></i>
+                                    <input type="radio" name="${type}_easy_to_prepare" value="3"><i></i>
+                                    <input type="radio" name="${type}_easy_to_prepare" value="4"><i></i>
+                                    <input type="radio" name="${type}_easy_to_prepare" value="5"><i></i>
+                                </span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>`
@@ -589,7 +668,7 @@
                     FuxSwalUtility.error("Set an input for " + $(this)[0].name)
                     return 0;
                 }
-                if($(this)[0].type === 'checkbox' && !$(this)[0].checked){
+                if(($(this)[0].type === 'checkbox' || $(this)[0].type === 'radio') && !$(this)[0].checked){
                     return;
                 }
                 formData[$(this)[0].name] = $(this)[0].value

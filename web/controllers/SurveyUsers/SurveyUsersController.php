@@ -70,7 +70,11 @@ class SurveyUsersController {
                 "other_recipe_id" => $recipes[1],
                 "why_selection" => $whySelection,
                 "favorite_to_cook" => explode("_", $body[$type."_favorite_to_cook"])[0],
-                "favorite_to_cook_why" => $body[$type."_favorite_to_cook_why"],
+                "matches_preferences" => min($body[$type."_matches_preferences"], 5) ?? null,
+                "tastier" => min($body[$type."_tastier"], 5) ?? null,
+                "helps_eat_healthily" => min($body[$type."_helps_eat_healthily"], 5) ?? null,
+                "helps_eat_sustainable" => min($body[$type."_helps_eat_sustainable"], 5) ?? null,
+                "easy_to_prepare" => min($body[$type."_easy_to_prepare"], 5) ?? null,
                 "better_recipe_id" => in_array($recipes[0], RecipesConstants::BEST_RECIPES) ? $recipes[0] : $recipes[1]
             ])){
                 DB::ref()->rollback();
