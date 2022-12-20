@@ -472,9 +472,9 @@
 
 <script>
     $(document).ready(function () {
-        $("#firsts-container").append(recipeChoiceView("firsts", JSON.parse('<?=$recipes["best_recipes"]["firsts"]?>'), JSON.parse('<?=$recipes["worst_recipes"]["firsts"]?>'), <?=$withSuggestions?>))
-        $("#seconds-meat-container").append(recipeChoiceView("seconds_meat", JSON.parse('<?=$recipes["best_recipes"]["seconds_meat"]?>'), JSON.parse('<?=$recipes["worst_recipes"]["seconds_meat"]?>'), <?=$withSuggestions?>))
-        $("#desserts-container").append(recipeChoiceView("desserts", JSON.parse('<?=$recipes["best_recipes"]["desserts"]?>'), JSON.parse('<?=$recipes["worst_recipes"]["desserts"]?>'), <?=$withSuggestions?>))
+        $("#firsts-container").append(recipeChoiceView("firsts", JSON.parse(`<?=$recipes["best_recipes"]["firsts"]?>`), JSON.parse(`<?=$recipes["worst_recipes"]["firsts"]?>`), <?=$withSuggestions?>))
+        $("#seconds-meat-container").append(recipeChoiceView("seconds_meat", JSON.parse(`<?=$recipes["best_recipes"]["seconds_meat"]?>`), JSON.parse(`<?=$recipes["worst_recipes"]["seconds_meat"]?>`), <?=$withSuggestions?>))
+        $("#desserts-container").append(recipeChoiceView("desserts", JSON.parse(`<?=$recipes["best_recipes"]["desserts"]?>`), JSON.parse(`<?=$recipes["worst_recipes"]["desserts"]?>`), <?=$withSuggestions?>))
     })
 
     function shuffle(array) {
@@ -597,7 +597,7 @@
         });
 
         FuxHTTP.post('<?=routeFullUrl('/survey-users/save')?>', formData, FuxHTTP.RESOLVE_MESSAGE, FuxHTTP.REJECT_MESSAGE)
-            .then(window.location.href = "<?=routeFullUrl('/survey-users/thank-you-page')?>")
+            //.then(window.location.href = "routeFullUrl('/survey-users/thank-you-page')?>")
             .catch(msg => FuxSwalUtility.error(msg))
 
     }

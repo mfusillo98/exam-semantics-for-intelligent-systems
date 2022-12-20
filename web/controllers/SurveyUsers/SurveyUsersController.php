@@ -28,7 +28,7 @@ class SurveyUsersController {
 
         //Get a random element for best recipes
         $recipes["best_recipes"]["firsts"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["firsts"][array_rand(RecipesConstants::BEST_RECIPES["firsts"])]);
-        $recipes["best_recipes"]["seconds_meat"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["seconds_meat"][array_rand(RecipesConstants::BEST_RECIPES["seconds_meat"])]);
+        $recipes["best_recipes"]["seconds_meat"] = RecipesUtils::getRecipeInformation(44051/*RecipesConstants::BEST_RECIPES["seconds_meat"][array_rand(RecipesConstants::BEST_RECIPES["seconds_meat"])]*/);
         $recipes["best_recipes"]["desserts"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["desserts"][array_rand(RecipesConstants::BEST_RECIPES["desserts"])]);
 
         //Get a random element for worst recipes
@@ -63,6 +63,8 @@ class SurveyUsersController {
                 $whySelection = isset($body[$type."_why_selection_".$why]) ? $whySelection.$why."," : "";
             }
 
+            echo $whySelection;
+
             if(!SurveyUsersRecipesModel::save([
                 "survey_user_id" => $user_id,
                 "type" => $type,
@@ -77,6 +79,8 @@ class SurveyUsersController {
                 return new FuxResponse(FuxResponse::ERROR, "We cannot save your information, try later");
             }
         }
+
+        return "OKOK";
 
         DB::ref()->commit();
         return new FuxResponse(FuxResponse::SUCCESS, "Thank you for sharing your opinion");
