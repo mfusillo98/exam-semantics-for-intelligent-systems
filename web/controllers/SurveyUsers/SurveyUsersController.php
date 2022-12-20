@@ -28,7 +28,7 @@ class SurveyUsersController {
 
         //Get a random element for best recipes
         $recipes["best_recipes"]["firsts"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["firsts"][array_rand(RecipesConstants::BEST_RECIPES["firsts"])]);
-        $recipes["best_recipes"]["seconds_meat"] = RecipesUtils::getRecipeInformation(44051/*RecipesConstants::BEST_RECIPES["seconds_meat"][array_rand(RecipesConstants::BEST_RECIPES["seconds_meat"])]*/);
+        $recipes["best_recipes"]["seconds_meat"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["seconds_meat"][array_rand(RecipesConstants::BEST_RECIPES["seconds_meat"])]);
         $recipes["best_recipes"]["desserts"] = RecipesUtils::getRecipeInformation(RecipesConstants::BEST_RECIPES["desserts"][array_rand(RecipesConstants::BEST_RECIPES["desserts"])]);
 
         //Get a random element for worst recipes
@@ -60,10 +60,8 @@ class SurveyUsersController {
             //Why selection string
             $whySelection = "";
             foreach (["personal_knowledge", "intuition", "ui", "chance"] as $why){
-                $whySelection = isset($body[$type."_why_selection_".$why]) ? $whySelection.$why."," : "";
+                $whySelection = isset($body[$type."_why_selection_".$why]) ? $whySelection.$why."," : $whySelection;
             }
-
-            echo $whySelection;
 
             if(!SurveyUsersRecipesModel::save([
                 "survey_user_id" => $user_id,
@@ -79,8 +77,6 @@ class SurveyUsersController {
                 return new FuxResponse(FuxResponse::ERROR, "We cannot save your information, try later");
             }
         }
-
-        return "OKOK";
 
         DB::ref()->commit();
         return new FuxResponse(FuxResponse::SUCCESS, "Thank you for sharing your opinion");
