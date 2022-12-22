@@ -713,10 +713,6 @@
         let formData = {}
         $(".page-inner form").each(function () {
             $(this).find(':input').not(':input[type=button], :input[type=submit]').each(function () {
-                if (!$(this)[0].value) {
-                    FuxSwalUtility.error("Set an input for " + $(this)[0].name)
-                    return 0;
-                }
                 if(($(this)[0].type === 'checkbox' || $(this)[0].type === 'radio') && !$(this)[0].checked){
                     return;
                 }
