@@ -113,7 +113,7 @@
                 <div class="card z-index-0 fadeIn3 fadeInBottom">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">User Models</h4>
+                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0" id="card-title">User Model</h4>
                         </div>
                     </div>
                     <div class="card-body page-inner">
@@ -141,9 +141,10 @@
                                     <div class="col-md-6 p-2">
                                         <div class="input-group input-group-outline" autocomplete="off">
                                             <select class="form-control" name="gender" required>
+                                                <option disabled selected value> Gender </option>
                                                 <option value="1">Male</option>
                                                 <option value="0">Female</option>
-                                                <option value="-1" selected>Other</option>
+                                                <option value="-1">Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -163,13 +164,14 @@
                                     <!-- SUSTAINABLE FOOD CHOICE -->
                                     <div class="col-md-6 col-sm-3 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            In your opinion, make sustainable food choice is:
+                                            In your opinion, to make sustainable food choices is:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 mt-3 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="importance_sustainable_food_choice"
                                                     required>
+                                                <option disabled selected value> </option>
                                                 <option value="not_important">Not important</option>
                                                 <option value="poorly_important">Poorly important</option>
                                                 <option value="important">Important</option>
@@ -180,15 +182,14 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            How do you consider your food choice:
+                                            How do you consider your food choices:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="sustainability_of_your_food_choice"
-                                                    required>
-                                                <option value="absolutely_not_sustainable">Absolutely not sustainable
-                                                </option>
+                                            <select class="form-control" name="sustainability_of_your_food_choice" required>
+                                                <option disabled selected value> </option>
+                                                <option value="absolutely_not_sustainable">Absolutely not sustainable</option>
                                                 <option value="not_sustainable">Not sustainable</option>
                                                 <option value="quite_sustainable">Quite sustainable</option>
                                                 <option value="sustainable">Sustainable</option>
@@ -199,12 +200,13 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            I try to make sustainable food choices every day:
+                                            I try to make sustainable food choices:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="sustainable_food_choices" required>
+                                                <option disabled selected value> </option>
                                                 <option value="always">Always</option>
                                                 <option value="often">Often</option>
                                                 <option value="usually">Usually</option>
@@ -217,13 +219,13 @@
                                     <!-- HEALTHY FOOD CHOICE -->
                                     <div class="col-md-6 col-sm-3 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            In your opinion, make healthy food choice is:
+                                            In your opinion, to make healthy food choices is:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 mt-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="importance_healthy_lifestyle"
-                                                    required>
+                                            <select class="form-control" name="importance_healthy_lifestyle" required>
+                                                <option disabled selected value> </option>
                                                 <option value="not_important">Not important</option>
                                                 <option value="poorly_important">Poorly important</option>
                                                 <option value="important">Important</option>
@@ -234,13 +236,13 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            How do you consider your food choice:
+                                            How do you consider your food choices:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
-                                            <select class="form-control" name="healthy_of_your_lifestyle"
-                                                    required>
+                                            <select class="form-control" name="healthy_of_your_lifestyle" required>
+                                                <option disabled selected value> </option>
                                                 <option value="absolutely_not_healthy">Absolutely not healthy
                                                 </option>
                                                 <option value="not_healthy">Not healthy</option>
@@ -253,12 +255,13 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            I try to make healthy food choices every day:
+                                            I try to make healthy food choices:
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="healthy_food_choices" required>
+                                                <option disabled selected value> </option>
                                                 <option value="always">Always</option>
                                                 <option value="often">Often</option>
                                                 <option value="usually">Usually</option>
@@ -277,6 +280,7 @@
                                     <div class="col-md-6 col-sm-9 mt-4 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="employment" required>
+                                                <option disabled selected value> </option>
                                                 <option value="student">Student</option>
                                                 <option value="private_company_stuff">Provate company stuff</option>
                                                 <option value="public_company_stuff">Public company stuff</option>
@@ -294,6 +298,7 @@
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="recipe_website_usage" required>
+                                                <option disabled selected value> </option>
                                                 <option value="daily">Daily</option>
                                                 <option value="weekly">Weekly</option>
                                                 <option value="monthly">Monthly</option>
@@ -310,6 +315,7 @@
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="preparing_home_cooked_meals" required>
+                                                <option disabled selected value> </option>
                                                 <option value="daily">Daily</option>
                                                 <option value="weekly">Weekly</option>
                                                 <option value="monthly">Monthly</option>
@@ -326,6 +332,7 @@
                                     <div class="col-md-6 col-sm-9 p-2">
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="goal" required>
+                                                <option disabled selected value> </option>
                                                 <option value="loes_weight">Lose weight</option>
                                                 <option value="gain_weight">Gain weight</option>
                                                 <option value="no_goals">No goals</option>
@@ -462,26 +469,94 @@
 <script>
 
     function changeStep(step) {
+        let cardTitleContainer = document.getElementById("card-title");
+        cardTitleContainer.innerText = ""
+
+        let error = "";
+
+        //Used in second step and next
+        let listOfRadioChecked = 0
+        let foundAlmostASelect = 0
+
         //Verify fields
         switch (step) {
+
             case 'first-step':
+                cardTitleContainer.innerHTML = 'User Model'
                 break
+
             case 'second-step':
+
+                $(".first-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
+                    $(this).removeClass("border-danger")
+                    if(!$(this)[0].value){
+                        $(this).addClass("border-danger")
+                        error = 1
+                    }
+                });
+
+                if(error) return FuxSwalUtility.error("Set a value for all fields")
+
                 if ($('#age-input').val() < 18 || $('#age-input').val() > 180) {
-                    return FuxSwalUtility.error("Check age field")
+                    return FuxSwalUtility.error("Set a truthful value for age field")
                 }
                 if ($('input[name="height"]').val() < 50 || $('input[name="height"]').val() > 250) {
-                    return FuxSwalUtility.error("Check height field")
+                    return FuxSwalUtility.error("Set a truthful value for height field")
                 }
                 if ($('input[name="weight"]').val() < 30 || $('input[name="weight"]').val() > 250) {
-                    return FuxSwalUtility.error("Check weight field")
+                    return FuxSwalUtility.error("Set a truthful value for weight field")
                 }
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
+
             case 'third-step':
-                console.log($('select[name="firsts"]').val())
-                if (!$('select[name="firsts"]').val()) {
-                    return FuxSwalUtility.error("Choose one")
-                }
+
+                $(".second-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
+                    $(this).removeClass("border-danger")
+                    if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
+                        $(this).addClass("border-danger")
+                        error = 1
+                    }
+
+                    if(($(this)[0].type === 'radio' && $(this)[0].checked)){
+                        listOfRadioChecked += 1
+                    }
+
+                    if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
+                        foundAlmostASelect = 1
+                    }
+                });
+
+                if(error) return FuxSwalUtility.error("Set an input for all fields")
+                if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
+                if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
+
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
+                break
+
+            case 'fourth-step':
+
+                $(".third-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
+                    $(this).removeClass("border-danger")
+                    if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
+                        $(this).addClass("border-danger")
+                        error = 1
+                    }
+
+                    if(($(this)[0].type === 'radio' && $(this)[0].checked)){
+                        listOfRadioChecked += 1
+                    }
+
+                    if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
+                        foundAlmostASelect = 1
+                    }
+                });
+
+                if(error) return FuxSwalUtility.error("Set an input for all fields")
+                if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
+                if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
+
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
         }
 
@@ -526,9 +601,10 @@
                         </div>
 
                         <div class="col-12 d-flex justify-content-between mt-5">
-                            Given ingredients, in your opinion, which recipe has a lower carbon food print?
+                            Given ingredients, in your opinion, which recipe is more sustainable (e.g., lower carbon foot print)?
                             <div class="input-group input-group-outline">
                                 <select name="${type}" class="form-control">
+                                    <option disabled selected value> </option>
                                     <option value="${recipes[0].recipe_id + "_" + recipes[1].recipe_id}">Left</option>
                                     <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
                                 </select>
@@ -540,11 +616,11 @@
                         <div class="col-12">
                             <div class="col-12 text-center mb-5">
                                 <h4>Give us more information!</h4>
-                                <span>There is not correct answer, you have to choose following your way of thinking</span>
+                                <span>Please share the reasons that drove your choice</span>
                             </div>
 
                             <div class="row my-3">
-                                <div class="col-5"><b>Why?</b></div>
+                                <div class="col-5"><b>Why did you consider it as more sustainable?</b></div>
                                 <div class="col-7">
                                     <div class="form-group">
                                         <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1"><label>My selection is based on personal knowledge</label></input><br>
@@ -555,21 +631,23 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-5 mb-3">
-                                <div class="col-5"><b>Select the recipe you would prefer to cook</b></div>
-                                <div class="col-7">
-                                    <div class="input-group input-group-outline">
-                                        <select name="${type}_favorite_to_cook" class="form-control">
-                                            <option value="${recipes[0].recipe_id + "_" + recipes[1].recipe_id}">Left</option>
-                                            <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
-                                        </select>
-                                    </div>
+                            <hr class="my-5"/>
+
+                            <div class="col-12 text-center mb-5">
+                                <h4>Select the recipe you would prefer to cook</h4>
+                                <div class="input-group input-group-outline">
+                                    <select name="${type}_favorite_to_cook" class="form-control">
+                                        <option disabled selected value> </option>
+                                        <option value="${recipes[0].recipe_id + "_" + recipes[1].recipe_id}">Left</option>
+                                        <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="row my-3">
                                 <div class="col-md-5 col-12"><b>It matches my food tastes and preferences</b></div>
                                 <div class="col-md-7 col-12 text-center">
+                                <input type="hidden" name="${type}_matches_preferences" value=""><i></i>
                                 <span class="star-rating star-5">
                                     <input type="radio" name="${type}_matches_preferences" value="1"><i></i>
                                     <input type="radio" name="${type}_matches_preferences" value="2"><i></i>
@@ -583,6 +661,7 @@
                             <div class="row my-3">
                                 <div class="col-md-5 col-12"><b>It seems savory and tastier</b></div>
                                 <div class="col-md-7 col-12 text-center">
+                                <input type="hidden" name="${type}_tastier" value=""><i></i>
                                 <span class="star-rating star-5">
                                     <input type="radio" name="${type}_tastier" value="1"><i></i>
                                     <input type="radio" name="${type}_tastier" value="2"><i></i>
@@ -596,6 +675,7 @@
                             <div class="row my-3">
                                 <div class="col-md-5 col-12"><b>It helps me to eat more healthily</b></div>
                                 <div class="col-md-7 col-12 text-center">
+                                <input type="hidden" name="${type}_helps_eat_healthily" value=""><i></i>
                                 <span class="star-rating star-5">
                                     <input type="radio" name="${type}_helps_eat_healthily" value="1"><i></i>
                                     <input type="radio" name="${type}_helps_eat_healthily" value="2"><i></i>
@@ -609,6 +689,7 @@
                             <div class="row my-3">
                                 <div class="col-md-5 col-12"><b>It helps me to eat in a more sustainable way</b></div>
                                 <div class="col-md-7 col-12 text-center">
+                                <input type="hidden" name="${type}_helps_eat_sustainable" value=""><i></i>
                                 <span class="star-rating star-5">
                                     <input type="radio" name="${type}_helps_eat_sustainable" value="1"><i></i>
                                     <input type="radio" name="${type}_helps_eat_sustainable" value="2"><i></i>
@@ -622,6 +703,7 @@
                             <div class="row my-3">
                                 <div class="col-md-5 col-12"><b>It seems easier to prepare</b></div>
                                 <div class="col-md-7 col-12 text-center">
+                                <input type="hidden" name="${type}_easy_to_prepare" value=""><i></i>
                                 <span class="star-rating star-5">
                                     <input type="radio" name="${type}_easy_to_prepare" value="1"><i></i>
                                     <input type="radio" name="${type}_easy_to_prepare" value="2"><i></i>
@@ -661,6 +743,31 @@
 
 <script>
     function saveData() {
+        //verifiche del 4° step prima del submit
+        let error = "";
+        let listOfRadioChecked = 0
+        let foundAlmostASelect = 0
+
+        $(".fourth-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
+            $(this).removeClass("border-danger")
+            if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
+                $(this).addClass("border-danger")
+                error = 1
+            }
+
+            if(($(this)[0].type === 'radio' && $(this)[0].checked)){
+                listOfRadioChecked += 1
+            }
+
+            if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
+                foundAlmostASelect = 1
+            }
+        });
+
+        if(error) return FuxSwalUtility.error("Set an input for all fields")
+        if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
+        if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
+
         let formData = {}
         $(".page-inner form").each(function () {
             $(this).find(':input').not(':input[type=button], :input[type=submit]').each(function () {
