@@ -113,7 +113,7 @@
                 <div class="card z-index-0 fadeIn3 fadeInBottom">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0" id="card-title">User Model</h4>
+                            <h4 class="text-white font-weight-bolder text-center mt-2 mb-0" id="card-title">Build you User Profile</h4>
                         </div>
                     </div>
                     <div class="card-body page-inner">
@@ -123,9 +123,8 @@
                             <!-- FIRST STEP-->
                             <div class="first-step">
                                 <div class="w-100 text-center">
-                                    Here you can answer to some question about your physic and your lifestyle and in the
-                                    end
-                                    we will ask to you if some recipes, in your opinion is healthy for our planet
+                                    In the following, we ask you to answer to some questions about you, your food choices and your lifestyle.<br>
+                                    These data will be used to evaluate the sustainability of your food choices and the connections with your personal characteristics.
                                     <h4 class="my-3">Answer the following questions</h4>
                                 </div>
                                 <div class="row my-3 align-items-center">
@@ -189,6 +188,7 @@
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="sustainability_of_your_food_choice" required>
                                                 <option disabled selected value> </option>
+                                                <option value="dont_know">I don't know</option>
                                                 <option value="absolutely_not_sustainable">Absolutely not sustainable</option>
                                                 <option value="not_sustainable">Not sustainable</option>
                                                 <option value="quite_sustainable">Quite sustainable</option>
@@ -243,8 +243,8 @@
                                         <div class="input-group input-group-outline">
                                             <select class="form-control" name="healthy_of_your_lifestyle" required>
                                                 <option disabled selected value> </option>
-                                                <option value="absolutely_not_healthy">Absolutely not healthy
-                                                </option>
+                                                <option value="dont_know">I don't know</option>
+                                                <option value="absolutely_not_healthy">Absolutely not healthy</option>
                                                 <option value="not_healthy">Not healthy</option>
                                                 <option value="quite_healthy">Quite healthy</option>
                                                 <option value="healthy">Healthy</option>
@@ -326,7 +326,7 @@
 
                                     <div class="col-md-6 col-sm-3 p-2">
                                         <div class="input-group input-group-outline">
-                                            What is your goal?
+                                            Do you have any personal goal?
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 p-2">
@@ -353,6 +353,9 @@
                             <div class="second-step d-none">
                                 <a class="text-primary" onclick="changeStep('first-step')" style="cursor: pointer"><
                                     Prev step</a>
+                                <div class="w-100 text-center my-3">
+                                    Now, we ask you to guess the more sustainable recipe between the alternatives we show you.
+                                </div>
 
                                 <div id="firsts-container">
                                     <!--Populated by js-->
@@ -472,12 +475,6 @@
         let cardTitleContainer = document.getElementById("card-title");
         cardTitleContainer.innerText = ""
 
-        let error = "";
-
-        //Used in second step and next
-        let listOfRadioChecked = 0
-        let foundAlmostASelect = 0
-
         //Verify fields
         switch (step) {
 
@@ -486,76 +483,17 @@
                 break
 
             case 'second-step':
-
-                $(".first-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
-                    $(this).removeClass("border-danger")
-                    if(!$(this)[0].value){
-                        $(this).addClass("border-danger")
-                        error = 1
-                    }
-                });
-
-                if(error) return FuxSwalUtility.error("Set a value for all fields")
-
-                if ($('#age-input').val() < 18 || $('#age-input').val() > 180) {
-                    return FuxSwalUtility.error("Set a truthful value for age field")
-                }
-                if ($('input[name="height"]').val() < 50 || $('input[name="height"]').val() > 250) {
-                    return FuxSwalUtility.error("Set a truthful value for height field")
-                }
-                if ($('input[name="weight"]').val() < 30 || $('input[name="weight"]').val() > 250) {
-                    return FuxSwalUtility.error("Set a truthful value for weight field")
-                }
+                if(!challengeStepCheck("first-step")) return false
                 cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
 
             case 'third-step':
-
-                $(".second-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
-                    $(this).removeClass("border-danger")
-                    if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
-                        $(this).addClass("border-danger")
-                        error = 1
-                    }
-
-                    if(($(this)[0].type === 'radio' && $(this)[0].checked)){
-                        listOfRadioChecked += 1
-                    }
-
-                    if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
-                        foundAlmostASelect = 1
-                    }
-                });
-
-                if(error) return FuxSwalUtility.error("Set an input for all fields")
-                if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
-                if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
-
+                if(!challengeStepCheck("second-step")) return false
                 cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
 
             case 'fourth-step':
-
-                $(".third-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
-                    $(this).removeClass("border-danger")
-                    if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
-                        $(this).addClass("border-danger")
-                        error = 1
-                    }
-
-                    if(($(this)[0].type === 'radio' && $(this)[0].checked)){
-                        listOfRadioChecked += 1
-                    }
-
-                    if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
-                        foundAlmostASelect = 1
-                    }
-                });
-
-                if(error) return FuxSwalUtility.error("Set an input for all fields")
-                if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
-                if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
-
+                if(!challengeStepCheck("third-step")) return false
                 cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
         }
@@ -571,9 +509,37 @@
             }
         }
     }
-</script>
 
-<script>
+    function challengeStepCheck(step){
+        let error = "";
+        let listOfRadioChecked = 0
+        let foundAlmostASelect = 0
+
+        $("."+step+"").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
+            $(this).removeClass("border-danger")
+            if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
+                $(this).addClass("border-danger")
+                error = 1
+            }
+
+            if(($(this)[0].type === 'radio' && $(this)[0].checked)){
+                listOfRadioChecked += 1
+            }
+
+            if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
+                foundAlmostASelect = 1
+            }
+        });
+
+        if(error) {FuxSwalUtility.error("Set an input for all fields"); return false}
+        if(!foundAlmostASelect && step !== 'first-step') {FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`"); return false}
+        if(listOfRadioChecked < 5 && step !== 'first-step') {FuxSwalUtility.error("Select a value for all stars input"); return false}
+
+        return true
+    }
+
+
+
     $(document).ready(function () {
         $("#firsts-container").append(recipeChoiceView("firsts", JSON.parse(`<?=$recipes["best_recipes"]["firsts"]?>`), JSON.parse(`<?=$recipes["worst_recipes"]["firsts"]?>`), <?=$withSuggestions?>))
         $("#seconds-meat-container").append(recipeChoiceView("seconds_meat", JSON.parse(`<?=$recipes["best_recipes"]["seconds_meat"]?>`), JSON.parse(`<?=$recipes["worst_recipes"]["seconds_meat"]?>`), <?=$withSuggestions?>))
@@ -739,34 +705,10 @@
                 </div>`
     }
 
-</script>
 
-<script>
     function saveData() {
-        //verifiche del 4° step prima del submit
-        let error = "";
-        let listOfRadioChecked = 0
-        let foundAlmostASelect = 0
 
-        $(".fourth-step").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
-            $(this).removeClass("border-danger")
-            if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
-                $(this).addClass("border-danger")
-                error = 1
-            }
-
-            if(($(this)[0].type === 'radio' && $(this)[0].checked)){
-                listOfRadioChecked += 1
-            }
-
-            if(($(this)[0].type === 'checkbox' && $(this)[0].checked)){
-                foundAlmostASelect = 1
-            }
-        });
-
-        if(error) return FuxSwalUtility.error("Set an input for all fields")
-        if(!foundAlmostASelect) return FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`")
-        if(listOfRadioChecked < 5) return FuxSwalUtility.error("Select a value for all stars input")
+        if(!challengeStepCheck("fourth-step")) return false
 
         let formData = {}
         $(".page-inner form").each(function () {
