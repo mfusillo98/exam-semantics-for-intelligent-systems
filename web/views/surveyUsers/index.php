@@ -483,7 +483,7 @@
                 break
 
             case 'second-step':
-                if(!challengeStepCheck("first-step")) return false
+                /*if(!challengeStepCheck("first-step")) return false*/
                 cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
 
@@ -567,7 +567,7 @@
                         </div>
 
                         <div class="col-12 d-flex justify-content-between mt-5">
-                            Given ingredients, in your opinion, which recipe is more sustainable (e.g., lower carbon foot print)?
+                            Given the ingredients, in your opinion, which recipe is more sustainable (e.g., lower carbon foot print)?
                             <div class="input-group input-group-outline">
                                 <select name="${type}" class="form-control">
                                     <option disabled selected value> </option>
@@ -586,12 +586,12 @@
                             </div>
 
                             <div class="row my-3">
-                                <div class="col-5"><b>Why did you consider it as more sustainable?</b></div>
+                                <div class="col-5"><b>Why did you consider it as more sustainable? (You can select more than one reason)</b></div>
                                 <div class="col-7">
                                     <div class="form-group">
-                                        <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1"><label>My selection is based on personal knowledge</label></input><br>
+                                        <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1"><label>My selection is based on personal knowledge (e.g., ingredients of the recipe)</label></input><br>
                                         <input type="checkbox" name="${type}_why_selection_intuition" value="1"><label>My selection is based on simple intuition</label></input><br>
-                                        <input type="checkbox" name="${type}_why_selection_ui" value="1"><label>My selection is based on the information provided by the UI</label></input><br>
+                                        <input type="checkbox" name="${type}_why_selection_ui" value="1"><label>My selection is based on the information provided by the User Interface (UI)</label></input><br>
                                         <input type="checkbox" name="${type}_why_selection_chance" value="1"><label>My selection is made by chance</label></input>
                                     </div>
                                 </div>
@@ -599,7 +599,7 @@
 
                             <hr class="my-5"/>
 
-                            <div class="col-12 text-center mb-5">
+                            <div class="col-12 text-center mb-3">
                                 <h4>Select the recipe you would prefer to cook</h4>
                                 <div class="input-group input-group-outline">
                                     <select name="${type}_favorite_to_cook" class="form-control">
@@ -608,6 +608,10 @@
                                         <option value="${recipes[1].recipe_id + "_" + recipes[0].recipe_id}">Right</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div class="col-12 text-center mb-2">
+                                <h4>Why?</h4>
                             </div>
 
                             <div class="row my-3">
