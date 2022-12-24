@@ -483,7 +483,7 @@
                 break
 
             case 'second-step':
-                /*if(!challengeStepCheck("first-step")) return false*/
+                if(!challengeStepCheck("first-step")) return false
                 cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
                 break
 
