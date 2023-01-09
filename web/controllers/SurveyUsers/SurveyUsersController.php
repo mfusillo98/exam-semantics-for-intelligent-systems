@@ -48,6 +48,13 @@ class SurveyUsersController {
             return new FuxResponse(FuxResponse::ERROR, "Pay attention to the age field");
         }
 
+        //Genero un control code finché diverso
+        $controlCode = rand(100000,999999);
+        while (SurveyUsersModel::getWhere(["control_code" => $controlCode])){
+            $controlCode = rand(100000,999999);
+        }
+        $body["control_code"] = $controlCode;
+
         DB::ref()->begin_transaction();
         if(!$user_id = SurveyUsersModel::save($body)){
             DB::ref()->rollback();
@@ -83,7 +90,7 @@ class SurveyUsersController {
         }
 
         DB::ref()->commit();
-        return new FuxResponse(FuxResponse::SUCCESS, "Thank you for sharing your opinion");
+        return new FuxResponse(FuxResponse::SUCCESS, "Thank you for sharing your opinion", ["control_code" => $controlCode]);
     }
 
 }

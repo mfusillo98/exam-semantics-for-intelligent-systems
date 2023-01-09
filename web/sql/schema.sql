@@ -99,3 +99,9 @@ ALTER TABLE survey_users_recipes
     ADD helps_eat_sustainable INT(11),
     ADD easy_to_prepare INT(11)
 ;
+
+/*
+ 09-01-2022
+ */
+
+ALTER TABLE survey_users ADD control_code INT(11)

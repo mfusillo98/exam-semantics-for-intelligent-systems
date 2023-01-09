@@ -49,7 +49,9 @@
                         </div>
                     </div>
                     <div class="card-body page-inner text-center">
-                        <h2>Thank you for sharing your opinion!</h2>
+                        <span>Thank you for sharing your opinion!</span>
+                        <h1 class="text-primary mt-4"><?=$controlCode?></h1>
+                        <h4>This is your control code. <span class="text-secondary">If you are using a crowdsourcing platforms</span> (e.g., Profilic, Mechanical Turk) please copy and paste it to complete the experiment</h4>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ class SurveyUsersModel extends \Fux\Database\Model\Model
         'importance_sustainable_food_choice', 'sustainability_of_your_food_choice', 'sustainable_food_choices',
         'importance_healthy_lifestyle', 'healthy_of_your_lifestyle', 'healthy_food_choices',
         'employment', 'recipe_website_usage', 'preparing_home_cooked_meals',
-        'created_at', 'updated_at', 'with_suggestion'];
+        'created_at', 'updated_at', 'with_suggestion', 'control_code'];
     protected static $primaryKey = ['survey_user_id'];
 }
 
