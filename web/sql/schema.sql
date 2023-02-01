@@ -88,3 +88,69 @@ CREATE TABLE survey_users_recipes (
     FOREIGN KEY (chosen_recipe_id) REFERENCES recipes(recipe_id),
     FOREIGN KEY (other_recipe_id) REFERENCES recipes(recipe_id)
 );
+
+
+-- Stats
+
+SELECT 'Ricette totali' as description, COUNT(*)
+FROM `recipes`
+UNION
+-- Ricette con almeno 80% di ingredienti con almeno 1 valore di CO2 & H20
+SELECT 'Ricette 80% ingr. con CO2 e H2O' as description, COUNT(*)
+FROM (
+         SELECT r.`recipe_id`,
+                m.total,
+                v.valid_ingredients,
+                ROUND(v.valid_ingredients / m.total * 100, 2) as valid_ingredients_perc
+         FROM `recipes` r
+                  JOIN (SELECT MAX(ingredient_index) as total, `recipe_id`
+                        from `ingredients_recipes`
+                        GROUP BY `recipe_id`) m ON m.`recipe_id` = r.`recipe_id`
+                  JOIN (SELECT COUNT(*) as valid_ingredients, `recipe_id`
+                        from `ingredients`
+                             -- Codizione da cambiare per gli ingredienti da considerare "validi"
+                        Where carbon_foot_print IS NOT NULL
+                          AND water_foot_print IS NOT NULL
+                        GROUP BY `recipe_id`) v ON v.`recipe_id` = r.`recipe_id`
+     ) t
+WHERE t.valid_ingredients_perc >= 80
+UNION
+-- Ricette con almeno 90% di ingredienti con almeno 1 valore di CO2 & H20
+SELECT 'Ricette 90% ingr. con CO2 e H2O' as description, COUNT(*)
+FROM (
+         SELECT r.`1m_recipe_id`,
+                m.total,
+                v.valid_ingredients,
+                ROUND(v.valid_ingredients / m.total * 100, 2) as valid_ingredients_perc
+         FROM `1m_recipe` r
+                  JOIN (SELECT MAX(ingredient_idx) as total, `1m_recipe_id`
+                        from `1m_recipes_ingredients`
+                        GROUP BY `1m_recipe_id`) m ON m.`1m_recipe_id` = r.`1m_recipe_id`
+                  JOIN (SELECT COUNT(*) as valid_ingredients, `1m_recipe_id`
+                        from `1m_recipes_ingredients`
+                        Where IFNULL(co2_direct_my_emission, IFNULL(co2_corgis_category,
+                                                                    IFNULL(co2_mean_by_hints_similarity, IFNULL(co2_mean_groups, NULL)))) IS NOT NULL
+                          AND IFNULL(h20_liters_per_kg_direct_healabel, IFNULL(h2o_corgis_category, NULL)) IS NOT NULL
+                        GROUP BY `1m_recipe_id`) v ON v.`1m_recipe_id` = r.`1m_recipe_id`
+     ) t
+WHERE t.valid_ingredients_perc >= 90
+UNION
+-- Ricette con 100% di ingredienti con almeno 1 valore di CO2 & H20
+SELECT 'Ricette 100% ingr. con CO2 e H2O' as description, COUNT(*)
+FROM (
+         SELECT r.`1m_recipe_id`,
+                m.total,
+                v.valid_ingredients,
+                ROUND(v.valid_ingredients / m.total * 100, 2) as valid_ingredients_perc
+         FROM `1m_recipe` r
+                  JOIN (SELECT MAX(ingredient_idx) as total, `1m_recipe_id`
+                        from `1m_recipes_ingredients`
+                        GROUP BY `1m_recipe_id`) m ON m.`1m_recipe_id` = r.`1m_recipe_id`
+                  JOIN (SELECT COUNT(*) as valid_ingredients, `1m_recipe_id`
+                        from `1m_recipes_ingredients`
+                        Where IFNULL(co2_direct_my_emission, IFNULL(co2_corgis_category,
+                                                                    IFNULL(co2_mean_by_hints_similarity, IFNULL(co2_mean_groups, NULL)))) IS NOT NULL
+                          AND IFNULL(h20_liters_per_kg_direct_healabel, IFNULL(h2o_corgis_category, NULL)) IS NOT NULL
+                        GROUP BY `1m_recipe_id`) v ON v.`1m_recipe_id` = r.`1m_recipe_id`
+     ) t
+WHERE t.valid_ingredients_perc >= 100;
