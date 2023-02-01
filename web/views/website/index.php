@@ -45,15 +45,7 @@
                 <div class="col-lg-8 text-center mx-auto my-auto">
                     <div class="mb-3" style="background-image: url('<?=asset('img/footPrintLogo.png')?>'); background-repeat: no-repeat; width:150px; height: 150px; background-size: cover; background-position: center; margin: auto"></div>
                     <h1 class="text-white">Find your favorite <span class="text-primary">healthy</span> recipes!</h1>
-                    <p class="lead mb-4 text-white">We want help you to choose recipes that can saving <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
-                    <button type="submit" class="btn bg-white text-dark">Let's start!</button>
-                    <h6 class="text-white mb-2 mt-5">Find us on</h6>
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-                    </div>
+                    <p class="lead mb-4 text-white">We want help you to choose recipes that can save <span class="text-success">planet</span> 🌍, <span class="text-danger">resources</span> 🍝 and <span class="text-warning">yourself 🥰</span>!</p>
                 </div>
             </div>
         </div>
@@ -71,7 +63,7 @@
             <!-- card section -->
             <div class="row mt-7 mb-7">
                 <div class="col-12 text-center mb-3">
-                    <h3 class="text-secondary">Chose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
+                    <h3 class="text-secondary">Choose one of our <span class="text-primary">top list</span>, or try to compute your <span class="text-primary">personal recipes</span>!</h3>
                     <span class="text-muted">Our classify are always upgraded automatically, based on data collected towards our system. Visit the sections to know more!</span>
                 </div>
                 <div class="col-md-4 my-5">
@@ -102,26 +94,21 @@
     <section class="pt-4 pb-6" id="count-stats">
         <div class="container">
             <div class="row justify-content-center text-center">
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary" id="state1" countTo="1000000">0</h1>
+                <div class="col-md-6">
+                    <h1 class="text-gradient text-primary" id="state1" countTo="<?=$totIngredients?>">0</h1>
                     <h5>Ingredients</h5>
                     <p>Number of ingredients collected in our dataset</p>
                 </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state2" countTo="51235">0</span>+</h1>
+                <div class="col-md-6">
+                    <h1 class="text-gradient text-primary"><span id="state2" countTo="<?=$totRecipes?>">0</span>+</h1>
                     <h5>Recipes</h5>
                     <p>Number of recipes in our dataset</p>
-                </div>
-                <div class="col-md-3">
-                    <h1 class="text-gradient text-primary"><span id="state3" countTo="350">0</span></h1>
-                    <h5>Search done</h5>
-                    <p>How many time users searched somethings in pur system</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
-    <section class="my-5 pt-5">
+    <section class="my-5 pt-5 d-none">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 m-auto">

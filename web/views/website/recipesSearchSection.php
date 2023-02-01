@@ -27,7 +27,7 @@
         <h2 class="text-primary">Find recipes! </h2>
         <span class="text-muted">What you want to cook today? Find your favorite no-emission food!</span>
         <div class="input-group shadow rounded-3 mt-3">
-            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient..."
+            <input type="search" class="form-control px-4" id="searchBar" placeholder="Type an ingredient... (e.g. chicken, tomato)"
                    style="max-height: 3em !important;"/>
             <button type="button" class="btn btn-primary m-0">
                 <i class="fas fa-search"></i>
@@ -35,13 +35,13 @@
         </div>
         <div class="d-flex align-items-center my-3">
             <b>
-                High rating recipes
+                More popular
             </b>
             <div class="flex-grow-1 mx-3">
                 <input type="range" min="0" max="100" value="100" class="w-100" id="sustainabilityWeight"/>
             </div>
             <b>
-                Sustainable recipes
+                More sustainable
             </b>
         </div>
     </div>
@@ -101,29 +101,7 @@
             onItemRender: function (recipes) {
                 console.log(recipes)
                 $("#loader-container").addClass("d-none")
-                const el = document.createElement('div');
-                const createdAt = moment(recipes.created_at);
-                el.innerHTML = `
-                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="font-weight-bold m-0">${recipes.title}</h3>
-                            <div>
-                                <small class="btn btn-success btn-sm">
-                                    Sustainability: ${recipes.sustainability_score.slice(0, 7)}
-                                </small>
-                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipes.rating} (${recipes.rating_count} reviews)</small>
-                                <small class="btn btn-primary btn-sm">
-                                    Score: ${recipes.weighted_score.slice(0, 7)}
-                                </small>
-                            </div>
-                        </div>
-                        <div class="mb-3">${recipes.ingredients_list}</div>
-                        <small class="text-muted">
-                            Inserted at: ${createdAt.format('DD-MM-YYYY')}
-                        </small>
-                    </a>
-                `;
-                return el;
+                return printRecipesUtils(recipes)
             },
             onPageRequest: function (cursor) {
                 $("#loader-container").removeClass("d-none")
@@ -145,7 +123,7 @@
                 el.innerHTML = `
                     <div class="card shadow-sm text-center w-100 p-3 border-0">
                         <h5>We have not yet recipes with this ingredient 🤨</h5>
-                        <h2 class="text-primary font-weight-bold">Try with some other! 💪🏼</h2>
+                        <h2 class="text-primary font-weight-bold">Try with some other (e.g. apple, cheese)! 💪🏼</h2>
                     </div>
                 `;
                 return el;
@@ -159,6 +137,43 @@
         } else {
             $("#before-search-container").addClass("d-none")
         }
+    }
+
+    function printRecipesUtils(recipe){
+        const el = document.createElement('div');
+        const createdAt = moment(recipe.created_at);
+
+        el.innerHTML = `
+                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipe.title}</div>
+                            <div>
+                                <small>
+                                    ${recipe.sustainability_score <= 0.33 ?
+            `<span class="btn btn-success btn-sm">Very sustainable</span>` :
+            recipe.sustainability_score <= 0.66 ?
+                `<span class="btn btn-warning btn-sm">Sustainable</span>` :
+                `<span class="btn btn-danger btn-sm">Not sustainable</b>`
+        }
+                                </small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
+                            </div>
+                        </div>
+                        <span class="mb-3">
+                              ${
+                                    recipe.ingredients_list.map(i =>{
+                                        let color = i.carbon_foot_print >= 0.7 ? "text-danger" : i.carbon_foot_print <= 0.3 ? "text-success" : ""
+                                        return `<span class="${color}">${i.name} </span>`
+                                    })
+                                }
+                        </span>
+                        <small class="text-muted" style="font-size: 10px">
+                            Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
+                            Taken from: ${recipe.url}
+                        </small>
+                    </a>
+                `;
+        return el;
     }
 
 </script>

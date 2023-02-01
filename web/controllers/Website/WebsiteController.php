@@ -2,10 +2,15 @@
 
 namespace App\Controllers\Website;
 
+use App\Models\IngredientsModel;
+use App\Models\RecipesModel;
+
 class WebsiteController{
 
     public static function index(){
-        return view("website/index");
+        $totIngredients = IngredientsModel::getAggregateWhere("COUNT", "ingredient_id");
+        $totRecipes = RecipesModel::getAggregateWhere("COUNT", "recipe_id");
+        return view("website/index", ["totIngredients" => $totIngredients, "totRecipes" => $totRecipes]);
     }
 
     public static function about(){

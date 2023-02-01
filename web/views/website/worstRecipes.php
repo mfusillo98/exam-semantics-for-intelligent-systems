@@ -45,13 +45,6 @@
                 <div class="col-lg-8 text-center mx-auto my-auto">
                     <h1 class="text-white"><span class="text-danger">WORST 10</span> Recipes! </h1>
                     <p class="lead mb-4 text-white">Which are the <span class="text-danger">most polluting</span> recipes? Which recipes consume the most water in their production?!</p>
-                    <h6 class="text-white mb-2 mt-5">Find us on</h6>
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-                        <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,7 +55,7 @@
 <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
     <!-- Section with four info areas left & one card right with image and waves -->
     <section>
-        <div class="container pt-4">
+        <div class="container pt-4 worst-recipes-container">
 
         </div>
     </section>
@@ -100,7 +93,7 @@
     </div>
 
     <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
-    <section class="my-5 pt-5">
+    <section class="my-5 pt-5 d-none">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 m-auto">
@@ -153,6 +146,43 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
 <script src="<?= asset("themes/material-kit-2-3.0.0/assets/js/material-kit.min.js?v=3.0.0")?>" type="text/javascript"></script>
 
+<?= assetOnce('/lib/moment/moment.js', "script") ?>
+
+<script>
+    let recipes = JSON.parse(`<?=json_encode($worstRecipes, true)?>`)
+    recipes.map(r =>{
+        $('.worst-recipes-container').append(printRecipesUtils(r))
+    })
+
+    function printRecipesUtils(recipe){
+        const el = document.createElement('div');
+        const createdAt = moment(recipe.created_at);
+        el.innerHTML = `
+                    <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipe.title}</div>
+                            <div>
+                                <small>
+                                    ${recipe.sustainability_score <= 0.33 ?
+            `<span class="btn btn-success btn-sm">Very sustainable</span>` :
+            recipe.sustainability_score <= 0.66 ?
+                `<span class="btn btn-warning btn-sm">Sustainable</span>` :
+                `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
+        }
+                                </small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
+                            </div>
+                        </div>
+                        <span class="mb-3">${recipe.ingredients_list}</span>
+                        <small class="text-muted" style="font-size: 10px">
+                            Inserted at: ${createdAt.format('DD-MM-YYYY')}<br>
+                            Taken from: ${recipe.url}
+                        </small>
+                    </a>
+                `;
+        return el;
+    }
+</script>
 
 <script>
     // get the element to animate
