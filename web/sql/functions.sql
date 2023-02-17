@@ -6,9 +6,9 @@ SET sql_mode = 'ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTIT
 
 
 -- Functions used to compute part of the score related to Carbon Foot Print (CFP)
-DROP FUNCTION IF EXISTS food_print.`get_mean_cfp`;
+DROP FUNCTION IF EXISTS `get_mean_cfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_mean_cfp`(recipe_id int(11))
+CREATE FUNCTION `get_mean_cfp`(recipe_id int(11))
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -18,8 +18,8 @@ BEGIN
 
     SELECT AVG(i.carbon_foot_print)
     INTO mcfp
-    FROM food_print.ingredients_recipes ir
-             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    FROM ingredients_recipes ir
+             JOIN ingredients i ON ir.ingredient_id = i.ingredient_id
     WHERE ir.recipe_id = recipe_id
       AND i.carbon_foot_print IS NOT NULL;
 
@@ -29,9 +29,9 @@ END;
 DELIMITER ;
 
 
-DROP FUNCTION IF EXISTS food_print.`get_trust_cfp`;
+DROP FUNCTION IF EXISTS `get_trust_cfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_trust_cfp`(recipe_id int(11))
+CREATE FUNCTION `get_trust_cfp`(recipe_id int(11))
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -41,8 +41,8 @@ BEGIN
 
     SELECT COUNT(i.carbon_foot_print) / COUNT(*)
     INTO trust_cfp
-    FROM food_print.ingredients_recipes ir
-             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    FROM ingredients_recipes ir
+             JOIN ingredients i ON ir.ingredient_id = i.ingredient_id
     WHERE ir.recipe_id = recipe_id;
 
     RETURN trust_cfp;
@@ -52,9 +52,9 @@ DELIMITER ;
 
 
 -- Functions used to compute part of the score related to Water Foot Print (WFP)
-DROP FUNCTION IF EXISTS food_print.`get_mean_wfp`;
+DROP FUNCTION IF EXISTS `get_mean_wfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_mean_wfp`(recipe_id int(11))
+CREATE FUNCTION `get_mean_wfp`(recipe_id int(11))
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -64,8 +64,8 @@ BEGIN
 
     SELECT AVG(i.water_foot_print)
     INTO mwfp
-    FROM food_print.ingredients_recipes ir
-             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    FROM ingredients_recipes ir
+             JOIN ingredients i ON ir.ingredient_id = i.ingredient_id
     WHERE ir.recipe_id = recipe_id
       AND i.water_foot_print IS NOT NULL;
 
@@ -75,9 +75,9 @@ END;
 DELIMITER ;
 
 
-DROP FUNCTION IF EXISTS food_print.`get_trust_wfp`;
+DROP FUNCTION IF EXISTS `get_trust_wfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_trust_wfp`(recipe_id int(11))
+CREATE FUNCTION `get_trust_wfp`(recipe_id int(11))
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -87,8 +87,8 @@ BEGIN
 
     SELECT COUNT(i.water_foot_print) / COUNT(*)
     INTO trust_wfp
-    FROM food_print.ingredients_recipes ir
-             JOIN food_print.ingredients i ON ir.ingredient_id = i.ingredient_id
+    FROM ingredients_recipes ir
+             JOIN ingredients i ON ir.ingredient_id = i.ingredient_id
     WHERE ir.recipe_id = recipe_id;
 
     RETURN trust_wfp;
@@ -97,23 +97,23 @@ END;
 DELIMITER ;
 
 
-UPDATE food_print.recipes
-SET mcfp      = food_print.get_mean_cfp(recipe_id),
-    trust_cfp = food_print.get_trust_cfp(recipe_id),
-    mwfp      = food_print.get_mean_wfp(recipe_id),
-    trust_wfp = food_print.get_trust_wfp(recipe_id)
+UPDATE recipes
+SET mcfp      = get_mean_cfp(recipe_id),
+    trust_cfp = get_trust_cfp(recipe_id),
+    mwfp      = get_mean_wfp(recipe_id),
+    trust_wfp = get_trust_wfp(recipe_id)
 WHERE 1;
 
-UPDATE food_print.recipes
+UPDATE recipes
 SET static_score = (mcfp / IF(trust_cfp > 0, trust_cfp, 0.00001)) + (mwfp / IF(trust_wfp > 0, trust_wfp, 0.00001))
 WHERE 1;
 
 
 -- Changing scoring formula using Z-scores for cfp and wfp
 
-DROP FUNCTION IF EXISTS food_print.`get_global_mean_cfp`;
+DROP FUNCTION IF EXISTS `get_global_mean_cfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_global_mean_cfp`()
+CREATE FUNCTION `get_global_mean_cfp`()
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -123,7 +123,7 @@ BEGIN
 
     SELECT AVG(carbon_foot_print)
     INTO mcfp
-    FROM food_print.ingredients
+    FROM ingredients
     WHERE carbon_foot_print IS NOT NULL;
 
     RETURN mcfp;
@@ -132,9 +132,9 @@ END;
 DELIMITER ;
 
 
-DROP FUNCTION IF EXISTS food_print.`get_global_mean_wfp`;
+DROP FUNCTION IF EXISTS `get_global_mean_wfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_global_mean_wfp`()
+CREATE FUNCTION `get_global_mean_wfp`()
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -144,7 +144,7 @@ BEGIN
 
     SELECT AVG(water_foot_print)
     INTO mwfp
-    FROM food_print.ingredients
+    FROM ingredients
     WHERE water_foot_print IS NOT NULL;
 
     RETURN mwfp;
@@ -154,9 +154,9 @@ DELIMITER ;
 
 
 
-DROP FUNCTION IF EXISTS food_print.`get_global_std_dev_cfp`;
+DROP FUNCTION IF EXISTS `get_global_std_dev_cfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_global_std_dev_cfp`()
+CREATE FUNCTION `get_global_std_dev_cfp`()
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -171,7 +171,7 @@ BEGIN
 
     SELECT SQRT((1/(n-1)) * SUM((carbon_foot_print - m)^2))
     INTO std_dev
-    FROM food_print.ingredients
+    FROM ingredients
     WHERE carbon_foot_print IS NOT NULL;
 
     RETURN std_dev;
@@ -180,9 +180,9 @@ END;
 DELIMITER ;
 
 
-DROP FUNCTION IF EXISTS food_print.`get_global_std_dev_wfp`;
+DROP FUNCTION IF EXISTS `get_global_std_dev_wfp`;
 DELIMITER //
-CREATE FUNCTION food_print.`get_global_std_dev_wfp`()
+CREATE FUNCTION `get_global_std_dev_wfp`()
     RETURNS DOUBLE
     DETERMINISTIC
     NO SQL
@@ -197,7 +197,7 @@ BEGIN
 
     SELECT SQRT((1/(n-1)) * SUM((water_foot_print - m)^2))
     INTO std_dev
-    FROM food_print.ingredients
+    FROM ingredients
     WHERE water_foot_print IS NOT NULL;
 
     RETURN std_dev;
@@ -207,5 +207,5 @@ DELIMITER ;
 
 
 -- Computing Z-normalization for cfp/wfp => cfp_std = (cfp - µ) / σ
-UPDATE food_print.ingredients SET carbon_foot_print_z_score = (carbon_foot_print - food_print.get_global_mean_cfp())/food_print.get_global_std_dev_cfp() where carbon_foot_print IS NOT NULL;
-UPDATE food_print.ingredients SET water_foot_print_z_score = (water_foot_print - food_print.get_global_mean_wfp())/food_print.get_global_std_dev_wfp() where water_foot_print IS NOT NULL;
+UPDATE ingredients SET carbon_foot_print_z_score = (carbon_foot_print - get_global_mean_cfp())/get_global_std_dev_cfp() where carbon_foot_print IS NOT NULL;
+UPDATE ingredients SET water_foot_print_z_score = (water_foot_print - get_global_mean_wfp())/get_global_std_dev_wfp() where water_foot_print IS NOT NULL;
