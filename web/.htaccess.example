@@ -5,21 +5,15 @@ Header set Cache-Control "max-age=0, public"
 
 Options +FollowSymLinks -MultiViews
 RewriteEngine on
-RewriteBase /bookizon
+RewriteBase /sis-web
 
 #RewriteCond %{HTTPS} off
 #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
 
-#Redirect degli index.html delle app
-RewriteRule ^index.html /app.html [L]
-
-#Redirect degli app.html a /app/index.html
-RewriteRule ^app.html /app/index.html [L]
-
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-l
-RewriteRule ^(.*)$ indexRoute.php
+RewriteRule ^(.*)$ index.php
 
 
 <ifModule mod_gzip.c>
