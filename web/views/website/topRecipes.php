@@ -160,9 +160,9 @@
                             <div class="font-weight-bold m-0" style="font-size: 25px">${recipe.title}</div>
                             <div>
                                 <small>
-                                    ${recipe.sustainability_score <= 0.33 ?
+                                    ${recipe.sustainability_score <= 0.10 ?
             `<span class="btn btn-success btn-sm">Very sustainable</span>` :
-            recipe.sustainability_score <= 0.66 ?
+            recipe.sustainability_score <= 0.50 ?
                 `<span class="btn btn-warning btn-sm">Sustainable</span>` :
                 `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
         }

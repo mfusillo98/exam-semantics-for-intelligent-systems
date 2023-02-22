@@ -10,6 +10,7 @@ use App\Models\RecipesModel;
 use App\Models\UsersModel;
 use App\Packages\Auth\Auth;
 use App\Utils\RecipeUtils;
+use App\Models\IngredientsNameAliasModel;
 use Fux\Database\Pagination\Cursor\Pagination;
 use Fux\FuxQueryBuilder;
 use Fux\FuxResponse;
@@ -18,9 +19,9 @@ use Fux\Request;
 class RecipesSearchController
 {
 
-    const TRUST_CFP_MIN = 1;
-    const TRUST_WFP_MIN = 1;
-    const ONLY_ENABLED_RECIPES = true;
+    const TRUST_CFP_MIN = 0.8;
+    const TRUST_WFP_MIN = 0.8;
+    const ONLY_ENABLED_RECIPES = false;
     const ONLY_RATED_RECIPES = true;
 
     /**
@@ -70,17 +71,18 @@ class RecipesSearchController
                 GROUP_CONCAT(DISTINCT CONCAT('{\"name\":\"', i.name, '\", \"carbon_foot_print\":\"', i.carbon_foot_print, '\"}') SEPARATOR ','), 
                 ']}') as ingredients_list";
 
-        $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
+        $sustainabilityScoreSQL = "(static_score)";
         $ratingScoreSQL = "((IFNULL(r.rating_count, 1) - $ratingCountRange[min])/$ratingCountRangeSize)";
 
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
-                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.url",
+                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT lower(ina.name)) as ingredients_list", "r.url",
                 "$sustainabilityScoreSQL as sustainability_score",
                 "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
+			->leftJoin(IngredientsNameAliasModel::class, "ir.ingredient_id = ina.ingredient_id", "ina")
             ->groupBy("r.recipe_id");
 
         if (self::TRUST_CFP_MIN) $recipeScoreQb->whereGreaterEqThan("r.trust_cfp", self::TRUST_CFP_MIN);
@@ -113,7 +115,7 @@ class RecipesSearchController
         }
 
         //Assigning a "row num" to the filtered recipes sorted by static score. This is needed in order to use a cursor pagination.
-        $rankedRecipes = (new FuxQueryBuilder())->select("*", '@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
+        $rankedRecipes = (new FuxQueryBuilder())->select("*", '@rownum := @rownum + 1 AS rank_')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
 
         foreach ($ingredients as $ingredient) {
             $rankedRecipes->whereLike("ingredients_list", "%$ingredient%");
@@ -124,7 +126,7 @@ class RecipesSearchController
 
         $pagination = new Pagination(
             $qb,
-            ["rank"],
+            ["rank_"],
             10,
             'ASC'
         );
@@ -134,9 +136,10 @@ class RecipesSearchController
         $recipes = $page->getItems();
         foreach ($recipes as &$r){
             $r["ingredients_list"] = (new FuxQueryBuilder())
-                ->select("i.ingredient_id", "i.name", "i.carbon_foot_print")
+                ->select("i.ingredient_id", "lower(ina.name) as name", "i.carbon_foot_print")
                 ->from(IngredientsRecipesModel::class,"ir")
                 ->leftJoin(IngredientsModel::class, "ir.ingredient_id=i.ingredient_id", "i")
+				->leftJoin(IngredientsNameAliasModel::class, "ir.ingredient_id = ina.ingredient_id", "ina")
                 ->where("ir.recipe_id", $r["recipe_id"])
                 ->execute();
         }
