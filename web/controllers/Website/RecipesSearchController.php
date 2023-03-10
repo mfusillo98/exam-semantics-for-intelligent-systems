@@ -22,7 +22,7 @@ class RecipesSearchController
     const TRUST_CFP_MIN = 0.8;
     const TRUST_WFP_MIN = 0.8;
     const ONLY_ENABLED_RECIPES = false;
-    const ONLY_RATED_RECIPES = true;
+    const ONLY_RATED_RECIPES = false;
 
     /**
      * Effettua una ricerca all'interno dei corsi
@@ -72,13 +72,12 @@ class RecipesSearchController
                 ']}') as ingredients_list";
 
         $sustainabilityScoreSQL = "(static_score)";
-        $ratingScoreSQL = "((IFNULL(r.rating_count, 1) - $ratingCountRange[min])/$ratingCountRangeSize)";
-
+        $ratingScoreSQL = " ((IFNULL(r.rating_count, 1) - (select min(rating_count) from (select ifnull(rating_count,0) as rating_count from recipes) a))/ (select max(rating_count) from recipes)-  (select min(rating_count) from (select ifnull(rating_count,0) as rating_count from recipes) a))";
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
                 "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT lower(ina.name)) as ingredients_list", "r.url",
                 "$sustainabilityScoreSQL as sustainability_score",
-                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
+                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1-(IFNULL(r.rating,1)/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
             ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
             ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
@@ -102,7 +101,7 @@ class RecipesSearchController
                 $sustainabilityScoreSQL = "((SUM(IFNULL(cfi.carbon_foot_print_z_score, i.carbon_foot_print_z_score) + i.water_foot_print_z_score) - $sustainabilityRange[min]) / $sustainabilityRangeSize)";
                 $recipeScoreQb->select("r.recipe_id", "r.title", "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.url",
                     "$sustainabilityScoreSQL as sustainability_score",
-                    "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score"
+                    "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1-(IFNULL(r.rating,1)/5) * $ratingScoreSQL) as weighted_score"
                 );
 
                 $tmpTable = [];
@@ -123,7 +122,6 @@ class RecipesSearchController
         $rankedRecipes->orderBy("weighted_score", "ASC");
 
         $qb = (new FuxQueryBuilder())->select("*")->from($rankedRecipes, "ranked_recipes");
-
         $pagination = new Pagination(
             $qb,
             ["rank_"],
