@@ -3,7 +3,7 @@ require_once __DIR__ . '/php/FuxFramework/bootstrap.php';
 
 set_time_limit(0);
 
-$recipes = \App\Models\RecipesModel::queryBuilder()->whereNull("image_url")->whereNotNull("static_score");
+$recipes = \App\Models\RecipesModel::queryBuilder()->whereNull("image_url")->whereNotNull("static_score")->execute();
 $web = new \Spekulatius\PHPScraper\PHPScraper;
 $web->setConfig(['disable_ssl' => true]);
 $web->setConfig([

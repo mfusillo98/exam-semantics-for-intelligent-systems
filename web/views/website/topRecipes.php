@@ -167,7 +167,7 @@
                 `<span class="btn btn-danger btn-sm">Bad Emissions</b>`
         }
                                 </small>
-                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating} (${recipe.rating_count || 1} reviews)</small>
+                                <small class="btn btn-info btn-sm"><i class='fas fa-star'></i> ${recipe.rating || "No rating"} (${recipe.rating_count || 0} reviews)</small>
                             </div>
                         </div>
                         <span class="mb-3">${recipe.ingredients_list}</span>
