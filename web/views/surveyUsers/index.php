@@ -282,8 +282,8 @@
                                             <select class="form-control" name="employment" required>
                                                 <option disabled selected value> </option>
                                                 <option value="student">Student</option>
-                                                <option value="private_company_stuff">Provate company stuff</option>
-                                                <option value="public_company_stuff">Public company stuff</option>
+                                                <option value="private_company_staff">Provate company staff</option>
+                                                <option value="public_company_staff">Public company staff</option>
                                                 <option value="self_employed">Self employed</option>
                                                 <option value="unemployed">Unemployed</option>
                                             </select>
