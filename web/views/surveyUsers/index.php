@@ -484,17 +484,17 @@
 
             case 'second-step':
                 if(!challengeStepCheck("first-step")) return false
-                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe (1/3)'
                 break
 
             case 'third-step':
                 if(!challengeStepCheck("second-step")) return false
-                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe (2/3)'
                 break
 
             case 'fourth-step':
                 if(!challengeStepCheck("third-step")) return false
-                cardTitleContainer.innerHTML = 'Select the more sustainable recipe'
+                cardTitleContainer.innerHTML = 'Select the more sustainable recipe (3/3)'
                 break
         }
 
