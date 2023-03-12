@@ -512,11 +512,25 @@
 
     function challengeStepCheck(step){
         let error = "";
+
+        let height = 1
+        let weight = 1
+
         let listOfRadioChecked = 0
         let foundAlmostASelect = 0
 
         $("."+step+"").find(':input').not(':input[type=button], :input[type=submit]').each(function () {
             $(this).removeClass("border-danger")
+
+            if(($(this)[0].name === 'height' && ($(this)[0].value < 50 || $(this)[0].value > 280))){
+                height = 0
+            }
+
+            if(($(this)[0].name === 'weight' && ($(this)[0].value < 30 || $(this)[0].value > 280))){
+                weight = 0
+            }
+
+
             if(($(this)[0].type !== 'radio' && $(this)[0].type !== 'hidden' && !$(this)[0].value)){
                 $(this).addClass("border-danger")
                 error = 1
@@ -530,6 +544,10 @@
                 foundAlmostASelect = 1
             }
         });
+
+
+        if(!height) {FuxSwalUtility.error("Set a a valid input for height field"); return false}
+        if(!weight) {FuxSwalUtility.error("Set a a valid input for weight field"); return false}
 
         if(error) {FuxSwalUtility.error("Set an input for all fields"); return false}
         if(!foundAlmostASelect && step !== 'first-step') {FuxSwalUtility.error("Select a reason for `Why did you consider it as more sustainable?`"); return false}
