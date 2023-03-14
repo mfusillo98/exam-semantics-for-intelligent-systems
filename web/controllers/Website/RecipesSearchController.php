@@ -75,7 +75,7 @@ class RecipesSearchController
         $ratingScoreSQL = " ((IFNULL(r.rating_count, 1) - (select min(rating_count) from (select ifnull(rating_count,0) as rating_count from recipes) a))/ (select max(rating_count) from recipes)-  (select min(rating_count) from (select ifnull(rating_count,0) as rating_count from recipes) a))";
         $recipeScoreQb = (new FuxQueryBuilder())
             ->select(
-                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT lower(ina.name)) as ingredients_list", "r.url",
+                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT lower(IFNULL(ina.name,i.name))) as ingredients_list", "r.url",
                 "$sustainabilityScoreSQL as sustainability_score",
                 "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1-(IFNULL(r.rating,1)/5) * $ratingScoreSQL) as weighted_score")
             ->from(RecipesModel::class, "r")
@@ -134,7 +134,7 @@ class RecipesSearchController
         $recipes = $page->getItems();
         foreach ($recipes as &$r){
             $r["ingredients_list"] = (new FuxQueryBuilder())
-                ->select("i.ingredient_id", "lower(ina.name) as name", "i.carbon_foot_print")
+                ->select("i.ingredient_id", "lower(IFNULL(ina.name,i.name)) as name", "i.carbon_foot_print")
                 ->from(IngredientsRecipesModel::class,"ir")
                 ->leftJoin(IngredientsModel::class, "ir.ingredient_id=i.ingredient_id", "i")
 				->leftJoin(IngredientsNameAliasModel::class, "ir.ingredient_id = ina.ingredient_id", "ina")

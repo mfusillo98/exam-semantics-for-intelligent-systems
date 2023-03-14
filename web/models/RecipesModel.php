@@ -20,7 +20,7 @@ class RecipesModel extends \Fux\Database\Model\Model
 {
 
     protected static $tableName = 'recipes';
-    protected static $tableFields = ['recipe_id', 'title', 'url', 'vendor_id', 'static_score', 'mcfp', 'trust_cfp',
+    protected static $tableFields = ['recipe_id', 'title', 'url','image_url', 'vendor_id', 'static_score', 'mcfp', 'trust_cfp',
         'mwfp', 'trust_wfp', 'created_at', 'updated_at','disabled','rating','rating_count'];
     protected static $primaryKey = ['recipe_id'];
 }
