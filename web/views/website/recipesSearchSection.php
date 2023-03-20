@@ -9,6 +9,16 @@
         animation: spin 2s linear infinite;
     }
 
+    .recipe-image {
+        height: 60px;
+        width: 80px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("<?=asset('img/defaultRecipeImg.png')?>");
+        cursor: pointer;
+    }
+
     @keyframes spin {
         0% {
             transform: rotate(0deg);
@@ -143,10 +153,14 @@
         const el = document.createElement('div');
         const createdAt = moment(recipe.created_at);
 
+        let image = recipe.image_url === null ? '<?=asset('img/defaultRecipeImg.png')?>' : recipe.image_url
+
         el.innerHTML = `
                     <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="font-weight-bold m-0" style="font-size: 25px">${recipe.title}</div>
+                            <div class="font-weight-bold m-0" style="font-size: 25px">
+                                <div class="recipe-image" style="background-image: url(${image})"></div>
+                                ${recipe.title}</div>
                             <div>
                                 <small>
                                     ${recipe.sustainability_score <= 0.10 ?
