@@ -10,8 +10,8 @@
     }
 
     .recipe-image {
-        height: 60px;
-        width: 80px;
+        height: 80px;
+        width: 100px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -159,7 +159,7 @@
                     <a class="card card-body shadow-sm border-0 my-2" style="cursor: pointer" href="${recipe.url}" target="_blank">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="font-weight-bold m-0" style="font-size: 25px">
-                                <div class="recipe-image" style="background-image: url(${image})"></div>
+                                <div class="recipe-image shadow-sm rounded" style="background-image: url(${image})"></div>
                                 ${recipe.title}</div>
                             <div>
                                 <small>
