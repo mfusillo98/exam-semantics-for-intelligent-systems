@@ -718,10 +718,14 @@
                     <div class="card-body py-3 pb-3">
                         ${recipe.ingredients_list.map(i => {
             let color = ""
-            if (withSuggestions) {
+            if (withSuggestions == 1) {
                 color = i.carbon_foot_print >= 0.7 ? "text-danger" : i.carbon_foot_print <= 0.3 ? "text-success" : ""
             }
-            return `<span class="${color}">${i.name} </span>`
+            let emoji = ""
+            if(withSuggestions == 2){
+                emoji = i.carbon_foot_print >= 0.7 ? "&#128560;" : i.carbon_foot_print <= 0.3 ? "&#128513;" : "&#128528;"
+            }
+            return `<span class="${color}">${emoji} ${i.name} <br></span>`
         })}
                     </div>
                 </div>`

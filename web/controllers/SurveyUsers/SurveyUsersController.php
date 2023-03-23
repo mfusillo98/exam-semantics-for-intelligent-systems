@@ -22,7 +22,7 @@ class SurveyUsersController {
      */
     public static function index()
     {
-        $withSuggestions =  rand(0,1);
+        $withSuggestions =  rand(0,2);
 
         $recipes = [];
 
