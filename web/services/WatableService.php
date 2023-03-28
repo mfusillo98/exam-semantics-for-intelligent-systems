@@ -105,7 +105,8 @@ class WatableService extends FuxServiceProvider implements IServiceProvider
                     } else {
                         $lista[$i][$key] = htmlspecialchars(($value ?? ""));
                         if ($this->overrides && $o = $this->overrides->get($key)) {
-                            if ($newVal = call_user_func($o, $row, $key, $value)) {
+                            $newVal = call_user_func($o, $row, $key, $value);
+                            if ($newVal !== false) {
                                 $lista[$i][$key] = $newVal;
                             }
                         }
