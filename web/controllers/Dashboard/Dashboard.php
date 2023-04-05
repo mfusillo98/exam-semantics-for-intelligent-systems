@@ -98,8 +98,11 @@ class Dashboard {
 
         //Override dei valori secondo alcune condizioni
         $override = new WatableOverrides();
-        $override->add("chosen_recipe_id", function ($row, $key, $value) {
-           return $value === $row["better_recipe_id"] ? "1" : "0";
+        $override->add("perception_sustainability", function ($row, $key, $value) {
+           return $value === $row["sustainable_recipe_id"] ? "1" : "0";
+        });
+        $override->add("preference_cooking", function ($row, $key, $value) {
+           return $value === $row["sustainable_recipe_id"] ? "1" : "0";
         });
         $watable->setOverrides($override);
 
@@ -120,15 +123,19 @@ class Dashboard {
 
         //Ordinamento dei campi
         $ordering = new WatableOrderings();
-        $ordering->add("better_recipe_id", 3);
-        $ordering->add("worst_recipe_id", 3);
         $watable->setOrderings($ordering);
 
         //Output della tabella
         return json($watable->getJsonDataFromModel(
             function () use ($model, $surveyUserId) {
                 return (new FuxQueryBuilder())
-                ->select("*, IF(better_recipe_id = chosen_recipe_id, other_recipe_id, chosen_recipe_id) as worst_recipe_id")
+                ->select(
+                    "survey_user_id, type, better_recipe_id as sustainable_recipe_id, 
+                            IF(better_recipe_id = chosen_recipe_id, other_recipe_id, chosen_recipe_id) as worst_recipe_id, 
+                            chosen_recipe_id as perception_sustainability,
+                            favorite_to_cook as preference_cooking,
+                            reason_knowledge, reason_ui, reason_chance, reason_intuition
+                            ")
                 ->from($model)
                 ->where("survey_user_id", $surveyUserId)
                 ->execute();
