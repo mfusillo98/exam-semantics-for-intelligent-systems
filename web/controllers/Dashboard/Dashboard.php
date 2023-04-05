@@ -134,7 +134,8 @@ class Dashboard {
                             IF(better_recipe_id = chosen_recipe_id, other_recipe_id, chosen_recipe_id) as worst_recipe_id, 
                             chosen_recipe_id as perception_sustainability,
                             favorite_to_cook as preference_cooking,
-                            reason_knowledge, reason_ui, reason_chance, reason_intuition
+                            reason_knowledge, reason_ui, reason_chance, reason_intuition,
+                            matches_preferences, tastier, helps_eat_healthily, helps_eat_sustainable, easy_to_prepare
                             ")
                 ->from($model)
                 ->where("survey_user_id", $surveyUserId)
