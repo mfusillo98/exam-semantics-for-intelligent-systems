@@ -607,10 +607,25 @@
                                 <div class="col-5"><b>Why did you consider it as more sustainable? (You can select more than one reason)</b></div>
                                 <div class="col-7">
                                     <div class="form-group">
-                                        <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1"><label>My selection is based on personal knowledge (e.g., ingredients of the recipe)</label></input><br>
-                                        <input type="checkbox" name="${type}_why_selection_intuition" value="1"><label>My selection is based on simple intuition</label></input><br>
-                                        <input type="checkbox" name="${type}_why_selection_ui" value="1"><label>My selection is based on the information provided by the User Interface (UI)</label></input><br>
-                                        <input type="checkbox" name="${type}_why_selection_chance" value="1"><label>My selection is made by chance</label></input>
+                                        <div class="d-flex align-items-center my-2">
+                                            <input type="checkbox" name="${type}_why_selection_personal_knowledge" value="1">
+                                            <label class="my-0 p-0">My selection is based on personal knowledge (e.g., ingredients of the recipe)</label>
+                                        </div>
+
+                                        <div class="d-flex align-items-center my-2">
+                                            <input type="checkbox" name="${type}_why_selection_intuition" value="1"/>
+                                            <label class="my-0 p-0">My selection is based on simple intuition</label>
+                                        </div>
+
+                                        <div class="d-flex align-items-center my-2">
+                                            <input type="checkbox" name="${type}_why_selection_ui" value="1"/>
+                                            <label class="my-0 p-0">My selection is based on the information provided by the User Interface (UI)</label>
+                                        </div>
+
+                                        <div class="d-flex align-items-center my-2">
+                                            <input type="checkbox" name="${type}_why_selection_chance" value="1"/>
+                                            <label class="my-0 p-0">My selection is made by chance</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
