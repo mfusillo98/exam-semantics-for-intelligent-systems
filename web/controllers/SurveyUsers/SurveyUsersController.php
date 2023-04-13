@@ -82,7 +82,7 @@ class SurveyUsersController {
                 "helps_eat_healthily" => min($body[$type."_helps_eat_healthily"], 5) ?? null,
                 "helps_eat_sustainable" => min($body[$type."_helps_eat_sustainable"], 5) ?? null,
                 "easy_to_prepare" => min($body[$type."_easy_to_prepare"], 5) ?? null,
-                "better_recipe_id" => in_array($recipes[0], RecipesConstants::BEST_RECIPES) ? $recipes[0] : $recipes[1],
+                "better_recipe_id" => in_array($recipes[0], RecipesConstants::BEST_RECIPES[$type]) ? $recipes[0] : $recipes[1],
                 "reason_knowledge" => isset($body[$type."_why_selection_personal_knowledge"]) ? "1" : "0",
                 "reason_ui" => isset($body[$type."_why_selection_ui"]) ? "1" : "0",
                 "reason_chance" => isset($body[$type."_why_selection_chance"]) ? "1" : "0",
