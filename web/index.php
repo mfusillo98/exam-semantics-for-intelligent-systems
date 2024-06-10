@@ -2,7 +2,7 @@
 require_once __DIR__ . '/php/FuxFramework/bootstrap.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_DEPRECATED);
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, Application");

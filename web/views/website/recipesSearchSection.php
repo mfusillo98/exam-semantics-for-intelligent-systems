@@ -106,7 +106,7 @@
             onPageRequest: function (cursor) {
                 $("#loader-container").removeClass("d-none")
                 return new Promise((resolve, reject) => {
-                    const url = `<?= routeFullUrl("/recipes-search/do-search") ?>`;
+                    const url = `<?= routeFullUrl("/recipes-search/by-ingredients") ?>`;
                     FuxHTTP.get(url, {
                         query: query,
                         sustainabilityWeight: sustainabilityWeight,

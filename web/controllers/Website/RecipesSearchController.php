@@ -24,11 +24,11 @@ class RecipesSearchController
     const ONLY_RATED_RECIPES = true;
 
     /**
-     * Effettua una ricerca all'interno dei corsi
+     * Effettua una ricerca
      * @param Request $request
      * @return FuxResponse
      */
-    public static function doSearch(Request $request)
+    public static function searchByIngredients(Request $request)
     {
         /**
          * @var array $queryParams = [
@@ -144,4 +144,99 @@ class RecipesSearchController
 
         return new FuxResponse(FuxResponse::SUCCESS, null, $page);
     }
+
+
+    /**
+     * Effettua una ricerca
+     * @param Request $request
+     * @return FuxResponse
+     */
+    public static function searchByName(Request $request)
+    {
+        /**
+         * @var array $queryParams = [
+         *     "query" => "history",
+         *     "cursor" => "asd123"
+         * ]
+         */
+
+        $queryParams = $request->getQueryStringParams();
+
+        //We need to apply a min-max normalization on recipes sustainability score. This is needed because we have to weight both sustainability score and rating score
+        $sustainabilityRange = RecipeUtils::getMinMaxSustainabilityScore(
+            self::ONLY_ENABLED_RECIPES ? 0 : null,
+            self::TRUST_CFP_MIN,
+            self::TRUST_WFP_MIN,
+            false //We consider all recipes also those that were not rated on the website
+        );
+        $sustainabilityRangeSize = $sustainabilityRange['max'] - $sustainabilityRange['min'];
+
+        $ratingCountRange = RecipeUtils::getMinMaxRatingCountScore(
+            self::ONLY_ENABLED_RECIPES ? 0 : null,
+            self::TRUST_CFP_MIN,
+            self::TRUST_WFP_MIN,
+            false //We consider all recipes also those that were not rated on the website
+        );
+        $ratingCountRangeSize = $ratingCountRange['max'] - $ratingCountRange['min'];
+
+        $sustainabilityWeight = min(1, ($queryParams['sustainabilityWeight'] ?? 100) / 100);
+        $ratingWeight = 1 - $sustainabilityWeight;
+
+        //Build a json with list of ingredients and their carbon foot print
+        $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
+        $ratingScoreSQL = "((IFNULL(r.rating_count, 1) - $ratingCountRange[min])/$ratingCountRangeSize)";
+
+        $recipeScoreQb = (new FuxQueryBuilder())
+            ->select(
+                "r.recipe_id", "r.title", "r.rating", "r.rating_count" , "GROUP_CONCAT(DISTINCT i.name, ' | ') as ingredients_list", "r.url",
+                "$sustainabilityScoreSQL as sustainability_score",
+                "$sustainabilityWeight * $sustainabilityScoreSQL + $ratingWeight * (1 - (r.rating/5) * $ratingScoreSQL) as weighted_score")
+            ->from(RecipesModel::class, "r")
+            ->leftJoin(IngredientsRecipesModel::class, "ir.recipe_id = r.recipe_id", "ir")
+            ->leftJoin(IngredientsModel::class, "ir.ingredient_id = i.ingredient_id", "i")
+            ->groupBy("r.recipe_id");
+
+        if (self::TRUST_CFP_MIN) $recipeScoreQb->whereGreaterEqThan("r.trust_cfp", self::TRUST_CFP_MIN);
+        if (self::TRUST_WFP_MIN) $recipeScoreQb->whereGreaterEqThan("r.trust_wfp", self::TRUST_WFP_MIN);
+        if (self::ONLY_ENABLED_RECIPES) $recipeScoreQb->where("r.disabled", 0);
+        if (self::ONLY_RATED_RECIPES) $recipeScoreQb->whereNotNull("r.rating");
+
+
+        //Assigning a "row num" to the filtered recipes sorted by static score. This is needed in order to use a cursor pagination.
+        $rankedRecipes = (new FuxQueryBuilder())->select("*", '@rownum := @rownum + 1 AS rank')->from($recipeScoreQb, "recipes, (SELECT @rownum := 0) ranking");
+
+
+        $keywords = explode(" ", $queryParams['query']);
+        $keywodsWhere = [];
+        foreach ($keywords as $k){
+            $keywodsWhere[] = "r.title like '%$k%'";
+        }
+        $rankedRecipes->SQLWhere("(" . implode(" AND ", $keywodsWhere) . ")");
+        $rankedRecipes->orderBy("weighted_score", "ASC");
+
+        $qb = (new FuxQueryBuilder())->select("*")->from($rankedRecipes, "ranked_recipes");
+
+        $pagination = new Pagination(
+            $qb,
+            ["rank"],
+            10,
+            'ASC'
+        );
+
+        $page = $pagination->get(($queryParams['cursor'] ?? null) ?: null);
+
+        $recipes = $page->getItems();
+        foreach ($recipes as &$r){
+            $r["ingredients_list"] = (new FuxQueryBuilder())
+                ->select("i.ingredient_id", "i.name", "i.carbon_foot_print")
+                ->from(IngredientsRecipesModel::class,"ir")
+                ->leftJoin(IngredientsModel::class, "ir.ingredient_id=i.ingredient_id", "i")
+                ->where("ir.recipe_id", $r["recipe_id"])
+                ->execute();
+        }
+        $page->setItems($recipes);
+
+        return new FuxResponse(FuxResponse::SUCCESS, null, $page);
+    }
+
 }
