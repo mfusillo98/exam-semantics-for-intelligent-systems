@@ -209,7 +209,7 @@ class RecipesSearchController
         $keywords = explode(" ", $queryParams['query']);
         $keywodsWhere = [];
         foreach ($keywords as $k){
-            $keywodsWhere[] = "r.title like '%$k%'";
+            $keywodsWhere[] = "title like '%$k%'";
         }
         $rankedRecipes->SQLWhere("(" . implode(" AND ", $keywodsWhere) . ")");
         $rankedRecipes->orderBy("weighted_score", "ASC");
