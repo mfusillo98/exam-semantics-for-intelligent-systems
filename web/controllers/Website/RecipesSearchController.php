@@ -63,13 +63,6 @@ class RecipesSearchController
         $sustainabilityWeight = min(1, ($queryParams['sustainabilityWeight'] ?? 100) / 100);
         $ratingWeight = 1 - $sustainabilityWeight;
 
-        //Build a json with list of ingredients and their carbon foot print
-        $ingredientsSelect =
-            "CONCAT('
-                {\"ingredients_list\":[', 
-                GROUP_CONCAT(DISTINCT CONCAT('{\"name\":\"', i.name, '\", \"carbon_foot_print\":\"', i.carbon_foot_print, '\"}') SEPARATOR ','), 
-                ']}') as ingredients_list";
-
         $sustainabilityScoreSQL = "((SUM(i.carbon_foot_print_z_score + i.water_foot_print_z_score) - $sustainabilityRange[min])/$sustainabilityRangeSize)";
         $ratingScoreSQL = "((IFNULL(r.rating_count, 1) - $ratingCountRange[min])/$ratingCountRangeSize)";
 
