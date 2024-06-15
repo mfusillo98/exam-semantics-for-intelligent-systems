@@ -6,6 +6,9 @@ namespace App\Models;
 /**
  * @property int ingredient_id,
  * @property string name,
+ * @property int cfp_score,
+ * @property int wfp_score,
+ * @property float score,
  * @property int category_id,
  * @property float carbon_foot_print,
  * @property string carbon_foot_print_source,
