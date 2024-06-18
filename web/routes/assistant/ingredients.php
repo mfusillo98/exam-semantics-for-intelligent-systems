@@ -13,7 +13,10 @@ const SCORE_CLASSES_NUM = 5;
 
     $result = [];
     foreach ($ingredients as $ingredient) {
-        $row = \App\Models\IngredientsModel::queryBuilder()->whereLike('name', "%$ingredient%")->first();
+        $keywords = explode(" ", $ingredient);
+        $qb = \App\Models\IngredientsModel::queryBuilder();
+        foreach($keywords as $k) $qb->whereLike('name', "%$k%");
+        $row = $qb->first();
         $result[$ingredient] = $row['score'] ?? SCORE_CLASSES_NUM / 2; //If score not avaiable a mean value is used
     }
 
