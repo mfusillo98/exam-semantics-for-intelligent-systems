@@ -1,11 +1,29 @@
 <?php
 
+const SCORE_CLASSES_NUM = 5;
+
+\Fux\Routing\Routing::router()->get('/assistant/ingredients/get-score', function (\Fux\Request $request) {
+    /**
+     * @var array $queryStringParams = [
+     *      "ingredients_csv" => "ingredient1,ingredient2,ingredient3"
+     * ]
+     */
+    $queryStringParams = $request->getQueryStringParams();
+    $ingredients = array_filter(explode(',', $queryStringParams['ingredients']));
+
+    $result = [];
+    foreach ($ingredients as $ingredient) {
+        $row = \App\Models\IngredientsModel::queryBuilder()->whereLike('name', "%$ingredient%")->first();
+        $result[$ingredient] = $row['score'] ?? SCORE_CLASSES_NUM / 2; //If score not avaiable a mean value is used
+    }
+
+    return new \Fux\FuxResponse(\Fux\FuxResponse::SUCCESS, null, $result);
+});
 
 /**
- * The aim of this script is to update the ingredient score of CFP e WFP values, and then compute general score which is
- * the mean of both of them.
+ * The aim of the following script is to update the ingredient score of CFP e WFP values, and then compute general
+ * score which is the mean of both of them.
  */
-
 \Fux\Routing\Routing::router()->get('/assistant/ingredients/assign-score', function () {
 
 
@@ -36,20 +54,18 @@
         return $intervals;
     }
 
-
-    $classesNum = 5;
     $cols = ['carbon_foot_print' => 'cfp_score', 'water_foot_print' => 'wfp_score'];
 
     \Fux\DB::ref()->begin_transaction();
     foreach ($cols as $sourceCol => $scoreCol) {
         $minMax = getMinMax($sourceCol);
-        $intervals = makeClassesIntervals($minMax['min'], $minMax['max'], $classesNum);
+        $intervals = makeClassesIntervals($minMax['min'], $minMax['max'], SCORE_CLASSES_NUM);
         foreach ($intervals as $i => $interval) {
             $qb = (new \Fux\FuxQueryBuilder())
                 ->update(\App\Models\IngredientsModel::class)
                 ->set($scoreCol, $i + 1)
                 ->whereGreaterEqThan($sourceCol, $interval[0]);
-            if ($i < $classesNum - 1) $qb->whereLowerThan($sourceCol, $interval[1]); //The last interval has no upper bound
+            if ($i < SCORE_CLASSES_NUM - 1) $qb->whereLowerThan($sourceCol, $interval[1]); //The last interval has no upper bound
             if (!$qb->execute()) {
                 \Fux\DB::ref()->rollback();
                 throw new \Exception("Error while updating $scoreCol");
@@ -57,10 +73,10 @@
         }
 
 
-        if(!(new \Fux\FuxQueryBuilder())
+        if (!(new \Fux\FuxQueryBuilder())
             ->update(\App\Models\IngredientsModel::class)
             ->set("score", "ROUND((" . implode("+", array_values($cols)) . ")/" . count($cols) . ",2)", true)
-            ->execute()){
+            ->execute()) {
             \Fux\DB::ref()->rollback();
             throw new \Exception("Error while updating scores");
         }
