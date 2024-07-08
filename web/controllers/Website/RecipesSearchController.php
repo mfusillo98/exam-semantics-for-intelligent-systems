@@ -220,12 +220,28 @@ class RecipesSearchController
 
         $recipes = $page->getItems();
         foreach ($recipes as &$r){
-            $r["ingredients_list"] = (new FuxQueryBuilder())
-                ->select("i.ingredient_id", "i.name", "i.carbon_foot_print")
+
+            /**
+             * In raw ingredients it could happen that the ingredient name is passed with additional description like:
+             * - cheese, ricotta, whole milk
+             * - egg substitute, powder
+             * - spinach, raw
+             * - chicken, broiler or fryers, breast, skinless, boneless, meat only, raw
+             *
+             * We take only the first name after splitting by comma
+            */
+            $rawIngredients = (new FuxQueryBuilder())
+                ->select("i.ingredient_id", "i.name", "i.carbon_foot_print","i.water_foot_print")
                 ->from(IngredientsRecipesModel::class,"ir")
                 ->leftJoin(IngredientsModel::class, "ir.ingredient_id=i.ingredient_id", "i")
                 ->where("ir.recipe_id", $r["recipe_id"])
                 ->execute();
+            foreach($rawIngredients as &$ingredient){
+                $names = explode(",", $ingredient["name"]);
+                $ingredient['name'] = $names[0];
+            }
+
+            $r["ingredients_list"] = $rawIngredients;
         }
         $page->setItems($recipes);
 

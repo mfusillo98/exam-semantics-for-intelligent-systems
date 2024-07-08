@@ -5,11 +5,12 @@ const SCORE_CLASSES_NUM = 5;
 \Fux\Routing\Routing::router()->get('/assistant/ingredients/get-score', function (\Fux\Request $request) {
     /**
      * @var array $queryStringParams = [
-     *      "ingredients_csv" => "ingredient1,ingredient2,ingredient3"
+     *      "ingredients_csv" => "ingredient1,ingredient2,ingredient3",
+     *      "separator" => ","
      * ]
      */
     $queryStringParams = $request->getQueryStringParams();
-    $ingredients = array_filter(explode(',', $queryStringParams['ingredients']));
+    $ingredients = array_filter(explode($queryStringParams['separator'] ?? ',', $queryStringParams['ingredients_csv']));
 
     $result = [];
     foreach ($ingredients as $ingredient) {
