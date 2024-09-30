@@ -18,7 +18,7 @@ const SCORE_CLASSES_NUM = 5;
         $qb = \App\Models\IngredientsModel::queryBuilder();
         foreach($keywords as $k) $qb->whereLike('name', "%$k%");
         $row = $qb->first();
-        $result[$ingredient] = $row['score'] ?? SCORE_CLASSES_NUM / 2; //If score not avaiable a mean value is used
+        $result[$ingredient] = (float)round($row['score'] ?? SCORE_CLASSES_NUM / 2,2); //If score not avaiable a mean value is used
     }
 
     return new \Fux\FuxResponse(\Fux\FuxResponse::SUCCESS, null, $result);
